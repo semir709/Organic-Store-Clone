@@ -1,5 +1,6 @@
 import React from "react";
 import ListNav from "./ListNav";
+import { BsBasket2Fill } from "react-icons/bs";
 
 const navData = {
   mainNav: [
@@ -32,11 +33,25 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex px-[10px]">
+        <div className="flex items-center">
           {/* List */}
           <nav>
             <ListNav arrayText={navData.infoNav} />
           </nav>
+
+          {/*Card*/}
+          <div className="flex items-center hover:cursor-pointer">
+            <span className="text-global-color-0 me-3">
+              <span>€</span>
+              0.00
+            </span>
+
+            <div className="relative">
+              <div className="after:content-['0'] after:absolute after:top-[-10px] after:right-[-14px] after:text-[11px] after:font-bold after:bg-global-color-0 after:rounded-full after:px-[7px] ">
+                <BsBasket2Fill />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
