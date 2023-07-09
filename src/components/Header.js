@@ -14,7 +14,7 @@ const navData = {
   ],
 };
 
-const Header = () => {
+const Header = ({ setCartToggle }) => {
   return (
     <div className="bg-white w-full h-[105px] px-[25px] py-[15px]">
       <div className="bg-transparent w-full h-full flex justify-between items-center">
@@ -40,7 +40,10 @@ const Header = () => {
           </nav>
 
           {/*Card*/}
-          <div className="flex items-center hover:cursor-pointer">
+          <div
+            className="flex items-center hover:cursor-pointer"
+            onClick={() => setCartToggle((prev) => !prev)}
+          >
             <span className="text-global-color-0 me-3">
               <span>€</span>
               0.00
