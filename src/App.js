@@ -14,7 +14,10 @@ function App() {
         setMobileMenuToggle={setMobileMenuToggle}
       />
 
-      <MobileMenu mobileMenuToggle={mobileMenuToggle} />
+      <MobileMenu
+        mobileMenuToggle={mobileMenuToggle}
+        setMobileMenuToggle={setMobileMenuToggle}
+      />
       <ShopingCart setCartToggle={setCartToggle} cartToggle={cartToggle} />
     </>
   );

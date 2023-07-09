@@ -3,17 +3,7 @@ import ListNav from "./ListNav";
 import { BsBasket2Fill } from "react-icons/bs";
 import { GrMenu } from "react-icons/gr";
 
-const navData = {
-  mainNav: [
-    { text: "Everything", url: "/" },
-    { text: "Groceries", url: "/" },
-    { text: "Juice", url: "/" },
-  ],
-  infoNav: [
-    { text: "About", url: "/" },
-    { text: "Contact", url: "/" },
-  ],
-};
+import { navData } from "../utils";
 
 const Header = ({ setCartToggle, setMobileMenuToggle }) => {
   return (
