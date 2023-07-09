@@ -3,6 +3,7 @@ import { GrFormClose } from "react-icons/gr";
 
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ButtonGreen from "./ButtonGreen";
+import BlackFilter from "./BlackFilter";
 
 const local = [
   {
@@ -18,11 +19,7 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
   const total = "12.00";
   return (
     <div className="">
-      <div
-        className={`fixed w-full h-full bg-black top-0 left-0 transition duration-300  ${
-          cartToggle ? "opacity-50 visible" : "opacity-0 invisible"
-        } `}
-      ></div>
+      <BlackFilter toggle={cartToggle} />
       <div
         className={`fixed w-1/3 h-full bg-white top-0 right-0  duration-300 border flex flex-col 
        ${cartToggle ? " translate-x-[0] " : "  translate-x-[100%] "}`}
@@ -86,7 +83,7 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
           ))}
         </div>
 
-        <div className="flex-1  my-5">
+        <div className="flex-1 ">
           {store.length === 0 ? (
             <div className="mx-4">
               <ButtonGreen text={"Continue Shopping"} />

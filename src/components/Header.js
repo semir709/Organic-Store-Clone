@@ -1,6 +1,7 @@
 import React from "react";
 import ListNav from "./ListNav";
 import { BsBasket2Fill } from "react-icons/bs";
+import { GrMenu } from "react-icons/gr";
 
 const navData = {
   mainNav: [
@@ -14,7 +15,7 @@ const navData = {
   ],
 };
 
-const Header = ({ setCartToggle }) => {
+const Header = ({ setCartToggle, setMobileMenuToggle }) => {
   return (
     <div className="bg-white w-full h-[105px] px-[25px] py-[15px]">
       <div className="bg-transparent w-full h-full flex justify-between items-center">
@@ -28,14 +29,14 @@ const Header = ({ setCartToggle }) => {
             </span>
           </div>
           {/* List */}
-          <nav>
+          <nav className="hidden md:block">
             <ListNav arrayText={navData.mainNav} />
           </nav>
         </div>
 
         <div className="flex items-center">
           {/* List */}
-          <nav>
+          <nav className="hidden md:block">
             <ListNav arrayText={navData.infoNav} />
           </nav>
 
@@ -53,6 +54,17 @@ const Header = ({ setCartToggle }) => {
               <div className="after:content-['0'] after:absolute after:top-[-10px] after:right-[-14px] after:text-[11px] after:font-bold after:bg-global-color-0 after:rounded-full after:px-[7px] ">
                 <BsBasket2Fill />
               </div>
+            </div>
+          </div>
+
+          <div
+            className="md:hidden block ms-[20px] hover:cursor-pointer"
+            onClick={() => {
+              setMobileMenuToggle((prev) => !prev);
+            }}
+          >
+            <div className="p-3 bg-global-color-0">
+              <GrMenu id="menu" />
             </div>
           </div>
         </div>
