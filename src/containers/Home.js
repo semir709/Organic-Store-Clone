@@ -5,6 +5,8 @@ import bigLeaf from "../img/BigLeaf.png";
 import newFruit from "../img/newFruit.png";
 import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
+import ServiceCard from "../components/ServiceCard";
+import { serviceCardList } from "../utils";
 
 const Home = () => {
   return (
@@ -17,7 +19,7 @@ const Home = () => {
             backgroundSize: "28% auto",
           }}
         ></div>
-        <div className="flex sm:flex-row xl:w-[1200px] w-full mx-auto items-center flex-col relative">
+        <div className="flex sm:flex-row max-w-[1200px] mx-auto items-center flex-col relative">
           <div className="sm:w-1/2 w-full sm:order-1 order-2 sm:mt-0 mt-5">
             <img src={newFruit} alt="" className="w-full object-cover" />
           </div>
@@ -47,6 +49,14 @@ const Home = () => {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-global-color-2 w-full py-[30px]">
+        <div className="max-w-[1200px] mx-auto grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
+          {serviceCardList.map(({ text, title, icon }) => (
+            <ServiceCard title={title} text={text} icon={icon} />
+          ))}
         </div>
       </section>
     </div>
