@@ -11,7 +11,7 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
       <div className="bg-transparent w-full h-full flex justify-between items-center">
         <div className="flex items-center">
           {/*Logo*/}
-          <div className="px-[20px]">
+          <div className="pe-[20px]">
             <span>
               <a href="/" className="text-3xl">
                 LOGO

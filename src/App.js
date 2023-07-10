@@ -3,16 +3,23 @@ import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
 import MobileMenu from "./components/MobileMenu";
+import Home from "./containers/Home";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
   return (
     <>
-      <Header
-        setCartToggle={setCartToggle}
-        setMobileMenuToggle={setMobileMenuToggle}
-      />
+      <header>
+        <Header
+          setCartToggle={setCartToggle}
+          setMobileMenuToggle={setMobileMenuToggle}
+        />
+      </header>
+
+      <main>
+        <Home />
+      </main>
 
       <MobileMenu
         mobileMenuToggle={mobileMenuToggle}
