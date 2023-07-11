@@ -80,6 +80,23 @@ const Home = () => {
           <CategoryCard />
         </div>
       </section>
+
+      <section className="py-[60px] bg-black">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex items-center justify-around sm:flex-row flex-col">
+            <h2 className="text-global-color-5 lg:text-4xl text-2xl  font-semibold mb-5 sm:mb-0 text-center ">
+              Get 25% Off On Your First Purchase!
+            </h2>
+
+            <div className="m-0">
+              <ButtonGreen
+                text={"Shop now"}
+                icon={<HiShoppingCart fontSize={20} />}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
