@@ -65,7 +65,7 @@ const Home = () => {
       </section>
 
       <section className="pt-[140px] pb-[100px]">
-        <ProductSection />
+        <ProductSection title={"Best Selling Products"} />
       </section>
 
       <div className="max-w-[1200px] mx-auto flex justify-center">
@@ -112,7 +112,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="pt-[120px] pb-[61px] "></section>
+      <section className="pt-[120px] pb-[61px]">
+        <ProductSection title={"Trending Products"} />
+      </section>
     </div>
   );
 };
