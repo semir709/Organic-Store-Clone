@@ -8,6 +8,8 @@ import { HiShoppingCart } from "react-icons/hi";
 import ServiceCard from "../components/ServiceCard";
 import { serviceCardList } from "../utils";
 import ProductSection from "../components/ProductSection";
+import leafImg from "../img/imageLeaf.png";
+import CategoryCard from "../components/CategoryCard";
 
 const Home = () => {
   return (
@@ -61,8 +63,22 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-[140px]">
+      <section className="pt-[140px] pb-[100px]">
         <ProductSection />
+      </section>
+
+      <div className="max-w-[1200px] mx-auto flex justify-center">
+        <div className="translate-y-[58%] lg:w-[15%] md:w-[20%] sm:w-[25%]  min-[450px]:w-[30%] w-[50%]">
+          <img src={leafImg} alt="" className="object-cover w-full" />
+        </div>
+      </div>
+
+      <section className="bg-global-color-4 py-[100px]">
+        <div className="max-w-[1200px] mx-auto flex lg:items-center justify-between gap-6 px-2 min-[820px]:flex-row flex-col">
+          <CategoryCard />
+          <CategoryCard />
+          <CategoryCard />
+        </div>
       </section>
     </div>
   );
