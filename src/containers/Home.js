@@ -11,6 +11,11 @@ import ProductSection from "../components/ProductSection";
 import leafImg from "../img/imageLeaf.png";
 import CategoryCard from "../components/CategoryCard";
 import { BsFillTriangleFill } from "react-icons/bs";
+import Head from "../components/Head";
+import RecCard from "../components/RecCard";
+import pap from "../img/pap.jpg";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import bigLeaf2 from "../img/leaf2.png";
 
 const Home = () => {
   return (
@@ -114,6 +119,58 @@ const Home = () => {
 
       <section className="pt-[120px] pb-[61px]">
         <ProductSection title={"Trending Products"} />
+      </section>
+
+      <section className="py-[80px] relative">
+        <div
+          className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-left-top opacity-25 "
+          style={{
+            backgroundImage: `url(${bigLeaf2})`,
+            backgroundSize: "38% auto",
+          }}
+        ></div>
+
+        <Head title={"Customers Reviews"} />
+
+        <div className="max-w-[1200px] mx-auto relative">
+          <div className="flex justify-center mt-[40px] gap-6 mx-2 ">
+            <div className="flex-1 mt-[70px]">
+              <RecCard />
+            </div>
+            <div className="flex-1 ">
+              <div className="drop-shadow-[0px_0px_3px_rgba(0,0,0,0.15)] w-full h-full">
+                <div
+                  className=" w-full h-full bg-no-repeat bg-cover hover:cursor-pointer group"
+                  style={{ backgroundImage: `url('${pap}')` }}
+                >
+                  <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 group-hover:opacity-80  transition duration-300"></div>
+                  <div className="relative w-full h-full p-[45px] text-white text-center flex flex-col justify-between items-center">
+                    <div className="">
+                      <h2 className="text-4xl font-semibold mb-5">
+                        Deal Of The Day 15% Off On All Vegetables!
+                      </h2>
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Vero!
+                      </p>
+                    </div>
+
+                    <div className="">
+                      <ButtonGreen
+                        text={"Shop now"}
+                        icon={<AiOutlineArrowRight />}
+                        iconLeft={false}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 mt-[70px]">
+              <RecCard />
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
