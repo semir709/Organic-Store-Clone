@@ -10,6 +10,7 @@ import { serviceCardList } from "../utils";
 import ProductSection from "../components/ProductSection";
 import leafImg from "../img/imageLeaf.png";
 import CategoryCard from "../components/CategoryCard";
+import { BsFillTriangleFill } from "react-icons/bs";
 
 const Home = () => {
   return (
@@ -97,6 +98,21 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-global-color-4 ">
+        <div className="w-full flex justify-center">
+          <div className="rotate-180 translate-y-[-4px]">
+            <BsFillTriangleFill fontSize={20} />
+          </div>
+        </div>
+        <div className="w-full text-center py-5 pb-[40px]">
+          <h3 className="text-2xl font-semibold">
+            Try It For Free. No Registration Needed.
+          </h3>
+        </div>
+      </section>
+
+      <section className="pt-[120px] pb-[61px] "></section>
     </div>
   );
 };
