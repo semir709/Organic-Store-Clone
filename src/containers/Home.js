@@ -7,6 +7,7 @@ import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
 import ServiceCard from "../components/ServiceCard";
 import { serviceCardList } from "../utils";
+import ProductSection from "../components/ProductSection";
 
 const Home = () => {
   return (
@@ -58,6 +59,10 @@ const Home = () => {
             <ServiceCard title={title} text={text} icon={icon} />
           ))}
         </div>
+      </section>
+
+      <section className="py-[140px]">
+        <ProductSection />
       </section>
     </div>
   );
