@@ -133,7 +133,7 @@ const Home = () => {
         <Head title={"Customers Reviews"} />
 
         <div className="max-w-[1200px] mx-auto relative">
-          <div className="flex justify-center mt-[40px] gap-6 mx-2 ">
+          <div className="flex justify-center mt-[40px] gap-6 min-[950px]:mx-2 flex-col min-[950px]:flex-row mx-[40px]">
             <div className="flex-1 mt-[70px]">
               <RecCard />
             </div>
@@ -146,10 +146,10 @@ const Home = () => {
                   <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 group-hover:opacity-80  transition duration-300"></div>
                   <div className="relative w-full h-full p-[45px] text-white text-center flex flex-col justify-between items-center">
                     <div className="">
-                      <h2 className="text-4xl font-semibold mb-5">
+                      <h2 className="sm:text-4xl font-semibold mb-5 text-2xl">
                         Deal Of The Day 15% Off On All Vegetables!
                       </h2>
-                      <p>
+                      <p className="sm:text-base text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Vero!
                       </p>
@@ -166,7 +166,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1 mt-[70px]">
+            <div className="flex-1 min-[950px]:mt-[70px]">
               <RecCard />
             </div>
           </div>
