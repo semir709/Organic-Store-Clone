@@ -122,7 +122,7 @@ const Home = () => {
         <ProductSection title={"Trending Products"} />
       </section>
 
-      <section className="py-[80px] relative">
+      <section className="py-[80px] relative bg-gradient-to-b from-global-color-5 to-global-color-4">
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-left-top opacity-25 "
           style={{
