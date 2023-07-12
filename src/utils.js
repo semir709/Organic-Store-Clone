@@ -60,3 +60,72 @@ export const sponsorList = [
     svg: loremLogo,
   },
 ];
+
+export const siteLinksfooter = [
+  {
+    text: "Privacy Policy",
+    url: "/",
+  },
+  {
+    text: "Shipping Details",
+    url: "/",
+  },
+  {
+    text: "Offers Coupons",
+    url: "/",
+  },
+  {
+    text: "Terms & Conditions",
+    url: "/",
+  },
+];
+
+export const quickLinks = [
+  {
+    text: "About",
+    url: "/",
+  },
+  {
+    text: "Cart",
+    url: "/",
+  },
+  {
+    text: "Checkout",
+    url: "/",
+  },
+  {
+    text: "Contact",
+    url: "/",
+  },
+  {
+    text: "Home",
+    url: "/",
+  },
+  {
+    text: "My account",
+    url: "/",
+  },
+  {
+    text: "Shop",
+    url: "/",
+  },
+];
+
+export const quickLinks2 = [
+  {
+    text: "Know More About Us",
+    url: "/",
+  },
+  {
+    text: "Visit Store",
+    url: "/",
+  },
+  {
+    text: "Let’s Connect",
+    url: "/",
+  },
+  {
+    text: "Locate Stores",
+    url: "/",
+  },
+];
