@@ -10,11 +10,15 @@ import { serviceCardList } from "../utils";
 import ProductSection from "../components/ProductSection";
 import leafImg from "../img/imageLeaf.png";
 import CategoryCard from "../components/CategoryCard";
-import { BsFillTriangleFill } from "react-icons/bs";
+import { BsFacebook, BsFillTriangleFill } from "react-icons/bs";
 import Head from "../components/Head";
 import RecCard from "../components/RecCard";
 import pap from "../img/pap.jpg";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiFillTwitterCircle,
+  AiOutlineArrowRight,
+  AiOutlineInstagram,
+} from "react-icons/ai";
 import bigLeaf2 from "../img/leaf2.png";
 import { sponsorList } from "../utils";
 import { siteLinksfooter } from "../utils";
@@ -199,8 +203,8 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="py-[75px] bg-global-color-6 ">
-        <div className="max-w-[1200px] mx-auto text-white px-2">
+      <footer className="pt-[75px] bg-global-color-6 ">
+        <div className="max-w-[1200px] mx-auto text-white px-2 pb-[50px]">
           <div className="grid sm:grid-cols-4 sm:justify-items-start justify-items-center text-center">
             <div className="w-[70%] sm:col-span-2 ">
               <aside className="">
@@ -321,6 +325,37 @@ const Home = () => {
                   </section>
                 </div>
               </aside>
+            </div>
+          </div>
+        </div>
+
+        <div className="py-[25px] border-t-[1px] border-gray-700 ">
+          <div className="max-w-[1200px] mx-auto">
+            <div className="flex justify-between items-center px-2 sm:flex-row flex-col">
+              <div className="sm:mb-0 mb-5">
+                <p className="opacity-70 text-white">
+                  Copyright © 2023 | Organic Store
+                </p>
+              </div>
+              <div className="flex items-center">
+                <a href="/" className="mx-2">
+                  <BsFacebook color="white" opacity={"0.7"} fontSize={20} />
+                </a>
+                <a href="/" className="mx-2">
+                  <AiFillTwitterCircle
+                    color="white"
+                    opacity={"0.7"}
+                    fontSize={25}
+                  />
+                </a>
+                <a href="/" className="mx-2">
+                  <AiOutlineInstagram
+                    color="white"
+                    opacity={"0.7"}
+                    fontSize={25}
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
