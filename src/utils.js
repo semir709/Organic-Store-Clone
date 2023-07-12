@@ -2,6 +2,8 @@ import { HiShoppingCart } from "react-icons/hi";
 import { FaTruckMoving, FaMoneyBillAlt, FaRecycle } from "react-icons/fa";
 import { BiSolidContact } from "react-icons/bi";
 
+import loremLogo from "./img/loremLogo.svg";
+
 export const navData = {
   mainNav: [
     { text: "Everything", url: "/" },
@@ -41,5 +43,20 @@ export const serviceCardList = [
     title: "Free Shipping",
     text: "Above $5 Only",
     icon: <FaRecycle fontSize={30} />,
+  },
+];
+
+export const sponsorList = [
+  {
+    svg: loremLogo,
+  },
+  {
+    svg: loremLogo,
+  },
+  {
+    svg: loremLogo,
+  },
+  {
+    svg: loremLogo,
   },
 ];
