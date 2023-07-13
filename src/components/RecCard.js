@@ -1,5 +1,6 @@
 import React from "react";
 import person from "../img/person.jpg";
+import PersonInfo from "./PersonInfo";
 
 const RecCard = () => {
   return (
@@ -12,18 +13,7 @@ const RecCard = () => {
         Rerum culpa suscipit mollitia?
       </p>
 
-      <div className="flex items-center justify-center ">
-        <div className=" w-[70px] h-[70px] rounded-full">
-          <img
-            src={person}
-            alt=""
-            className="object-cover w-full h-full rounded-full"
-          />
-        </div>
-        <div className="ms-5">
-          <span>Mila Kunus</span>
-        </div>
-      </div>
+      <PersonInfo />
     </div>
   );
 };

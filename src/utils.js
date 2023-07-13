@@ -129,3 +129,18 @@ export const quickLinks2 = [
     url: "/",
   },
 ];
+
+export const checkListData = [
+  { text: "Fresh fruits" },
+  { text: "Dry fruits" },
+  { text: "Fresh vegetables" },
+  { text: "Dried vegetables" },
+  { text: "Dried vegetables" },
+];
+
+export const checkListData2 = [
+  { text: "Beauty products" },
+  { text: "Milk products" },
+  { text: "Organic honey" },
+  { text: "Organic tea" },
+];
