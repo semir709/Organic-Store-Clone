@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
 import MobileMenu from "./components/MobileMenu";
 import Home from "./containers/Home";
+import Shop from "./containers/Shop";
+import Footer from "./components/Footer";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
@@ -17,9 +19,12 @@ function App() {
         />
       </header>
 
-      <main>
+      {/* <main>
         <Home />
-      </main>
+      </main> */}
+      <Shop />
+
+      <Footer />
 
       <MobileMenu
         mobileMenuToggle={mobileMenuToggle}

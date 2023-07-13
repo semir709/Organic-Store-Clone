@@ -21,3 +21,7 @@ code {
 #menu path {
   stroke: white;
 }
+
+input:focus{
+  outline: none;
+}
