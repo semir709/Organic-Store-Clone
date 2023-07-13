@@ -26,6 +26,7 @@ import { quickLinks } from "../utils";
 import { quickLinks2 } from "../utils";
 import googlePlay from "../img/googlePlay.png";
 import appStore from "../img/app-store.png";
+import LeafCenter from "../components/LeafCenter";
 
 const Home = () => {
   return (
@@ -70,7 +71,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="bg-global-color-2 w-full py-[30px]">
         <div className="max-w-[1200px] mx-auto grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
           {serviceCardList.map(({ text, title, icon }) => (
@@ -78,17 +78,10 @@ const Home = () => {
           ))}
         </div>
       </section>
-
       <section className="pt-[140px] pb-[100px]">
         <ProductSection title={"Best Selling Products"} />
       </section>
-
-      <div className="max-w-[1200px] mx-auto flex justify-center">
-        <div className="translate-y-[58%] lg:w-[15%] md:w-[20%] sm:w-[25%]  min-[450px]:w-[30%] w-[50%]">
-          <img src={leafImg} alt="" className="object-cover w-full" />
-        </div>
-      </div>
-
+      <LeafCenter />
       <section className="bg-global-color-4 py-[100px]">
         <div className="max-w-[1200px] mx-auto flex lg:items-center justify-between gap-6 px-2 min-[820px]:flex-row flex-col">
           <CategoryCard />
@@ -96,7 +89,6 @@ const Home = () => {
           <CategoryCard />
         </div>
       </section>
-
       <section className="py-[60px] bg-black">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center justify-around sm:flex-row flex-col">
@@ -113,7 +105,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="bg-global-color-4 ">
         <div className="w-full flex justify-center">
           <div className="rotate-180 translate-y-[-4px]">
@@ -126,11 +117,9 @@ const Home = () => {
           </h3>
         </div>
       </section>
-
       <section className="pt-[120px] pb-[61px]">
         <ProductSection title={"Trending Products"} />
       </section>
-
       <section className="py-[80px] relative bg-gradient-to-b from-global-color-5 to-global-color-4">
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-left-top opacity-25 "
@@ -182,7 +171,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="bg-global-color-4 pb-[40px]">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center justify-between w-full px-2 min-[950px]:flex-row flex-col">

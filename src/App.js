@@ -6,13 +6,14 @@ import MobileMenu from "./components/MobileMenu";
 import Home from "./containers/Home";
 import Shop from "./containers/Shop";
 import Footer from "./components/Footer";
+import AboutUs from "./containers/AboutUs";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
   return (
     <>
-      <header>
+      <header className="bg-global-color-4">
         <Header
           setCartToggle={setCartToggle}
           setMobileMenuToggle={setMobileMenuToggle}
@@ -22,7 +23,9 @@ function App() {
       {/* <main>
         <Home />
       </main> */}
-      <Shop />
+      {/* <Shop /> */}
+
+      <AboutUs />
 
       <Footer />
 

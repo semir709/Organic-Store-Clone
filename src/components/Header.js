@@ -7,7 +7,7 @@ import { navData } from "../utils";
 
 const Header = ({ setCartToggle, setMobileMenuToggle }) => {
   return (
-    <div className="bg-white w-full h-[105px] px-[25px] py-[15px]">
+    <div className="bg-transparent w-full h-[105px] px-[25px] py-[15px]">
       <div className="bg-transparent w-full h-full flex justify-between items-center">
         <div className="flex items-center">
           {/*Logo*/}
