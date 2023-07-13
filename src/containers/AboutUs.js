@@ -46,15 +46,19 @@ const AboutUs = () => {
 
       <section className="py-[40px] bg-global-color-6 text-white">
         <div className="max-w-[1200px] mx-auto">
-          <div className="flex items-center justify-between w-full px-5 ">
-            <div className="w-fit">
-              <h4 className="text-2xl font-semibold">
+          <div className="flex items-center justify-center min-[700px]:justify-between px-5 flex-wrap-reverse min-[700px]:flex-nowrap w-full sm:flex-row flex-col">
+            <div className="w-fit min-[700px]:order-none order-1  mb-5 min-[700px]:mb-0">
+              <h4 className="text-2xl font-semibold text-center">
                 Numbers Speak For <br /> Themselves!
               </h4>
             </div>
-            <div className="flex items-center justify-between w-full ">
+            <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-2 my-5">
               <NumberStat />
+            </div>
+            <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-3 my-5">
               <NumberStat />
+            </div>
+            <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-4 my-5">
               <NumberStat />
             </div>
           </div>
