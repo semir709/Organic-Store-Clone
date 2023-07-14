@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiSolidDownArrow, BiSolidRightArrow } from "react-icons/bi";
 
-const QuestionDrop = () => {
+const QuestionDrop = ({ question, answer }) => {
   const [toggle, setToggle] = useState(false);
   return (
     <div
@@ -10,9 +10,7 @@ const QuestionDrop = () => {
     >
       <div className="flex items-center justify-between mb-2 mx-[40px]">
         <div className="mb-2">
-          <p className="text-lg font-bold">
-            Pulvinar nostrud class cum facilis?
-          </p>
+          <p className="text-lg font-bold">{question}</p>
         </div>
         <div className="ms-[40px]">
           {toggle ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
@@ -24,12 +22,7 @@ const QuestionDrop = () => {
         }`}
       >
         <div className=" overflow-hidden ">
-          <p className="py-5  px-[40px]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            ratione expedita amet ullam voluptates sapiente eius provident
-            fugiat voluptas, reiciendis qui quod quas magnam. Quidem, temporibus
-            at. Voluptates, error doloremque?
-          </p>
+          <p className="py-5  px-[40px]">{answer}</p>
         </div>
       </div>
     </div>

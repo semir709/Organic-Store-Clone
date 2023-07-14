@@ -1,16 +1,21 @@
 import React from "react";
 import SectionMessage from "../components/SectionMessage";
-import { BiPhone } from "react-icons/bi";
 import leafImg from "../img/imageLeaf.png";
 import CardContact from "../components/CardContact";
 import Head from "../components/Head";
 import QuestionDrop from "../components/QuestionDrop";
 import BgLeaf from "../components/BgLeaf";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
+
+const someText = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
+repellendus fugit iusto, culpa velit libero quos vitae maxime
+error nisi.`;
 
 const ContactUs = () => {
   return (
     <div>
-      <SectionMessage />
+      <SectionMessage title={"Get In Touch"} />
 
       <div className="bg-global-color-4 py-[70px]"></div>
 
@@ -23,9 +28,21 @@ const ContactUs = () => {
                   <img src={leafImg} alt="" className="object-cover w-full" />
                 </div>
               </div>
-              <CardContact />
-              <CardContact />
-              <CardContact />
+              <CardContact
+                icon={<BsFillTelephoneFill size={20} />}
+                text1={"+123 456 789"}
+                text2={"+123 456 789"}
+              />
+              <CardContact
+                icon={<HiOutlineMail size={30} />}
+                text1={"info@example.com"}
+                text2={"support@example.com"}
+              />
+              <CardContact
+                icon={<HiLocationMarker size={30} />}
+                text1={"1569 Ave, New York,"}
+                text2={"NY 10028, USA"}
+              />
             </div>
           </div>
         </div>
@@ -33,20 +50,38 @@ const ContactUs = () => {
 
       <section className="py-[30px] relative">
         <BgLeaf />
-        <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto max-w-[1200px] relative">
           <Head title={"Frequently Asked Question!"} />
 
           <section className="mt-5 mx-5 ">
             <div className="flex gap-x-20 sm:flex-row flex-col">
               <div className="flex-1">
-                <QuestionDrop />
-                <QuestionDrop />
-                <QuestionDrop />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
               </div>
               <div className="flex-1">
-                <QuestionDrop />
-                <QuestionDrop />
-                <QuestionDrop />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
+                <QuestionDrop
+                  question={"Pulvinar nostrud class cum facilis?"}
+                  answer={someText}
+                />
               </div>
             </div>
           </section>
