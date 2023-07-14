@@ -27,18 +27,13 @@ import { quickLinks2 } from "../utils";
 import googlePlay from "../img/googlePlay.png";
 import appStore from "../img/app-store.png";
 import LeafCenter from "../components/LeafCenter";
+import BgLeaf from "../components/BgLeaf";
 
 const Home = () => {
   return (
     <div>
       <section className="bg-global-color-4 w-full py-[120px] relative">
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-right-bottom opacity-25 "
-          style={{
-            backgroundImage: `url(${bigLeaf})`,
-            backgroundSize: "28% auto",
-          }}
-        ></div>
+        <BgLeaf />
         <div className="flex sm:flex-row max-w-[1200px] mx-auto items-center flex-col relative">
           <div className="sm:w-1/2 w-full sm:order-1 order-2 sm:mt-0 mt-5">
             <img src={newFruit} alt="" className="w-full object-cover" />
