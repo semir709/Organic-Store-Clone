@@ -7,6 +7,7 @@ import Home from "./containers/Home";
 import Shop from "./containers/Shop";
 import Footer from "./components/Footer";
 import AboutUs from "./containers/AboutUs";
+import ContactUs from "./containers/ContactUs";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
@@ -25,7 +26,8 @@ function App() {
       </main> */}
       {/* <Shop /> */}
 
-      <AboutUs />
+      {/* <AboutUs /> */}
+      <ContactUs />
 
       <Footer />
 
