@@ -17,7 +17,7 @@ import BgLeaf from "../components/BgLeaf";
 const AboutUs = () => {
   return (
     <div>
-      <SectionMessage />
+      <SectionMessage title={"About Us"} />
       <section className="bg-global-color-4">
         <LeafCenter />
       </section>
