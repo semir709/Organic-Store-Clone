@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./containers/AboutUs";
 import ContactUs from "./containers/ContactUs";
 import Product from "./containers/Product";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
@@ -22,15 +23,13 @@ function App() {
         />
       </header>
 
-      {/* <main>
-        <Home />
-      </main> */}
-      {/* <Shop /> */}
-
-      {/* <AboutUs /> */}
-      {/* <ContactUs /> */}
-
-      <Product />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/contact" element={<ContactUs />} />
+      </Routes>
 
       <Footer />
 

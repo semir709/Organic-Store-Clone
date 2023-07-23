@@ -42,7 +42,9 @@ const Product = () => {
                   inputMode="numeric"
                   className="p-2 me-4 text-center"
                 />
-                <ButtonGreen text={"add to chart"} />
+                <button className="uppercase px-[80px] py-2 bg-global-color-1 hover:bg-global-color-0 text-white font-semibold rounded-md">
+                  Add to chart
+                </button>
               </form>
               <span>
                 Categories:{" "}
