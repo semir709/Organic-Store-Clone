@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
+import Card from "../components/Card";
 
 const Product = () => {
   const [section, setSection] = useState(0);
@@ -176,9 +177,13 @@ const Product = () => {
             </div>
           </div>
         </main>
-        <section className="mt-5">
-          <h2>Related Products</h2>
-          <div>aldjk</div>
+        <section className="mt-5 mx-4">
+          <h2 className="text-4xl font-semibold mb-5">Related Products</h2>
+          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
+            {[1, 2, 3, 4].map(() => (
+              <Card />
+            ))}
+          </div>
         </section>
       </div>
     </div>
