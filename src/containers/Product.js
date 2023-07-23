@@ -70,7 +70,7 @@ const Product = () => {
                   section === 0 ? "border-global-color-0" : "border-transparent"
                 }`}
               >
-                <a>Description</a>
+                <a className="font-semibold text-global-color-3">Description</a>
               </li>
               <li
                 onClick={() => setSection(1)}
@@ -78,7 +78,9 @@ const Product = () => {
                   section === 1 ? "border-global-color-0" : "border-transparent"
                 }`}
               >
-                <a>Reviews (0) </a>
+                <a className="font-semibold text-global-color-3">
+                  Reviews (0){" "}
+                </a>
               </li>
             </ul>
 
@@ -95,41 +97,72 @@ const Product = () => {
 
               {section === 1 && (
                 <div className="">
-                  <p>There are no reviews yet.</p>
+                  <p className="mb-5">There are no reviews yet.</p>
 
-                  <div className="border p-5">
-                    <span>Be the first to review “Cashew Butter” </span>
+                  <div className="border-[2px] p-5">
+                    <span className="text-3xl font-medium">
+                      Be the first to review “Cashew Butter”{" "}
+                    </span>
                     <form action="">
-                      <p>
+                      <p className="text-base mb-5">
                         Your email address will not be published. Required
                         fields are marked *
                       </p>
 
-                      <div className="flex items-center">
-                        <label htmlFor="">Your rating *</label>
+                      <div className="flex items-center mb-5">
+                        <label htmlFor="" className="text-2xl">
+                          Your rating *
+                        </label>
                         <div className="ms-4">Stars</div>
                       </div>
 
                       <div>
-                        <label htmlFor="">Your review *</label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <label
+                          htmlFor="textArea"
+                          className="block text-2xl mb-1"
+                        >
+                          Your review *
+                        </label>
+                        <textarea
+                          id="textArea"
+                          name=""
+                          cols="30"
+                          rows="3"
+                          className="w-full mb-5"
+                        ></textarea>
                       </div>
 
-                      <div className="flex items-center">
-                        <div>
-                          <label htmlFor="">Name *</label>
-                          <input type="text" />
+                      <div className="flex sm:flex-row flex-col sm:items-center mb-4 gap-6">
+                        <div className="flex-1">
+                          <label htmlFor="name" className="block mb-2">
+                            Name *
+                          </label>
+                          <input
+                            id="name"
+                            type="text"
+                            className="py-3 me-4 w-full px-5  "
+                          />
                         </div>
 
-                        <div>
-                          <label htmlFor="">Email *</label>
-                          <input type="text" />
+                        <div className="flex-1">
+                          <label htmlFor="email" className="block mb-2">
+                            Email *
+                          </label>
+                          <input
+                            id="email"
+                            type="text"
+                            className="py-3 me-4 w-full px-5"
+                          />
                         </div>
                       </div>
 
-                      <div className="flex items-center">
-                        <input type="text" />
-                        <label htmlFor="">
+                      <div className="flex items-center mb-5">
+                        <input
+                          id="checkSave"
+                          type="checkbox"
+                          className="me-3"
+                        />
+                        <label htmlFor="checkSave" className="">
                           Save my name, email, and website in this browser for
                           the next time I comment.
                         </label>
