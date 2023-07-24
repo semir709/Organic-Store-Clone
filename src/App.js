@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
@@ -11,10 +11,21 @@ import ContactUs from "./containers/ContactUs";
 import Product from "./containers/Product";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import sanityClient from "./client.js";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type == 'test'] {
+    name
+  }`
+      )
+      .then((data) => console.log(data));
+  }, []);
   return (
     <>
       <ScrollToTop />
