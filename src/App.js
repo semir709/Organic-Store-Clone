@@ -10,12 +10,14 @@ import AboutUs from "./containers/AboutUs";
 import ContactUs from "./containers/ContactUs";
 import Product from "./containers/Product";
 import { Route, Routes } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
   return (
     <>
+      <ScrollToTop />
       <header className="bg-global-color-4">
         <Header
           setCartToggle={setCartToggle}
@@ -25,9 +27,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/" element={<Shop />} />
+        <Route path="/shop/:category" element={<Shop />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
 

@@ -1,9 +1,19 @@
 import React from "react";
-import { HiShoppingCart } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
-const ButtonGreen = ({ text, icon, iconPosition }) => {
+const ButtonGreen = ({ text, icon, iconPosition, url }) => {
+  const navigate = useNavigate();
+
+  const whenClick = () => {
+    console.log(url);
+    navigate(url);
+  };
   return (
-    <button className="bg-global-color-1 w-fit flex items-center justify-center font-semibold py-3 px-5 rounded-md uppercase text-white tracking-tight  hover:bg-global-color-0 transition duration-300 my-2 ">
+    <button
+      type="button"
+      onClick={whenClick}
+      className="bg-global-color-1 w-fit flex items-center justify-center font-semibold py-3 px-5 rounded-md uppercase text-white tracking-tight  hover:bg-global-color-0 transition duration-300 my-2 "
+    >
       {iconPosition === "left" && <div className="me-5">{icon}</div>}
       {text && text}
       {iconPosition === "right" && <div className="ms-5">{icon}</div>}

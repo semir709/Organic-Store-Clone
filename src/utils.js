@@ -6,20 +6,20 @@ import loremLogo from "./img/loremLogo.svg";
 
 export const navData = {
   mainNav: [
-    { text: "Everything", url: "/" },
-    { text: "Groceries", url: "/" },
-    { text: "Juice", url: "/" },
+    { text: "Everything", url: "/shop" },
+    { text: "Groceries", url: "/shop/groceries" },
+    { text: "Juice", url: "/shop/juice" },
   ],
   infoNav: [
-    { text: "About", url: "/" },
-    { text: "Contact", url: "/" },
+    { text: "About", url: "/about" },
+    { text: "Contact", url: "/contact" },
   ],
   allNav: [
-    { text: "Everything", url: "/" },
-    { text: "Groceries", url: "/" },
-    { text: "Juice", url: "/" },
-    { text: "About", url: "/" },
-    { text: "Contact", url: "/" },
+    { text: "Everything", url: "/shop" },
+    { text: "Groceries", url: "/shop/groceries" },
+    { text: "Juice", url: "/shop/juice" },
+    { text: "About", url: "/about" },
+    { text: "Contact", url: "/contact" },
   ],
 };
 
@@ -83,31 +83,27 @@ export const siteLinksfooter = [
 export const quickLinks = [
   {
     text: "About",
-    url: "/",
+    url: "/about",
   },
   {
     text: "Cart",
-    url: "/",
+    url: "/cart",
   },
   {
     text: "Checkout",
-    url: "/",
+    url: "/checkout",
   },
   {
     text: "Contact",
-    url: "/",
+    url: "/contact",
   },
   {
     text: "Home",
     url: "/",
   },
   {
-    text: "My account",
-    url: "/",
-  },
-  {
     text: "Shop",
-    url: "/",
+    url: "/shop",
   },
 ];
 
@@ -118,15 +114,11 @@ export const quickLinks2 = [
   },
   {
     text: "Visit Store",
-    url: "/",
+    url: "/store",
   },
   {
     text: "Let’s Connect",
-    url: "/",
-  },
-  {
-    text: "Locate Stores",
-    url: "/",
+    url: "/contact",
   },
 ];
 
@@ -143,4 +135,35 @@ export const checkListData2 = [
   { text: "Milk products" },
   { text: "Organic honey" },
   { text: "Organic tea" },
+];
+
+export const dataProducts = [
+  {
+    title: "Assorted Coffee",
+    price: "35.00",
+    img: "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-300x300.jpg",
+    category: "Groceries",
+    slug: "assorted-coffee",
+  },
+  {
+    title: "Assorted Coffee",
+    price: "35.00",
+    img: "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-300x300.jpg",
+    category: "Groceries",
+    slug: "assorted-coffee",
+  },
+  {
+    title: "Assorted Coffee",
+    price: "35.00",
+    img: "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-300x300.jpg",
+    category: "Groceries",
+    slug: "assorted-coffee",
+  },
+  {
+    title: "Assorted Coffee",
+    price: "35.00",
+    img: "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted-300x300.jpg",
+    category: "Groceries",
+    slug: "assorted-coffee",
+  },
 ];

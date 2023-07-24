@@ -2,8 +2,8 @@ import React from "react";
 import ListNav from "./ListNav";
 import { BsBasket2Fill } from "react-icons/bs";
 import { GrMenu } from "react-icons/gr";
-
 import { navData } from "../utils";
+import { Link } from "react-router-dom";
 
 const Header = ({ setCartToggle, setMobileMenuToggle }) => {
   return (
@@ -13,9 +13,9 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
           {/*Logo*/}
           <div className="pe-[20px]">
             <span>
-              <a href="/" className="text-3xl">
+              <Link to={"/"} className="text-3xl">
                 LOGO
-              </a>
+              </Link>
             </span>
           </div>
           {/* List */}

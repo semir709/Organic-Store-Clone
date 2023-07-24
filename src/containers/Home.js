@@ -28,6 +28,7 @@ import googlePlay from "../img/googlePlay.png";
 import appStore from "../img/app-store.png";
 import LeafCenter from "../components/LeafCenter";
 import BgLeaf from "../components/BgLeaf";
+import { dataProducts } from "../utils";
 
 const Home = () => {
   return (
@@ -62,6 +63,8 @@ const Home = () => {
                 <ButtonGreen
                   text={"Shop now"}
                   icon={<HiShoppingCart fontSize={20} />}
+                  iconPosition={"left"}
+                  url={"/shop"}
                 />
               </div>
             </div>
@@ -75,14 +78,35 @@ const Home = () => {
           </div>
         </section>
         <section className="pt-[140px] pb-[100px]">
-          <ProductSection title={"Best Selling Products"} />
+          <ProductSection
+            title={"Best Selling Products"}
+            products={dataProducts}
+          />
         </section>
         <LeafCenter />
         <section className="bg-global-color-4 py-[100px]">
           <div className="max-w-[1200px] mx-auto flex lg:items-center justify-between gap-6 px-2 min-[820px]:flex-row flex-col">
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
+            <CategoryCard
+              title={"Farm Fresh Fruits"}
+              text={
+                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
+              }
+              url={"/shop/fruits"}
+            />
+            <CategoryCard
+              title={"Farm Fresh Fruits"}
+              text={
+                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
+              }
+              url={"/shop/fruits"}
+            />
+            <CategoryCard
+              title={"Farm Fresh Fruits"}
+              text={
+                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
+              }
+              url={"/shop/fruits"}
+            />
           </div>
         </section>
         <section className="py-[60px] bg-black">
@@ -96,6 +120,8 @@ const Home = () => {
                 <ButtonGreen
                   text={"Shop now"}
                   icon={<HiShoppingCart fontSize={20} />}
+                  iconPosition={"left"}
+                  url={"/shop"}
                 />
               </div>
             </div>
@@ -114,7 +140,7 @@ const Home = () => {
           </div>
         </section>
         <section className="pt-[120px] pb-[61px]">
-          <ProductSection title={"Trending Products"} />
+          <ProductSection title={"Trending Products"} products={dataProducts} />
         </section>
         <section className="py-[80px] relative bg-gradient-to-b from-global-color-5 to-global-color-4">
           <div
@@ -154,7 +180,8 @@ const Home = () => {
                         <ButtonGreen
                           text={"Shop now"}
                           icon={<AiOutlineArrowRight />}
-                          iconLeft={false}
+                          iconPosition={"right"}
+                          url={"/shop"}
                         />
                       </div>
                     </div>
