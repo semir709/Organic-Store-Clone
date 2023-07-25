@@ -17,15 +17,6 @@ function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
 
-  useEffect(() => {
-    sanityClient
-      .fetch(
-        `*[_type == 'test'] {
-    name
-  }`
-      )
-      .then((data) => console.log(data));
-  }, []);
   return (
     <>
       <ScrollToTop />

@@ -1,3 +1,5 @@
-import test from './test'
+import category from './category'
+import product from './product'
+import about from './about'
 
-export const schemaTypes = [test]
+export const schemaTypes = [category, product, about]
