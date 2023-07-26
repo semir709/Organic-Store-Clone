@@ -61,5 +61,48 @@ export default {
         },
       ],
     },
+    {
+      name: 'sectionMoreinfo',
+      title: 'Section More Info',
+      type: 'object',
+      fields: [
+        {
+          name: 'slideImages',
+          title: 'Slide Images',
+          type: 'array',
+          of: [
+            {
+              type: 'image',
+              fields: [
+                {
+                  name: 'captionSlideImage',
+                  title: 'Caption Slide Image',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                },
+              ],
+            },
+          ],
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'rewiew',
+          title: 'Rewiew',
+          type: 'reference',
+          to: [{type: 'rewiews'}],
+        },
+        {
+          name: 'list',
+          title: 'List',
+          type: 'array',
+          of: [
+            {
+              type: 'string',
+            },
+          ],
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    },
   ],
 }
