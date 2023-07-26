@@ -89,7 +89,7 @@ export default {
           name: 'rewiew',
           title: 'Rewiew',
           type: 'reference',
-          to: [{type: 'rewiews'}],
+          to: [{type: 'reviews'}],
         },
         {
           name: 'list',
