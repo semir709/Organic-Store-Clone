@@ -11,7 +11,6 @@ import ContactUs from "./containers/ContactUs";
 import Product from "./containers/Product";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import sanityClient from "./client.js";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import fruit from "../img/fruit.png";
 import leafDraw from "../img/leafDraw.png";
 import bigLeaf from "../img/BigLeaf.png";
@@ -6,7 +6,7 @@ import newFruit from "../img/newFruit.png";
 import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
 import ServiceCard from "../components/ServiceCard";
-import { serviceCardList } from "../utils";
+import { getHomePage, serviceCardList, urlFor } from "../utils";
 import ProductSection from "../components/ProductSection";
 import leafImg from "../img/imageLeaf.png";
 import CategoryCard from "../components/CategoryCard";
@@ -29,8 +29,21 @@ import appStore from "../img/app-store.png";
 import LeafCenter from "../components/LeafCenter";
 import BgLeaf from "../components/BgLeaf";
 import { dataProducts } from "../utils";
+import sanityClient from "../client";
 
 const Home = () => {
+  const [homeData, setHomeData] = useState(null);
+
+  useEffect(() => {
+    sanityClient.fetch(getHomePage).then((data) => setHomeData(data[0]));
+  }, []);
+
+  // console.log(homeData.mainSection.image);
+
+  if (!homeData) return <p>Loading...</p>;
+
+  console.log(homeData);
+
   return (
     <main>
       <div>
@@ -38,7 +51,11 @@ const Home = () => {
           <BgLeaf />
           <div className="flex sm:flex-row max-w-[1200px] mx-auto items-center flex-col relative">
             <div className="sm:w-1/2 w-full sm:order-1 order-2 sm:mt-0 mt-5">
-              <img src={newFruit} alt="" className="w-full object-cover" />
+              <img
+                src={urlFor(homeData.mainSection.image).url()}
+                alt={homeData.mainSection.image.caption}
+                className="w-full object-cover"
+              />
             </div>
 
             <div className="sm:w-1/2 w-full h-full sm:ps-[40px] px-5 sm:order-2 order-1 flex flex-col items-center sm:items-start">
@@ -51,12 +68,11 @@ const Home = () => {
               </h5>
 
               <h1 className="mb-[30px] text-4xl  font-bold selection:bg-global-color-0 md:text-5xl w-fit sm:text-left text-center">
-                Join The Organic Movement!
+                {homeData.mainSection.title}
               </h1>
 
               <p className="mb-[30px] text-global-color-2 w-ft sm:text-left text-center">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-                vitae, deserunt atque corporis odio porro?
+                {homeData.mainSection.text}
               </p>
 
               <div className="w-[200px]">
@@ -80,33 +96,19 @@ const Home = () => {
         <section className="pt-[140px] pb-[100px]">
           <ProductSection
             title={"Best Selling Products"}
-            products={dataProducts}
+            products={homeData.bestSellingProducts.products}
           />
         </section>
         <LeafCenter />
         <section className="bg-global-color-4 py-[100px]">
           <div className="max-w-[1200px] mx-auto flex lg:items-center justify-between gap-6 px-2 min-[820px]:flex-row flex-col">
-            <CategoryCard
-              title={"Farm Fresh Fruits"}
-              text={
-                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
-              }
-              url={"/shop/fruits"}
-            />
-            <CategoryCard
-              title={"Farm Fresh Fruits"}
-              text={
-                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
-              }
-              url={"/shop/fruits"}
-            />
-            <CategoryCard
-              title={"Farm Fresh Fruits"}
-              text={
-                "Ut sollicitudin quam vel purus tempus, vel eleifend felis varius. "
-              }
-              url={"/shop/fruits"}
-            />
+            {homeData.categorySection.category.map(({ title, text, image }) => (
+              <CategoryCard
+                title={title}
+                text={text}
+                image={urlFor(image).url()}
+              />
+            ))}
           </div>
         </section>
         <section className="py-[60px] bg-black">
@@ -140,7 +142,10 @@ const Home = () => {
           </div>
         </section>
         <section className="pt-[120px] pb-[61px]">
-          <ProductSection title={"Trending Products"} products={dataProducts} />
+          <ProductSection
+            title={"Trending Products"}
+            products={homeData.trendingProducts.products}
+          />
         </section>
         <section className="py-[80px] relative bg-gradient-to-b from-global-color-5 to-global-color-4">
           <div
@@ -168,11 +173,16 @@ const Home = () => {
                     <div className="relative w-full h-full p-[45px] text-white text-center flex flex-col justify-between items-center">
                       <div className="">
                         <h2 className="sm:text-4xl font-semibold mb-5 text-2xl">
-                          Deal Of The Day 15% Off On All Vegetables!
+                          {
+                            homeData.custumerReviews.imageReviewsSection
+                              .titleReviews
+                          }
                         </h2>
                         <p className="sm:text-base text-sm">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Vero!
+                          {
+                            homeData.custumerReviews.imageReviewsSection
+                              .textReviews
+                          }
                         </p>
                       </div>
 

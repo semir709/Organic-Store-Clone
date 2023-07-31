@@ -14,11 +14,16 @@ const Card = ({ title, category, price, img, slug }) => {
       </div>
 
       <div className="mt-5 text-center">
-        <span className="opacity-50 text-sm">{category}</span>
+        <div className="flex items-center justify-center">
+          {category.map(({ slug, name }) => (
+            <span key={slug} className="opacity-50 text-sm">
+              {name}
+            </span>
+          ))}
+        </div>
         <a href="/">
           <h2 className="text-global-color-2 text-lg font-semibold">{title}</h2>
         </a>
-        <div className="">star</div>
         <span className="font-semibold">
           €<span>{price}</span>
         </span>

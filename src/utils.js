@@ -1,8 +1,45 @@
-import { HiShoppingCart } from "react-icons/hi";
 import { FaTruckMoving, FaMoneyBillAlt, FaRecycle } from "react-icons/fa";
 import { BiSolidContact } from "react-icons/bi";
-
 import loremLogo from "./img/loremLogo.svg";
+
+import sanityClient from "./client";
+import imageUrlBuilder from "@sanity/image-url";
+
+const builder = imageUrlBuilder(sanityClient);
+
+export const urlFor = (source) => {
+  return builder.image(source);
+};
+
+export const getHomePage = `*[_type == 'home'] {
+  mainSection,
+  categorySection {
+    category[] {
+      'title': titleCategory,
+    'text': textCategory,
+    'image': imageCategory
+    }
+  } ,
+  trendingProducts {
+    products[]->{
+    category[] -> {'name':category, 'slug':slug.current},
+    image,
+    'slug':slug.current,
+    price,
+    title
+  },
+  },
+  bestSellingProducts {
+  products[]->{
+    category[] -> {'name':category, 'slug':slug.current},
+    image,
+    'slug':slug.current,
+    price,
+    title
+  }
+  } ,
+  custumerReviews
+}`;
 
 export const navData = {
   mainNav: [

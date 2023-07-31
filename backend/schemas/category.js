@@ -4,7 +4,7 @@ export default {
   title: 'Category',
   fields: [
     {
-      name: 'cateogry',
+      name: 'category',
       title: 'Category',
       type: 'string',
       validation: (Rule) => Rule.required(),
@@ -14,7 +14,7 @@ export default {
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'cateogry',
+        source: 'category',
       },
     },
     {
