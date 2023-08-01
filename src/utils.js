@@ -38,7 +38,14 @@ export const getHomePage = `*[_type == 'home'] {
     title
   }
   } ,
-  custumerReviews
+  custumerReviews{
+    imageReviewsSection,
+    reviewsList[]->{
+      name,
+      text,
+      image
+    }
+  }
 }`;
 
 export const navData = {
