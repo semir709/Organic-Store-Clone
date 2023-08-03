@@ -13,26 +13,27 @@ const Product = () => {
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchProductData = async () => {
-  //     try {
-  //       const mainProduct = await sanityClient.fetch(getProduct(slug));
+  useEffect(() => {
+    setDataReletedProducts(null);
+    setProduct(null);
 
-  //       if (!mainProduct) return null;
+    const fetchProductData = async () => {
+      try {
+        const mainProduct = await sanityClient.fetch(getProduct(slug));
 
-  //       const reletedProduct = await sanityClient.fetch(
-  //         getRelatedProducts(mainProduct[0].category)
-  //       );
+        if (!mainProduct) return null;
 
-  //       setProduct(mainProduct[0]);
-  //       setDataReletedProducts(reletedProduct);
-  //     } catch (err) {}
-  //   };
+        const reletedProduct = await sanityClient.fetch(
+          getRelatedProducts(mainProduct[0].category)
+        );
 
-  //   fetchProductData();
-  // }, [slug]);
+        setProduct(mainProduct[0]);
+        setDataReletedProducts(reletedProduct);
+      } catch (err) {}
+    };
 
-  // if (!product) return <p>Loading...</p>;
+    fetchProductData();
+  }, [slug]);
 
   return (
     <div className="py-[40px] bg-global-color-4">
