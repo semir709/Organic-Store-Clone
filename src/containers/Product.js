@@ -4,6 +4,8 @@ import Card from "../components/Card";
 import sanityClient from "../client";
 import { getProduct, getRelatedProducts, urlFor } from "../utils";
 import { Link, useParams } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Product = () => {
   const [section, setSection] = useState(0);
@@ -11,26 +13,26 @@ const Product = () => {
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);
 
-  useEffect(() => {
-    const fetchProductData = async () => {
-      try {
-        const mainProduct = await sanityClient.fetch(getProduct(slug));
+  // useEffect(() => {
+  //   const fetchProductData = async () => {
+  //     try {
+  //       const mainProduct = await sanityClient.fetch(getProduct(slug));
 
-        if (!mainProduct) return null;
+  //       if (!mainProduct) return null;
 
-        const reletedProduct = await sanityClient.fetch(
-          getRelatedProducts(mainProduct[0].category)
-        );
+  //       const reletedProduct = await sanityClient.fetch(
+  //         getRelatedProducts(mainProduct[0].category)
+  //       );
 
-        setProduct(mainProduct[0]);
-        setDataReletedProducts(reletedProduct);
-      } catch (err) {}
-    };
+  //       setProduct(mainProduct[0]);
+  //       setDataReletedProducts(reletedProduct);
+  //     } catch (err) {}
+  //   };
 
-    fetchProductData();
-  }, [slug]);
+  //   fetchProductData();
+  // }, [slug]);
 
-  if (!product) return <p>Loading...</p>;
+  // if (!product) return <p>Loading...</p>;
 
   return (
     <div className="py-[40px] bg-global-color-4">
@@ -38,51 +40,80 @@ const Product = () => {
         <main className="mx-4">
           <div className="flex lg:flex-row flex-col gap-10 ">
             <div className="lg:w-1/2">
-              <img
-                src={urlFor(product.image)}
-                alt={product.image.caption}
-                className="object-cover w-full h-full"
-              />
+              {!product?.image ? (
+                <Skeleton className="h-full w-full" />
+              ) : (
+                <img
+                  src={urlFor(product?.image)}
+                  alt={product?.image.caption}
+                  className="object-cover w-full h-full"
+                />
+              )}
             </div>
 
             <div className="flex-1">
-              <h1 className="text-3xl font-semibold mb-5">{product.title}</h1>
-              <div className="flex items-center mb-1">
-                <p className="font-semibold text-2xl">£{product.price}</p>
-                <span className="text-md">
-                  +{" "}
-                  {product.shipping === 0 ? "Free shipping" : product.shipping}
-                </span>
+              <h1 className="text-3xl font-semibold mb-5">
+                {product?.title || <Skeleton />}
+              </h1>
+              <div className="mb-3">
+                {!product ? (
+                  <Skeleton className="py-2" />
+                ) : (
+                  <div className="flex items-center mb-1">
+                    <p className="font-semibold text-2xl">{product?.price}</p>
+                    <span className="text-md">
+                      +{" "}
+                      {product?.shipping === 0
+                        ? "Free shipping"
+                        : product?.shipping}
+                    </span>
+                  </div>
+                )}
               </div>
-              <p className="text-global-color-2">{product.description}</p>
-              <form
-                action=""
-                className="flex items-center py-5 border-b-gray-300 border-b-[1px] mb-3"
-              >
-                <input
-                  type="number"
-                  value={1}
-                  min={1}
-                  size={4}
-                  inputMode="numeric"
-                  className="p-2 me-4 text-center"
-                />
-                <button className="uppercase px-[80px] py-2 bg-global-color-1 hover:bg-global-color-0 text-white font-semibold rounded-md">
-                  Add to chart
-                </button>
-              </form>
-              <span>
-                Categories:{" "}
-                {product.category.map(({ slug, name }) => (
-                  <Link
-                    key={slug}
-                    to={`/shop/${slug}`}
-                    className="text-global-color-0 hover:text-global-color-1 me-2"
+
+              <p className="text-global-color-2">
+                {product?.description || <Skeleton className="py-[40px]" />}
+              </p>
+              {!product ? (
+                <Skeleton className="py-3 my-2" />
+              ) : (
+                <div>
+                  <form
+                    action=""
+                    className="flex items-center py-5 border-b-gray-300 border-b-[1px] mb-3"
                   >
-                    {name}
-                  </Link>
-                ))}
-              </span>
+                    <input
+                      type="number"
+                      value={1}
+                      min={1}
+                      size={4}
+                      inputMode="numeric"
+                      className="p-2 me-4 text-center"
+                    />
+                    <button className="uppercase px-[80px] py-2 bg-global-color-1 hover:bg-global-color-0 text-white font-semibold rounded-md">
+                      Add to chart
+                    </button>
+                  </form>
+                </div>
+              )}
+              <div>
+                {!product ? (
+                  <Skeleton className="py-1" />
+                ) : (
+                  <span>
+                    Categories:{" "}
+                    {product.category.map(({ slug, name }) => (
+                      <Link
+                        key={slug}
+                        to={`/shop/${slug}`}
+                        className="text-global-color-0 hover:text-global-color-1 me-2"
+                      >
+                        {name}
+                      </Link>
+                    ))}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -113,9 +144,13 @@ const Product = () => {
             <div className="my-5">
               {section === 0 && (
                 <div>
-                  {dataReletedProducts.description.map(({ description }) => (
-                    <p className="my-2">{description}</p>
-                  ))}
+                  {!dataReletedProducts ? (
+                    <Skeleton className="py-[50px]" />
+                  ) : (
+                    dataReletedProducts?.description.map(({ description }) => (
+                      <p className="my-2 ">{description}</p>
+                    ))
+                  )}
                 </div>
               )}
 
@@ -203,23 +238,19 @@ const Product = () => {
         <section className="mt-5 mx-4">
           <h2 className="text-4xl font-semibold mb-5">Related Products</h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
-            {/* Load after main load skeleton load */}
-
-            {!dataReletedProducts ? (
-              <p className="bg-red-300 w-[20px] h-[20px]">Loading...</p>
-            ) : (
-              dataReletedProducts.relatedProducts.map(
-                ({ title, price, image, slug, category }) => (
-                  <Card
-                    title={title}
-                    price={price}
-                    category={category}
-                    img={urlFor(image)}
-                    slug={slug}
-                  />
-                )
-              )
-            )}
+            {!dataReletedProducts
+              ? [1, 2, 3, 4].map(() => <Skeleton className="py-[100px]" />)
+              : dataReletedProducts?.relatedProducts.map(
+                  ({ title, price, image, slug, category }) => (
+                    <Card
+                      title={title}
+                      price={price}
+                      category={category}
+                      img={urlFor(image)}
+                      slug={slug}
+                    />
+                  )
+                )}
           </div>
         </section>
       </div>
