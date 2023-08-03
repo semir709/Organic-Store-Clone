@@ -4,8 +4,8 @@ export default {
   title: 'Category',
   fields: [
     {
-      name: 'category',
-      title: 'Category',
+      name: 'name',
+      title: 'Name Category',
       type: 'string',
       validation: (Rule) => Rule.required(),
     },

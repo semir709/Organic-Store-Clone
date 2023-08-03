@@ -1,9 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import Card from "../components/Card";
+import sanityClient from "../client";
+import { getProduct, getRelatedProducts, urlFor } from "../utils";
+import { useLocation, useParams } from "react-router-dom";
 
 const Product = () => {
   const [section, setSection] = useState(0);
+  const slug = useParams();
+  const [dataReletedProducts, setDataReletedProducts] = useState(null);
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const mainProduct = await sanityClient.fetch(getProduct(slug));
+
+        if (!mainProduct) return null;
+
+        const reletedProduct = await sanityClient.fetch(
+          getRelatedProducts(mainProduct[0].category)
+        );
+
+        setProduct(mainProduct[0]);
+        setDataReletedProducts(reletedProduct);
+      } catch (err) {}
+    };
+
+    fetchProductData();
+  }, [slug]);
+
+  if (!product) return <p>Loading...</p>;
+
   return (
     <div className="py-[40px] bg-global-color-4">
       <div className="max-w-[1200px] mx-auto">
@@ -11,25 +39,22 @@ const Product = () => {
           <div className="flex lg:flex-row flex-col gap-10 ">
             <div className="lg:w-1/2">
               <img
-                src="https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/cashew-butter-500.jpg"
-                alt=""
+                src={urlFor(product.image)}
+                alt={product.image.caption}
                 className="object-cover w-full h-full"
               />
             </div>
 
             <div className="flex-1">
-              <h1 className="text-3xl font-semibold mb-5">
-                Natural Extracted Edible Oil
-              </h1>
+              <h1 className="text-3xl font-semibold mb-5">{product.title}</h1>
               <div className="flex items-center mb-1">
-                <p className="font-semibold text-2xl">£25.00</p>
-                <span className="text-md">+ Free Shipping</span>
+                <p className="font-semibold text-2xl">£{product.price}</p>
+                <span className="text-md">
+                  +{" "}
+                  {product.shipping === 0 ? "Free shipping" : product.shipping}
+                </span>
               </div>
-              <p className="text-global-color-2">
-                Neque porro quisquam est, qui dolore ipsum quia dolor sit amet,
-                consectetur adipisci velit, sed quia non incidunt lores ta porro
-                ame. numquam eius modi tempora incidunt lores ta porro ame.
-              </p>
+              <p className="text-global-color-2">{product.description}</p>
               <form
                 action=""
                 className="flex items-center py-5 border-b-gray-300 border-b-[1px] mb-3"
@@ -48,19 +73,15 @@ const Product = () => {
               </form>
               <span>
                 Categories:{" "}
-                <a
-                  href="/"
-                  className="text-global-color-0 hover:text-global-color-1"
-                >
-                  Groceries
-                </a>
-                ,{" "}
-                <a
-                  href="/"
-                  className="text-global-color-0 hover:text-global-color-1"
-                >
-                  Juice
-                </a>
+                {product.category.map(({ slug, name }) => (
+                  <a
+                    key={slug}
+                    href={`/product/${slug}`}
+                    className="text-global-color-0 hover:text-global-color-1"
+                  >
+                    {name}
+                  </a>
+                ))}
               </span>
             </div>
           </div>
@@ -182,9 +203,23 @@ const Product = () => {
         <section className="mt-5 mx-4">
           <h2 className="text-4xl font-semibold mb-5">Related Products</h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
-            {[1, 2, 3, 4].map(() => (
-              <Card />
-            ))}
+            {/* Load after main load skeleton load */}
+
+            {!dataReletedProducts ? (
+              <p className="bg-red-300 w-[20px] h-[20px]">Loading...</p>
+            ) : (
+              dataReletedProducts.map(
+                ({ title, price, image, slug, category }) => (
+                  <Card
+                    title={title}
+                    price={price}
+                    category={category}
+                    img={urlFor(image)}
+                    slug={slug}
+                  />
+                )
+              )
+            )}
           </div>
         </section>
       </div>

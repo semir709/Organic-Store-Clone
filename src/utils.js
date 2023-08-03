@@ -47,6 +47,42 @@ export const getHomePage = `*[_type == 'home'] {
     }
   }
 }`;
+export const getRelatedProducts = (categories) => {
+  const data = `*[_type == 'product' && references(*[_type=="category" && slug.current in ['${categories
+    .map(({ slug }) => slug)
+    .join("','")}']]._id)] {
+    title,
+    image,
+    price,
+    'slug': slug.current,
+    category[]->{
+      name,
+      'slug': slug.current
+    }
+  }[0..3]`;
+
+  console.log(data);
+
+  return data;
+};
+
+export const getProduct = ({ slug }) => {
+  const data = `*[_type == 'product' && slug.current == '${slug}'] {
+    title,
+    image,
+    price,
+    'slug': slug.current,
+    category[]->{
+      name,
+      'slug': slug.current
+    },
+    description,
+    shipping,
+    previusPrice
+  }`;
+
+  return data;
+};
 
 export const navData = {
   mainNav: [

@@ -38,11 +38,7 @@ const Home = () => {
     sanityClient.fetch(getHomePage).then((data) => setHomeData(data[0]));
   }, []);
 
-  // console.log(homeData.mainSection.image);
-
   if (!homeData) return <p>Loading...</p>;
-
-  console.log(homeData);
 
   return (
     <main>
