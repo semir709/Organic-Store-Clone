@@ -48,20 +48,33 @@ export const getHomePage = `*[_type == 'home'] {
   }
 }`;
 export const getRelatedProducts = (categories) => {
-  const data = `*[_type == 'product' && references(*[_type=="category" && slug.current in ['${categories
-    .map(({ slug }) => slug)
-    .join("','")}']]._id)] {
-    title,
-    image,
-    price,
-    'slug': slug.current,
-    category[]->{
-      name,
-      'slug': slug.current
-    }
-  }[0..3]`;
+  const data = `{
+    'relatedProducts': *[_type == 'product' && references(*[_type=="category" && slug.current in ['${categories
+      .map(({ slug }) => slug)
+      .join("','")}']]._id)] {
+      title,
+      image,
+      price,
+      'slug': slug.current,
+      category[]->{
+        name,
+        'slug': slug.current
+      }
+    }[0..3] ,
+    'description': *[_type == 'category' && slug.current in ['${categories
+      .map(({ slug }) => slug)
+      .join("','")}']] {description}
+  }`;
 
-  console.log(data);
+  return data;
+};
+
+export const getCategoryDesc = (categories) => {
+  const data = `*[_type == 'category' && slug.current in ['${categories
+    .map(({ slug }) => slug)
+    .join("','")}']] {
+    description
+  }`;
 
   return data;
 };

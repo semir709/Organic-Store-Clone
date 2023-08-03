@@ -3,7 +3,7 @@ import ButtonGreen from "../components/ButtonGreen";
 import Card from "../components/Card";
 import sanityClient from "../client";
 import { getProduct, getRelatedProducts, urlFor } from "../utils";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Product = () => {
   const [section, setSection] = useState(0);
@@ -74,13 +74,13 @@ const Product = () => {
               <span>
                 Categories:{" "}
                 {product.category.map(({ slug, name }) => (
-                  <a
+                  <Link
                     key={slug}
-                    href={`/product/${slug}`}
-                    className="text-global-color-0 hover:text-global-color-1"
+                    to={`/shop/${slug}`}
+                    className="text-global-color-0 hover:text-global-color-1 me-2"
                   >
                     {name}
-                  </a>
+                  </Link>
                 ))}
               </span>
             </div>
@@ -94,7 +94,9 @@ const Product = () => {
                   section === 0 ? "border-global-color-0" : "border-transparent"
                 }`}
               >
-                <a className="font-semibold text-global-color-3">Description</a>
+                <Link className="font-semibold text-global-color-3">
+                  Description
+                </Link>
               </li>
               <li
                 onClick={() => setSection(1)}
@@ -102,20 +104,18 @@ const Product = () => {
                   section === 1 ? "border-global-color-0" : "border-transparent"
                 }`}
               >
-                <a className="font-semibold text-global-color-3">
+                <Link className="font-semibold text-global-color-3">
                   Reviews (0){" "}
-                </a>
+                </Link>
               </li>
             </ul>
 
             <div className="my-5">
               {section === 0 && (
                 <div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti molestias tempora aperiam a alias perspiciatis
-                    vitae officiis eius laborum cumque.
-                  </p>
+                  {dataReletedProducts.description.map(({ description }) => (
+                    <p className="my-2">{description}</p>
+                  ))}
                 </div>
               )}
 
@@ -208,7 +208,7 @@ const Product = () => {
             {!dataReletedProducts ? (
               <p className="bg-red-300 w-[20px] h-[20px]">Loading...</p>
             ) : (
-              dataReletedProducts.map(
+              dataReletedProducts.relatedProducts.map(
                 ({ title, price, image, slug, category }) => (
                   <Card
                     title={title}

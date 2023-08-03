@@ -16,7 +16,7 @@ const Card = ({ title, category, price, img, slug }) => {
       <div className="mt-5 text-center">
         <div className="flex items-center justify-center">
           {category.map(({ slug, name }) => (
-            <span key={slug} className="opacity-50 text-sm">
+            <span key={slug} className="opacity-50 text-sm me-2">
               {name}
             </span>
           ))}
