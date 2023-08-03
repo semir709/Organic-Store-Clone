@@ -97,6 +97,11 @@ export const getProduct = ({ slug }) => {
   return data;
 };
 
+export const getContact = `*[_type == 'contact'] {
+  'questions': questions.questionBlock[] {answer, question},
+  'contact': contactInfo
+}`;
+
 export const navData = {
   mainNav: [
     { text: "Everything", url: "/shop" },

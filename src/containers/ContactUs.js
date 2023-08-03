@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionMessage from "../components/SectionMessage";
 import leafImg from "../img/imageLeaf.png";
 import CardContact from "../components/CardContact";
@@ -7,12 +7,24 @@ import QuestionDrop from "../components/QuestionDrop";
 import BgLeaf from "../components/BgLeaf";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
+import { getContact } from "../utils";
+import sanityClient from "../client";
 
 const someText = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
 repellendus fugit iusto, culpa velit libero quos vitae maxime
 error nisi.`;
 
 const ContactUs = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    setData(null);
+    sanityClient.fetch(getContact).then((data) => setData(data[0]));
+  }, []);
+
+  if (!data) return <p>Loading...</p>;
+
+  console.log(data);
+
   return (
     <div>
       <SectionMessage title={"Get In Touch"} />
@@ -30,18 +42,17 @@ const ContactUs = () => {
               </div>
               <CardContact
                 icon={<BsFillTelephoneFill size={20} />}
-                text1={"+123 456 789"}
-                text2={"+123 456 789"}
+                arrayText={data.contact.phone}
               />
+
               <CardContact
-                icon={<HiOutlineMail size={30} />}
-                text1={"info@example.com"}
-                text2={"support@example.com"}
+                icon={<BsFillTelephoneFill size={20} />}
+                arrayText={data.contact.email}
               />
+
               <CardContact
-                icon={<HiLocationMarker size={30} />}
-                text1={"1569 Ave, New York,"}
-                text2={"NY 10028, USA"}
+                icon={<BsFillTelephoneFill size={20} />}
+                arrayText={data.contact.location}
               />
             </div>
           </div>
