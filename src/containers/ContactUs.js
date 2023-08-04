@@ -65,35 +65,10 @@ const ContactUs = () => {
           <Head title={"Frequently Asked Question!"} />
 
           <section className="mt-5 mx-5 ">
-            <div className="flex gap-x-20 sm:flex-row flex-col">
-              <div className="flex-1">
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-              </div>
-              <div className="flex-1">
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-                <QuestionDrop
-                  question={"Pulvinar nostrud class cum facilis?"}
-                  answer={someText}
-                />
-              </div>
+            <div className="grid gap-x-20 md:grid-cols-2">
+              {data.questions.map(({ question, answer }, index) => (
+                <QuestionDrop key={index} question={question} answer={answer} />
+              ))}
             </div>
           </section>
         </div>
