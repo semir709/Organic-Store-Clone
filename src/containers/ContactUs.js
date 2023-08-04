@@ -6,13 +6,11 @@ import Head from "../components/Head";
 import QuestionDrop from "../components/QuestionDrop";
 import BgLeaf from "../components/BgLeaf";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
 import { getContact } from "../utils";
 import sanityClient from "../client";
-
-const someText = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
-repellendus fugit iusto, culpa velit libero quos vitae maxime
-error nisi.`;
+import { MdEmail, MdLocationPin } from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ContactUs = () => {
   const [data, setData] = useState(null);
@@ -20,10 +18,6 @@ const ContactUs = () => {
     setData(null);
     sanityClient.fetch(getContact).then((data) => setData(data[0]));
   }, []);
-
-  if (!data) return <p>Loading...</p>;
-
-  console.log(data);
 
   return (
     <div>
@@ -42,17 +36,17 @@ const ContactUs = () => {
               </div>
               <CardContact
                 icon={<BsFillTelephoneFill size={20} />}
-                arrayText={data.contact.phone}
+                arrayText={data?.contact?.phone}
               />
 
               <CardContact
-                icon={<BsFillTelephoneFill size={20} />}
-                arrayText={data.contact.email}
+                icon={<MdEmail size={27} />}
+                arrayText={data?.contact?.email}
               />
 
               <CardContact
-                icon={<BsFillTelephoneFill size={20} />}
-                arrayText={data.contact.location}
+                icon={<MdLocationPin size={30} />}
+                arrayText={data?.contact?.location}
               />
             </div>
           </div>
@@ -66,9 +60,17 @@ const ContactUs = () => {
 
           <section className="mt-5 mx-5 ">
             <div className="grid gap-x-20 md:grid-cols-2">
-              {data.questions.map(({ question, answer }, index) => (
-                <QuestionDrop key={index} question={question} answer={answer} />
-              ))}
+              {!data
+                ? [1, 2, 3, 4, 5, 6].map(() => (
+                    <Skeleton className="py-5 my-2" />
+                  ))
+                : data?.questions.map(({ question, answer }, index) => (
+                    <QuestionDrop
+                      key={index}
+                      question={question}
+                      answer={answer}
+                    />
+                  ))}
             </div>
           </section>
         </div>

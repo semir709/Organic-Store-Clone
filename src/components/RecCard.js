@@ -1,5 +1,4 @@
 import React from "react";
-import person from "../img/person.jpg";
 import PersonInfo from "./PersonInfo";
 
 const RecCard = ({ text, image, alt, name }) => {

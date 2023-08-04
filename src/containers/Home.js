@@ -258,7 +258,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* <section className="bg-global-color-4 pb-[40px]">
+        <section className="bg-global-color-4 pb-[40px]">
           <div className="max-w-[1200px] mx-auto">
             <div className="flex items-center justify-between w-full px-2 min-[950px]:flex-row flex-col">
               <div className="flex-2 min-[950px]:me-5 m-0">
@@ -276,7 +276,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
       </div>
     </main>
   );

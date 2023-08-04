@@ -3,6 +3,7 @@ import { BiSolidDownArrow, BiSolidRightArrow } from "react-icons/bi";
 
 const QuestionDrop = ({ question, answer }) => {
   const [toggle, setToggle] = useState(false);
+
   return (
     <div
       className="border-b-2   hover:cursor-pointer mb-[50px] "
