@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionMessage from "../components/SectionMessage";
 import LeafCenter from "../components/LeafCenter";
 import fruit from "../img/fruit.jpg";
@@ -7,14 +7,25 @@ import PersonInfo from "../components/PersonInfo";
 import drawLeaf from "../img/leafDraw.png";
 import { BiCheckCircle } from "react-icons/bi";
 import CheckList from "../components/CheckList";
-import { checkListData } from "../utils";
+import { checkListData, getAbout, urlFor } from "../utils";
 import { checkListData2 } from "../utils";
 import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
 import bigLeaf from "../img/BigLeaf.png";
 import BgLeaf from "../components/BgLeaf";
+import sanityClient from "../client";
 
 const AboutUs = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setData(null);
+    sanityClient.fetch(getAbout).then((data) => setData(data[0]));
+  }, []);
+
+  if (!data) return <p>Loading...</p>;
+
+  console.log(data);
   return (
     <div>
       <SectionMessage title={"About Us"} />
@@ -27,28 +38,17 @@ const AboutUs = () => {
           <div className="flex items-center mx-5 lg:flex-row flex-col">
             <div className="flex-1 lg:py-[50px] lg:pe-[150px] mx-5 mb-[50px]">
               <h2 className="font-semibold sm:text-4xl text-2xl mb-5">
-                We Are Your Favourite Store.
+                {data.sectionInfo.title}
               </h2>
-              <p className="sm:text-base text-sm">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum
-                dolores ut, laborum, sit modi vitae excepturi labore, error
-                corporis hic doloribus dignissimos aliquam aut voluptas
-                reprehenderit molestias debitis. Doloremque omnis, autem labore
-                consequuntur eius ipsa excepturi mollitia. Iste, non corrupti id
-                aspernatur at assumenda provident cupiditate quod explicabo sit
-                ea. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Illum dolores ut, laborum, sit modi vitae excepturi labore,
-                <br />
-                error corporis hic doloribus dignissimos aliquam aut voluptas
-                reprehenderit molestias debitis. Doloremque omnis, autem labore
-                consequuntur eius ipsa excepturi mollitia. Iste, non corrupti id
-                aspernatur at assumenda provident cupiditate quod explicabo sit
-                ea.
-              </p>
+              <p className="sm:text-base text-sm">{data.sectionInfo.text}</p>
             </div>
 
             <div className="flex-1 w-full lg:p-0 px-5">
-              <img src={fruit} alt="" className="object-cover w-full" />
+              <img
+                src={urlFor(data.sectionInfo.image).url()}
+                alt={data.sectionInfo.image.caption}
+                className="object-cover w-full"
+              />
             </div>
           </div>
         </div>
@@ -63,13 +63,25 @@ const AboutUs = () => {
               </h4>
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-2 my-5">
-              <NumberStat />
+              <NumberStat
+                number={data.sectionNumber.productsCategory}
+                title={"Products Category"}
+                reduce={100}
+              />
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-3 my-5">
-              <NumberStat />
+              <NumberStat
+                number={data.sectionNumber.createdProducts}
+                title={"Created Products"}
+                reduce={100}
+              />
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-4 my-5">
-              <NumberStat />
+              <NumberStat
+                number={data.sectionNumber.happyCustomers}
+                title={"Happy Customers"}
+                reduce={100}
+              />
             </div>
           </div>
         </div>
@@ -89,7 +101,6 @@ const AboutUs = () => {
                   />
                 </div>
                 <div className="flex items-center flex-col text-center">
-                  <div>star</div>
                   <p>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                     Totam exercitationem quasi blanditiis amet tempora quibusdam

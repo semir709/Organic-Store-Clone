@@ -4,6 +4,7 @@ import loremLogo from "./img/loremLogo.svg";
 
 import sanityClient from "./client";
 import imageUrlBuilder from "@sanity/image-url";
+import { useEffect, useRef } from "react";
 
 const builder = imageUrlBuilder(sanityClient);
 
@@ -101,6 +102,39 @@ export const getContact = `*[_type == 'contact'] {
   'questions': questions.questionBlock[] {answer, question},
   'contact': contactInfo
 }`;
+
+export const getAbout = `*[_type == 'about'] {
+  sectionInfo,
+  sectionNumber,
+  sectionMoreinfo {
+    rewiew -> {
+      name, 
+      text
+    },
+    slideImages,
+    list
+  }
+}`;
+
+export const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
 
 export const navData = {
   mainNav: [
