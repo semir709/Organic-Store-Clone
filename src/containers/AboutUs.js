@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SectionMessage from "../components/SectionMessage";
 import LeafCenter from "../components/LeafCenter";
 import fruit from "../img/fruit.jpg";
@@ -17,15 +17,26 @@ import sanityClient from "../client";
 
 const AboutUs = () => {
   const [data, setData] = useState(null);
+  const sectionRef = useRef();
+  const [isNumVisiable, setIsNumVisiable] = useState(false);
 
   useEffect(() => {
     setData(null);
     sanityClient.fetch(getAbout).then((data) => setData(data[0]));
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entr) => {
+      const entry = entr[0];
+
+      if (entry.isIntersecting) setIsNumVisiable(true);
+    });
+
+    if (data) observer.observe(sectionRef.current);
+  }, [data]);
+
   if (!data) return <p>Loading...</p>;
 
-  console.log(data);
   return (
     <div>
       <SectionMessage title={"About Us"} />
@@ -54,7 +65,10 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <section className="py-[40px] bg-global-color-6 text-white">
+      <section
+        ref={sectionRef}
+        className="py-[40px] bg-global-color-6 text-white"
+      >
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center justify-center min-[700px]:justify-between px-5 flex-wrap-reverse min-[700px]:flex-nowrap w-full sm:flex-row flex-col">
             <div className="w-fit min-[700px]:order-none order-1  mb-5 min-[700px]:mb-0">
@@ -66,21 +80,24 @@ const AboutUs = () => {
               <NumberStat
                 number={data.sectionNumber.productsCategory}
                 title={"Products Category"}
-                reduce={100}
+                reduce={50}
+                isNumVisiable={isNumVisiable}
               />
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-3 my-5">
               <NumberStat
                 number={data.sectionNumber.createdProducts}
                 title={"Created Products"}
-                reduce={100}
+                reduce={50}
+                isNumVisiable={isNumVisiable}
               />
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-4 my-5">
               <NumberStat
                 number={data.sectionNumber.happyCustomers}
                 title={"Happy Customers"}
-                reduce={100}
+                reduce={50}
+                isNumVisiable={isNumVisiable}
               />
             </div>
           </div>

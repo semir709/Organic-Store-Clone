@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useInterval } from "../utils";
 
-const NumberStat = ({ number, title, reduce }) => {
+const NumberStat = ({ number, title, reduce, isNumVisiable }) => {
   const [integer, setInteger] = useState(number - reduce);
 
   useInterval(() => {
-    if (integer < number) {
+    if (isNumVisiable && integer < number) {
       setInteger(integer + 1);
     }
   }, 10);
