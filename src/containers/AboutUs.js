@@ -14,6 +14,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import bigLeaf from "../img/BigLeaf.png";
 import BgLeaf from "../components/BgLeaf";
 import sanityClient from "../client";
+import SwiperCom from "../components/SwiperCom";
 
 const AboutUs = () => {
   const [data, setData] = useState(null);
@@ -108,14 +109,12 @@ const AboutUs = () => {
         <BgLeaf />
         <div className="max-w-[1200px] mx-auto relative">
           <div className="flex md:flex-row flex-col mx-5 items-center">
-            <div className="sm:p-[70px] flex-1 ">
+            <div className="sm:p-[70px]  w-[58%] ">
               <div className="bg-global-color-4 px-[70px] rounded-md">
                 <div className="w-full rounded-md translate-y-[-50px]">
-                  <img
-                    className="object-cover w-full rounded-md"
-                    src="https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/elementor/thumbs/image-02-ok9thlk7f88j35jeicf161gqa3zxv2i1l1ldi2gemg.jpg"
-                    alt=""
-                  />
+                  <div className="bg-white w-full h-[400px] ">
+                    <SwiperCom array={data.sectionMoreinfo.slideImages} />
+                  </div>
                 </div>
                 <div className="flex items-center flex-col text-center">
                   <p>
@@ -129,7 +128,7 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1 md:px-0  sm:px-[70px]">
+            <div className="w-1/2 md:px-0  sm:px-[70px]">
               <div className="py-[70px]">
                 <div className="flex items-center mb-[40px] md:flex-row flex-col">
                   <div className="lg:w-[35%] md:w-[75%] w-[35%]">
