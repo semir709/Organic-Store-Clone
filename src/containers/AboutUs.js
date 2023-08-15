@@ -15,6 +15,7 @@ import bigLeaf from "../img/BigLeaf.png";
 import BgLeaf from "../components/BgLeaf";
 import sanityClient from "../client";
 import SwiperCom from "../components/SwiperCom";
+import Skeleton from "react-loading-skeleton";
 
 const AboutUs = () => {
   const [data, setData] = useState(null);
@@ -36,10 +37,6 @@ const AboutUs = () => {
     if (data) observer.observe(sectionRef.current);
   }, [data]);
 
-  if (!data) return <p>Loading...</p>;
-
-  console.log(data);
-
   return (
     <div>
       <SectionMessage title={"About Us"} />
@@ -50,19 +47,29 @@ const AboutUs = () => {
       <section className="pt-[60px] pb-[120px]">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center mx-5 lg:flex-row flex-col">
-            <div className="flex-1 lg:py-[50px] lg:pe-[150px] mx-5 mb-[50px]">
+            <div className="flex-1 lg:py-[50px] lg:pe-[150px] mx-5 mb-[50px] w-full px-5">
               <h2 className="font-semibold sm:text-4xl text-2xl mb-5">
-                {data.sectionInfo.title}
+                {!data ? <Skeleton /> : data.sectionInfo.title}
               </h2>
-              <p className="sm:text-base text-sm">{data.sectionInfo.text}</p>
+              <p className="sm:text-base text-sm ">
+                {!data ? (
+                  <Skeleton className="py-[100px] " />
+                ) : (
+                  data.sectionInfo.text
+                )}
+              </p>
             </div>
 
             <div className="flex-1 w-full lg:p-0 px-5">
-              <img
-                src={urlFor(data.sectionInfo.image).url()}
-                alt={data.sectionInfo.image.caption}
-                className="object-cover w-full"
-              />
+              {!data ? (
+                <Skeleton className="py-[170px]" />
+              ) : (
+                <img
+                  src={urlFor(data.sectionInfo.image).url()}
+                  alt={data.sectionInfo.image.caption}
+                  className="object-cover w-full"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -81,7 +88,7 @@ const AboutUs = () => {
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-2 my-5">
               <NumberStat
-                number={data.sectionNumber.productsCategory}
+                number={parseInt(data?.sectionNumber?.productsCategory)}
                 title={"Products Category"}
                 reduce={50}
                 isNumVisiable={isNumVisiable}
@@ -89,7 +96,7 @@ const AboutUs = () => {
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-3 my-5">
               <NumberStat
-                number={data.sectionNumber.createdProducts}
+                number={parseInt(data?.sectionNumber?.productsCategory)}
                 title={"Created Products"}
                 reduce={50}
                 isNumVisiable={isNumVisiable}
@@ -97,7 +104,7 @@ const AboutUs = () => {
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-4 my-5">
               <NumberStat
-                number={data.sectionNumber.happyCustomers}
+                number={parseInt(data?.sectionNumber?.productsCategory)}
                 title={"Happy Customers"}
                 reduce={50}
                 isNumVisiable={isNumVisiable}
@@ -114,17 +121,31 @@ const AboutUs = () => {
             <div className=" md:w-[50%] w-[90%]">
               <div className="bg-global-color-4  rounded-md flex flex-col items-center px-[70px] ">
                 <div className="bg-white w-full translate-y-[-50px] ">
-                  <SwiperCom array={data.sectionMoreinfo.slideImages} />
+                  {!data ? (
+                    <Skeleton className="py-[170px]" />
+                  ) : (
+                    <SwiperCom array={data.sectionMoreinfo.slideImages} />
+                  )}
                 </div>
 
                 <div className="flex items-center flex-col text-center mt-[-30px]">
-                  <p>{data.sectionMoreinfo.rewiew.text}</p>
+                  <p>
+                    {!data ? (
+                      <Skeleton className="py-[30px] px-[100px] " />
+                    ) : (
+                      data.sectionMoreinfo.rewiew.text
+                    )}
+                  </p>
                   <div className="my-[40px]">
-                    <PersonInfo
-                      image={urlFor(data.sectionMoreinfo.rewiew.image).url()}
-                      alt={data.sectionMoreinfo.rewiew.image.caption}
-                      name={data.sectionMoreinfo.rewiew.name}
-                    />
+                    {!data ? (
+                      <Skeleton />
+                    ) : (
+                      <PersonInfo
+                        image={urlFor(data.sectionMoreinfo.rewiew.image).url()}
+                        alt={data.sectionMoreinfo.rewiew.image.caption}
+                        name={data.sectionMoreinfo.rewiew.name}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
