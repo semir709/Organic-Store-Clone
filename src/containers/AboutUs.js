@@ -110,15 +110,14 @@ const AboutUs = () => {
       <section className="py-[100px] relative">
         <BgLeaf />
         <div className="max-w-[1200px] mx-auto relative">
-          <div className="flex md:flex-row flex-col mx-5 items-center">
-            <div className="sm:p-[70px]  w-[58%] ">
-              <div className="bg-global-color-4 px-[70px] rounded-md">
-                <div className="w-full rounded-md translate-y-[-50px]">
-                  <div className="bg-white w-full h-[400px] ">
-                    <SwiperCom array={data.sectionMoreinfo.slideImages} />
-                  </div>
+          <div className="flex md:flex-row flex-col  mx-5 items-center  gap-x-20 ">
+            <div className=" md:w-[50%] w-[90%]">
+              <div className="bg-global-color-4  rounded-md flex flex-col items-center px-[70px] ">
+                <div className="bg-white w-full translate-y-[-50px] ">
+                  <SwiperCom array={data.sectionMoreinfo.slideImages} />
                 </div>
-                <div className="flex items-center flex-col text-center">
+
+                <div className="flex items-center flex-col text-center mt-[-30px]">
                   <p>{data.sectionMoreinfo.rewiew.text}</p>
                   <div className="my-[40px]">
                     <PersonInfo
@@ -130,10 +129,10 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
-            <div className="w-1/2 md:px-0  sm:px-[70px]">
+            <div className="lg:w-1/2  md:px-0  sm:px-[70px] md:w-[50%] w-[90%]">
               <div className="py-[70px]">
                 <div className="flex items-center mb-[40px] md:flex-row flex-col">
-                  <div className="lg:w-[35%] md:w-[75%] w-[35%]">
+                  <div className=" lg:w-[35%] md:w-[60%]">
                     <figure className="w-full">
                       <img
                         className="w-full object-cover"

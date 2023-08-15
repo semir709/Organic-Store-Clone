@@ -19,11 +19,17 @@ const SwiperCom = ({ array }) => {
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
-        className="mySwiper bg-global-color-4 h-full w-full rounded-md"
+        className="mySwiper bg-global-color-4 "
       >
         {array.map(({ asset, captionSlideImage }) => (
           <SwiperSlide>
-            <img src={urlFor(asset).url()} alt={captionSlideImage} />
+            <div className="w-full h-full ">
+              <img
+                className="w-full object-cover rounded-lg"
+                src={urlFor(asset).url()}
+                alt={captionSlideImage}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -6,7 +6,7 @@ const CheckList = ({ list }) => {
     <ul>
       {list.map(({ text }) => (
         <li className="flex items-center mb-2">
-          <span className="me-3">
+          <span className="me-1">
             <BiCheckCircle className="text-global-color-1" size={25} />
           </span>
           <span className="text-lg">{text}</span>
