@@ -38,6 +38,8 @@ const AboutUs = () => {
 
   if (!data) return <p>Loading...</p>;
 
+  console.log(data);
+
   return (
     <div>
       <SectionMessage title={"About Us"} />
@@ -117,13 +119,13 @@ const AboutUs = () => {
                   </div>
                 </div>
                 <div className="flex items-center flex-col text-center">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Totam exercitationem quasi blanditiis amet tempora quibusdam
-                    odit ducimus minus nulla perferendis.
-                  </p>
+                  <p>{data.sectionMoreinfo.rewiew.text}</p>
                   <div className="my-[40px]">
-                    <PersonInfo />
+                    <PersonInfo
+                      image={urlFor(data.sectionMoreinfo.rewiew.image).url()}
+                      alt={data.sectionMoreinfo.rewiew.image.caption}
+                      name={data.sectionMoreinfo.rewiew.name}
+                    />
                   </div>
                 </div>
               </div>

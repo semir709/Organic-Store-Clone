@@ -109,7 +109,8 @@ export const getAbout = `*[_type == 'about'] {
   sectionMoreinfo {
     rewiew -> {
       name, 
-      text
+      text,
+      image
     },
     slideImages,
     list

@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
@@ -6,7 +5,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { urlFor, useInterval } from "../utils";
+import { urlFor } from "../utils";
 
 const SwiperCom = ({ array }) => {
   return (
@@ -20,7 +19,7 @@ const SwiperCom = ({ array }) => {
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
-        className="mySwiper bg-global-color-4 h-full w-full"
+        className="mySwiper bg-global-color-4 h-full w-full rounded-md"
       >
         {array.map(({ asset, captionSlideImage }) => (
           <SwiperSlide>
