@@ -37,6 +37,8 @@ const AboutUs = () => {
     if (data) observer.observe(sectionRef.current);
   }, [data]);
 
+  console.log(data);
+
   return (
     <div>
       <SectionMessage title={"About Us"} />
@@ -96,7 +98,7 @@ const AboutUs = () => {
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-3 my-5">
               <NumberStat
-                number={parseInt(data?.sectionNumber?.productsCategory)}
+                number={parseInt(data?.sectionNumber?.createdProducts)}
                 title={"Created Products"}
                 reduce={50}
                 isNumVisiable={isNumVisiable}
@@ -104,7 +106,7 @@ const AboutUs = () => {
             </div>
             <div className="mx-auto min-[700px]:m-0 min-[700px]:mx-5 sm:order-none order-4 my-5">
               <NumberStat
-                number={parseInt(data?.sectionNumber?.productsCategory)}
+                number={parseInt(data?.sectionNumber?.happyCustomers)}
                 title={"Happy Customers"}
                 reduce={50}
                 isNumVisiable={isNumVisiable}

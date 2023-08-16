@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useInterval } from "../utils";
 import Skeleton from "react-loading-skeleton";
 
 const NumberStat = (props) => {
-  const [integer, setInteger] = useState(props.number - props.reduce);
+  const [integer, setInteger] = useState(0);
+
+  useEffect(() => {
+    if (isNaN(props.number) === false) setInteger(props.number - props.reduce);
+  }, [props.number, props.reduce]);
 
   useInterval(() => {
     if (props.isNumVisiable && integer < props.number) {
@@ -11,10 +15,8 @@ const NumberStat = (props) => {
     }
   }, 10);
 
-  console.log(props);
-
   return !props.number ? (
-    <Skeleton className="py-[20px] px-[40px]" />
+    <Skeleton className="py-3 px-[50px]" />
   ) : (
     <div className="text-center">
       <div>
