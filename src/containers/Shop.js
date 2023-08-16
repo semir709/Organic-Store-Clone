@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import { BiArrowFromRight } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import CardSide from "../components/CardSide";
 import Card from "../components/Card";
+import sanityClient from "../client";
+import { getProducts, urlFor } from "../utils";
 
 const Shop = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    sanityClient.fetch(getProducts).then((data) => setData(data));
+  }, []);
+
+  if (!data) return <p>Loading</p>;
+
+  console.log(data);
+
   return (
     <div className="bg-global-color-4 py-[60px]">
       <div className="max-w-[1300px] mx-auto">
@@ -90,37 +102,32 @@ const Shop = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  <Card
-                    title={"Some title"}
-                    category={["asd", "dasd"]}
-                    price={12}
-                    img={""}
-                    slug={"1"}
-                  />
-
-                  <Card
-                    title={"Some title"}
-                    category={["asd", "dasd"]}
-                    price={12}
-                    img={""}
-                    slug={"1"}
-                  />
-
-                  <Card
-                    title={"Some title"}
-                    category={["asd", "dasd"]}
-                    price={12}
-                    img={""}
-                    slug={"1"}
-                  />
-
-                  <Card
-                    title={"Some title"}
-                    category={["asd", "dasd"]}
-                    price={12}
-                    img={""}
-                    slug={"1"}
-                  />
+                  {data.map(
+                    ({
+                      title,
+                      category,
+                      price,
+                      image,
+                      slug,
+                      currency,
+                      setPrevious,
+                      previusPrice,
+                      sale,
+                    }) => (
+                      <Card
+                        key={slug}
+                        title={title}
+                        category={category}
+                        price={price}
+                        img={urlFor(image).url()}
+                        slug={slug}
+                        currency={currency}
+                        setPrevious={setPrevious}
+                        previusPrice={previusPrice}
+                        sale={sale}
+                      />
+                    )
+                  )}
                 </div>
               </div>
             </main>

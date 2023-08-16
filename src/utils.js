@@ -117,6 +117,21 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
+export const getProducts = `*[_type == 'product'] {
+  image,
+  title,
+  price,
+  category[] -> {
+    name,
+    'slug':slug.current
+  },
+  sale,
+  'slug': slug.current,
+  currency,
+  setPrevious,
+  previusPrice
+}`;
+
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 
