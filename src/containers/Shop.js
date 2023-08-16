@@ -90,11 +90,37 @@ const Shop = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                  <Card
+                    title={"Some title"}
+                    category={["asd", "dasd"]}
+                    price={12}
+                    img={""}
+                    slug={"1"}
+                  />
+
+                  <Card
+                    title={"Some title"}
+                    category={["asd", "dasd"]}
+                    price={12}
+                    img={""}
+                    slug={"1"}
+                  />
+
+                  <Card
+                    title={"Some title"}
+                    category={["asd", "dasd"]}
+                    price={12}
+                    img={""}
+                    slug={"1"}
+                  />
+
+                  <Card
+                    title={"Some title"}
+                    category={["asd", "dasd"]}
+                    price={12}
+                    img={""}
+                    slug={"1"}
+                  />
                 </div>
               </div>
             </main>

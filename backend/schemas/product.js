@@ -25,10 +25,20 @@ export default {
       of: [{type: 'reference', to: [{type: 'category'}]}],
       validation: (Rule) => Rule.required(),
     },
+
+    {
+      name: 'currency',
+      title: 'Currency',
+      type: 'string',
+      options: {
+        list: [{title: 'Euro', value: '€'}],
+      },
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: 'price',
       title: 'Price',
-      type: 'string',
+      type: 'number',
       validation: (Rule) => Rule.required(),
     },
     {
@@ -59,9 +69,25 @@ export default {
       description: 'If set to 0 it will appear free shipping on the product',
     },
     {
+      name: 'setPrevious',
+      title: 'Set Previous',
+      type: 'boolean',
+    },
+    {
       name: 'previusPrice',
       title: 'Previus Price',
-      type: 'string',
+      type: 'number',
+      hidden: ({document}) => !document?.setPrevious,
+    },
+    {
+      name: 'sale',
+      title: 'Sale',
+      type: 'boolean',
     },
   ],
+
+  initialValue: {
+    sale: false,
+    setPrevious: false,
+  },
 }

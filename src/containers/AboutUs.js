@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import SectionMessage from "../components/SectionMessage";
 import LeafCenter from "../components/LeafCenter";
-import fruit from "../img/fruit.jpg";
 import NumberStat from "../components/NumberStat";
 import PersonInfo from "../components/PersonInfo";
 import drawLeaf from "../img/leafDraw.png";
-import { BiCheckCircle } from "react-icons/bi";
 import CheckList from "../components/CheckList";
 import { checkListData, getAbout, urlFor } from "../utils";
 import { checkListData2 } from "../utils";
 import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
-import bigLeaf from "../img/BigLeaf.png";
 import BgLeaf from "../components/BgLeaf";
 import sanityClient from "../client";
 import SwiperCom from "../components/SwiperCom";
