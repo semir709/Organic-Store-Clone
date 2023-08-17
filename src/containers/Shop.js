@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Card from "../components/Card";
 import sanityClient from "../client";
 import { getProducts, getSideProducts, urlFor } from "../utils";
+import Skeleton from "react-loading-skeleton";
 
 const Shop = () => {
   const [data, setData] = useState(null);
@@ -16,10 +17,6 @@ const Shop = () => {
       sanityClient.fetch(getSideProducts),
     ]).then(([product, side]) => setData({ product: product, side: side[0] }));
   }, []);
-
-  if (!data) return <p>Loading</p>;
-
-  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -46,54 +43,66 @@ const Shop = () => {
               <div className="mb-[30px]">
                 <ul>
                   <li>
-                    <a
-                      href="/"
-                      className="text-global-color-0 hover:text-global-color-1"
-                    >
-                      Groceries(10)
-                    </a>
+                    {!data ? (
+                      <Skeleton />
+                    ) : (
+                      <a
+                        href="/"
+                        className="text-global-color-0 hover:text-global-color-1"
+                      >
+                        Groceries(10)
+                      </a>
+                    )}
                   </li>
                   <li>
-                    <a
-                      href="/"
-                      className="text-global-color-0 hover:text-global-color-1"
-                    >
-                      Juice(9)
-                    </a>
+                    {!data ? (
+                      <Skeleton />
+                    ) : (
+                      <a
+                        href="/"
+                        className="text-global-color-0 hover:text-global-color-1"
+                      >
+                        Juice(9)
+                      </a>
+                    )}
                   </li>
                 </ul>
               </div>
 
               <div className="grid md:grid-cols-1 min-[400px]:grid-cols-2 sm:gap-y-0 gap-6">
-                {data.side.products.map(
-                  ({
-                    title,
-                    category,
-                    price,
-                    image,
-                    slug,
-                    currency,
-                    setPrevious,
-                    previusPrice,
-                    sale,
-                  }) => (
-                    <div className="mb-4">
-                      <Card
-                        key={slug}
-                        title={title}
-                        category={category}
-                        price={price}
-                        img={urlFor(image).url()}
-                        slug={slug}
-                        currency={currency}
-                        setPrevious={setPrevious}
-                        previusPrice={previusPrice}
-                        sale={sale}
-                        onSide={true}
-                      />
-                    </div>
-                  )
-                )}
+                {!data
+                  ? [1, 2, 3].map(() => (
+                      <Skeleton className="w-full py-[80px] my-3" />
+                    ))
+                  : data.side.products.map(
+                      ({
+                        title,
+                        category,
+                        price,
+                        image,
+                        slug,
+                        currency,
+                        setPrevious,
+                        previusPrice,
+                        sale,
+                      }) => (
+                        <div className="mb-4">
+                          <Card
+                            key={slug}
+                            title={title}
+                            category={category}
+                            price={price}
+                            img={urlFor(image).url()}
+                            slug={slug}
+                            currency={currency}
+                            setPrevious={setPrevious}
+                            previusPrice={previusPrice}
+                            sale={sale}
+                            onSide={true}
+                          />
+                        </div>
+                      )
+                    )}
               </div>
             </div>
           </div>
@@ -111,9 +120,13 @@ const Shop = () => {
                 </header>
 
                 <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-                  <p className="sm:m-0 mb-[20px]">
-                    {"Showing 1–9 of 12 results"}
-                  </p>
+                  {!data ? (
+                    <Skeleton className="py-2 px-[100px]" />
+                  ) : (
+                    <p className="sm:m-0 mb-[20px]">
+                      Showing 1–9 of 12 results
+                    </p>
+                  )}
                   <form action="">
                     <select name="orderby" id="orderby">
                       <option value="menu_order" selecteds="selected">
@@ -131,32 +144,36 @@ const Shop = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  {data.product.map(
-                    ({
-                      title,
-                      category,
-                      price,
-                      image,
-                      slug,
-                      currency,
-                      setPrevious,
-                      previusPrice,
-                      sale,
-                    }) => (
-                      <Card
-                        key={slug}
-                        title={title}
-                        category={category}
-                        price={price}
-                        img={urlFor(image).url()}
-                        slug={slug}
-                        currency={currency}
-                        setPrevious={setPrevious}
-                        previusPrice={previusPrice}
-                        sale={sale}
-                      />
-                    )
-                  )}
+                  {!data
+                    ? [1, 2, 3, 4, 5, 6].map(() => (
+                        <Skeleton className="w-full py-[100px]" />
+                      ))
+                    : data.product.map(
+                        ({
+                          title,
+                          category,
+                          price,
+                          image,
+                          slug,
+                          currency,
+                          setPrevious,
+                          previusPrice,
+                          sale,
+                        }) => (
+                          <Card
+                            key={slug}
+                            title={title}
+                            category={category}
+                            price={price}
+                            img={urlFor(image).url()}
+                            slug={slug}
+                            currency={currency}
+                            setPrevious={setPrevious}
+                            previusPrice={previusPrice}
+                            sale={sale}
+                          />
+                        )
+                      )}
                 </div>
               </div>
             </main>
