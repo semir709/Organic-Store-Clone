@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import { BiArrowFromRight } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
-import CardSide from "../components/CardSide";
+
 import Card from "../components/Card";
 import sanityClient from "../client";
-import { getProducts, urlFor } from "../utils";
+import { getProducts, getSideProducts, urlFor } from "../utils";
 
 const Shop = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    sanityClient.fetch(getProducts).then((data) => setData(data));
+    Promise.all([
+      sanityClient.fetch(getProducts),
+      sanityClient.fetch(getSideProducts),
+    ]).then(([product, side]) => setData({ product: product, side: side[0] }));
   }, []);
 
   if (!data) return <p>Loading</p>;
@@ -62,9 +65,35 @@ const Shop = () => {
               </div>
 
               <div className="grid md:grid-cols-1 min-[400px]:grid-cols-2 sm:gap-y-0 gap-6">
-                <CardSide />
-                <CardSide />
-                <CardSide />
+                {data.side.products.map(
+                  ({
+                    title,
+                    category,
+                    price,
+                    image,
+                    slug,
+                    currency,
+                    setPrevious,
+                    previusPrice,
+                    sale,
+                  }) => (
+                    <div className="mb-4">
+                      <Card
+                        key={slug}
+                        title={title}
+                        category={category}
+                        price={price}
+                        img={urlFor(image).url()}
+                        slug={slug}
+                        currency={currency}
+                        setPrevious={setPrevious}
+                        previusPrice={previusPrice}
+                        sale={sale}
+                        onSide={true}
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -102,7 +131,7 @@ const Shop = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  {data.map(
+                  {data.product.map(
                     ({
                       title,
                       category,

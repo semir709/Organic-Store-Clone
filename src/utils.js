@@ -132,6 +132,23 @@ export const getProducts = `*[_type == 'product'] {
   previusPrice
 }`;
 
+export const getSideProducts = `*[_type == 'sideProducts']{
+  products [] -> {
+    image,
+    title,
+    price,
+    category[] -> {
+      name,
+      'slug':slug.current
+    },
+    sale,
+    'slug': slug.current,
+    currency,
+    setPrevious,
+    previusPrice
+  }
+}`;
+
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 

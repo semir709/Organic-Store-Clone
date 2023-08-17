@@ -11,6 +11,7 @@ const Card = ({
   setPrevious,
   previusPrice,
   sale,
+  onSide = false,
 }) => {
   const navigation = useNavigate();
 
@@ -29,24 +30,40 @@ const Card = ({
       </div>
 
       <div className="mt-5 text-center">
-        <div className="flex items-center justify-center">
-          {category.map(({ slug, name }) => (
-            <span key={slug} className="opacity-50 text-sm me-2">
-              {name}
-            </span>
-          ))}
-        </div>
+        {!onSide && (
+          <div className="flex items-center justify-center">
+            {category.map(({ slug, name }) => (
+              <span key={slug} className="opacity-50 text-sm me-2 ">
+                {name}
+              </span>
+            ))}
+          </div>
+        )}
         <a href="/">
-          <h2 className="text-global-color-2 text-lg font-semibold">{title}</h2>
+          <h2
+            className={` ${
+              onSide
+                ? "text-left text-base text-global-color-0 hover:text-global-color-1 "
+                : "text-center text-lg font-semibold text-global-color-2 "
+            }`}
+          >
+            {title}
+          </h2>
         </a>
-        <div>
+        <div
+          className={`${
+            onSide
+              ? "text-left text-base "
+              : "text-center text-lg font-semibold"
+          }`}
+        >
           {setPrevious && isNaN(previusPrice) === false && (
-            <span className="font-semibold me-2 line-through text-gray-400">
+            <span className="me-2 line-through text-gray-400 ">
               {currency}
               <span>{previusPrice}</span>
             </span>
           )}
-          <span className="font-semibold">
+          <span className="">
             {currency}
             <span>{price}</span>
           </span>
