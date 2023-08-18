@@ -10,13 +10,22 @@ import Skeleton from "react-loading-skeleton";
 
 const Shop = () => {
   const [data, setData] = useState(null);
+  const [page, setPage] = useState(1);
+  const [gap, setGap] = useState(2);
+
+  let start = (page - 1) * gap;
+  let end = start + gap - 1;
 
   useEffect(() => {
     Promise.all([
-      sanityClient.fetch(getProducts),
+      sanityClient.fetch(getProducts(start, end)),
       sanityClient.fetch(getSideProducts),
-    ]).then(([product, side]) => setData({ product: product, side: side[0] }));
+    ]).then(([product, side]) =>
+      setData({ productData: product, side: side[0] })
+    );
   }, []);
+
+  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -124,7 +133,8 @@ const Shop = () => {
                     <Skeleton className="py-2 px-[100px]" />
                   ) : (
                     <p className="sm:m-0 mb-[20px]">
-                      Showing 1–9 of 12 results
+                      Showing {start + 1} - {end + 1} of{" "}
+                      {data.productData.amount} results
                     </p>
                   )}
                   <form action="">
@@ -148,7 +158,7 @@ const Shop = () => {
                     ? [1, 2, 3, 4, 5, 6].map(() => (
                         <Skeleton className="w-full py-[100px]" />
                       ))
-                    : data.product.map(
+                    : data.productData.product.map(
                         ({
                           title,
                           category,

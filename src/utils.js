@@ -117,20 +117,42 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
-export const getProducts = `*[_type == 'product'] {
-  image,
-  title,
-  price,
-  category[] -> {
-    name,
-    'slug':slug.current
-  },
-  sale,
-  'slug': slug.current,
-  currency,
-  setPrevious,
-  previusPrice
-}`;
+// export const getProducts = `*[_type == 'product'] {
+//   image,
+//   title,
+//   price,
+//   category[] -> {
+//     name,
+//     'slug':slug.current
+//   },
+//   sale,
+//   'slug': slug.current,
+//   currency,
+//   setPrevious,
+//   previusPrice
+// }`;
+
+export const getProducts = (start, end) => {
+  const data = `{
+    'product': *[_type == 'product'][${start}..${end}] {
+      image,
+      title,
+      price,
+      category[] -> {
+        name,
+        'slug':slug.current
+      },
+      sale,
+      'slug': slug.current,
+      currency,
+      setPrevious,
+      previusPrice
+    },
+    'amount': count(*[_type == 'product'])
+  }`;
+
+  return data;
+};
 
 export const getSideProducts = `*[_type == 'sideProducts']{
   products [] -> {
