@@ -5,7 +5,12 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import Card from "../components/Card";
 import sanityClient from "../client";
-import { getProducts, getSideProducts, urlFor } from "../utils";
+import {
+  getCategoryNumber,
+  getProducts,
+  getSideProducts,
+  urlFor,
+} from "../utils";
 import Skeleton from "react-loading-skeleton";
 
 const Shop = () => {
@@ -20,10 +25,11 @@ const Shop = () => {
     Promise.all([
       sanityClient.fetch(getProducts(start, end)),
       sanityClient.fetch(getSideProducts),
-    ]).then(([product, side]) =>
-      setData({ productData: product, side: side[0] })
+      sanityClient.fetch(getCategoryNumber),
+    ]).then(([product, side, categoryNum]) =>
+      setData({ productData: product, side: side[0], categoryNum: categoryNum })
     );
-  }, []);
+  }, [start, end]);
 
   console.log(data);
 
@@ -51,30 +57,18 @@ const Shop = () => {
 
               <div className="mb-[30px]">
                 <ul>
-                  <li>
-                    {!data ? (
-                      <Skeleton />
-                    ) : (
-                      <a
-                        href="/"
-                        className="text-global-color-0 hover:text-global-color-1"
-                      >
-                        Groceries(10)
-                      </a>
-                    )}
-                  </li>
-                  <li>
-                    {!data ? (
-                      <Skeleton />
-                    ) : (
-                      <a
-                        href="/"
-                        className="text-global-color-0 hover:text-global-color-1"
-                      >
-                        Juice(9)
-                      </a>
-                    )}
-                  </li>
+                  {!data
+                    ? [1, 2].map(() => <Skeleton />)
+                    : data.categoryNum.map(({ name, count }) => (
+                        <li>
+                          <a
+                            href="/"
+                            className="text-global-color-0 hover:text-global-color-1"
+                          >
+                            {name}({count})
+                          </a>
+                        </li>
+                      ))}
                 </ul>
               </div>
 

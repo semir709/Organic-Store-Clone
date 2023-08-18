@@ -117,21 +117,6 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
-// export const getProducts = `*[_type == 'product'] {
-//   image,
-//   title,
-//   price,
-//   category[] -> {
-//     name,
-//     'slug':slug.current
-//   },
-//   sale,
-//   'slug': slug.current,
-//   currency,
-//   setPrevious,
-//   previusPrice
-// }`;
-
 export const getProducts = (start, end) => {
   const data = `{
     'product': *[_type == 'product'][${start}..${end}] {
@@ -170,6 +155,11 @@ export const getSideProducts = `*[_type == 'sideProducts']{
     previusPrice
   }
 }`;
+
+export const getCategoryNumber = `*[_type == "category"] {
+  name,
+  "count": count(*[_type == "product" && references(^._id)])
+} | order(count desc)`;
 
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
