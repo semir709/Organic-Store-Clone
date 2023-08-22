@@ -183,7 +183,7 @@ export const useInterval = (callback, delay) => {
 
 export const navData = {
   mainNav: [
-    { text: "Everything", url: "/shop" },
+    { text: "Everything", url: "/shop/all" },
     { text: "Groceries", url: "/shop/groceries" },
     { text: "Juice", url: "/shop/juice" },
   ],
@@ -192,7 +192,7 @@ export const navData = {
     { text: "Contact", url: "/contact" },
   ],
   allNav: [
-    { text: "Everything", url: "/shop" },
+    { text: "Everything", url: "/shop/all" },
     { text: "Groceries", url: "/shop/groceries" },
     { text: "Juice", url: "/shop/juice" },
     { text: "About", url: "/about" },

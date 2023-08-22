@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import { BiArrowFromRight } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 import Card from "../components/Card";
 import sanityClient from "../client";
@@ -12,6 +13,8 @@ import {
   urlFor,
 } from "../utils";
 import Skeleton from "react-loading-skeleton";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 const Shop = () => {
   const [data, setData] = useState(null);
@@ -30,6 +33,21 @@ const Shop = () => {
       setData({ productData: product, side: side[0], categoryNum: categoryNum })
     );
   }, [start, end]);
+
+  // useEffect(() => {
+  //   setPaginationLength(() => {
+  //     let res;
+  //     let array;
+
+  //     if (data?.productData.amount) {
+  //       res = data?.productData.amount / gap;
+  //       array = new Array(res).fill(null);
+  //       return array;
+  //     }
+
+  //     return;
+  //   });
+  // }, [data, gap]);
 
   console.log(data);
 
@@ -110,7 +128,7 @@ const Shop = () => {
             </div>
           </div>
           <div className="md:ms-[80px] w-full md:order-none  order-1">
-            <main>
+            <main className="h-full flex flex-col justify-between">
               <div>
                 <nav className="opacity-70 mb-[30px]">
                   <a href="/">Home</a> / Shop
@@ -180,6 +198,9 @@ const Shop = () => {
                       )}
                 </div>
               </div>
+              <div>
+                <Pagination totalPages={10} />
+              </div>
             </main>
           </div>
         </div>
@@ -189,3 +210,11 @@ const Shop = () => {
 };
 
 export default Shop;
+
+{
+  /* <div className="mx-2 h-full">
+                  <button className="border border-global-color-0 px-4 h-full  text-global-color-0 hover:bg-global-color-0 hover:text-white">
+                    <BsArrowRight />
+                  </button>
+                </div> */
+}
