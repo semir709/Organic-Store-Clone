@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import { BiArrowFromRight } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 import Card from "../components/Card";
 import sanityClient from "../client";
@@ -199,7 +198,7 @@ const Shop = () => {
                 </div>
               </div>
               <div>
-                <Pagination totalPages={10} />
+                <Pagination totalPages={gap} />
               </div>
             </main>
           </div>
