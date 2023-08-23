@@ -17,14 +17,25 @@ import Pagination from "../components/Pagination";
 
 const Shop = () => {
   const [data, setData] = useState(null);
-  const [page, setPage] = useState(1);
+  const { current } = useParams();
+  const [page, setPage] = useState(current);
   const [perPage, setPerPage] = useState(2);
   const [paginationLength, setPaginationLength] = useState(0);
 
-  let start = (page - 1) * perPage;
-  let end = start + perPage - 1;
+  const [start, setStart] = useState((page - 1) * perPage);
+  const [end, setEnd] = useState(start + perPage - 1);
 
   useEffect(() => {
+    setPage(current);
+  }, [current]);
+
+  useEffect(() => {
+    setStart((page - 1) * perPage);
+    setEnd(start + perPage - 1);
+  }, [perPage, page, start]);
+
+  useEffect(() => {
+    setData(null);
     Promise.all([
       sanityClient.fetch(getProducts(start, end)),
       sanityClient.fetch(getSideProducts),
@@ -40,9 +51,6 @@ const Shop = () => {
       setPaginationLength(data?.productData.amount / perPage);
     }
   }, [data, perPage]);
-
-  console.log(data);
-  console.log(perPage, "perPage");
 
   return (
     <div className="bg-global-color-4 py-[60px]">
