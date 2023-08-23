@@ -133,7 +133,10 @@ export const getProducts = (start, end) => {
       setPrevious,
       previusPrice
     },
-    'amount': count(*[_type == 'product'])
+    'amount': count(*[_type == 'product']),
+    'itemsConfig': *[_type == "ItemsConfig"] {
+      itemsPerPage
+    }
   }`;
 
   return data;

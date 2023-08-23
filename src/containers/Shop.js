@@ -18,10 +18,11 @@ import Pagination from "../components/Pagination";
 const Shop = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
-  const [gap, setGap] = useState(2);
+  const [perPage, setPerPage] = useState(2);
+  const [paginationLength, setPaginationLength] = useState(0);
 
-  let start = (page - 1) * gap;
-  let end = start + gap - 1;
+  let start = (page - 1) * perPage;
+  let end = start + perPage - 1;
 
   useEffect(() => {
     Promise.all([
@@ -33,22 +34,15 @@ const Shop = () => {
     );
   }, [start, end]);
 
-  // useEffect(() => {
-  //   setPaginationLength(() => {
-  //     let res;
-  //     let array;
-
-  //     if (data?.productData.amount) {
-  //       res = data?.productData.amount / gap;
-  //       array = new Array(res).fill(null);
-  //       return array;
-  //     }
-
-  //     return;
-  //   });
-  // }, [data, gap]);
+  useEffect(() => {
+    if (data) {
+      setPerPage(data.productData.itemsConfig[0].itemsPerPage);
+      setPaginationLength(data?.productData.amount / perPage);
+    }
+  }, [data, perPage]);
 
   console.log(data);
+  console.log(perPage, "perPage");
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -198,7 +192,7 @@ const Shop = () => {
                 </div>
               </div>
               <div>
-                <Pagination totalPages={gap} />
+                <Pagination totalPages={paginationLength} />
               </div>
             </main>
           </div>
@@ -209,11 +203,3 @@ const Shop = () => {
 };
 
 export default Shop;
-
-{
-  /* <div className="mx-2 h-full">
-                  <button className="border border-global-color-0 px-4 h-full  text-global-color-0 hover:bg-global-color-0 hover:text-white">
-                    <BsArrowRight />
-                  </button>
-                </div> */
-}
