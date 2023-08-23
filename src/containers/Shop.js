@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import ButtonGreen from "../components/ButtonGreen";
-import { BiArrowFromRight } from "react-icons/bi";
+import React, { Suspense, useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 import Card from "../components/Card";
@@ -12,8 +10,13 @@ import {
   urlFor,
 } from "../utils";
 import Skeleton from "react-loading-skeleton";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import Filter from "../components/Filter";
+import CategoryList from "../components/CategoryList";
+import NavTrack from "../components/NavTrack";
+import StatsItems from "../components/StatsItems";
+import DropFilter from "../components/DropFilter";
 
 const Shop = () => {
   const [data, setData] = useState(null);
@@ -52,6 +55,10 @@ const Shop = () => {
     }
   }, [data, perPage]);
 
+  const { productData, side, categoryNum } = data || {};
+  const { products: sideProducts } = side || {};
+  const { amount, product } = productData || {};
+
   return (
     <div className="bg-global-color-4 py-[60px]">
       <div className="max-w-[1300px] mx-auto">
@@ -70,33 +77,19 @@ const Shop = () => {
               </form>
 
               <div className="mb-[30px]">
-                <h3 className="text-lg font-semibold">Filter by price</h3>
-                <div>Filter</div>
+                <Filter />
               </div>
 
               <div className="mb-[30px]">
-                <ul>
-                  {!data
-                    ? [1, 2].map(() => <Skeleton />)
-                    : data.categoryNum.map(({ name, count }) => (
-                        <li>
-                          <a
-                            href="/"
-                            className="text-global-color-0 hover:text-global-color-1"
-                          >
-                            {name}({count})
-                          </a>
-                        </li>
-                      ))}
-                </ul>
+                <CategoryList data={categoryNum} />
               </div>
 
               <div className="grid md:grid-cols-1 min-[400px]:grid-cols-2 sm:gap-y-0 gap-6">
-                {!data
+                {!sideProducts
                   ? [1, 2, 3].map(() => (
                       <Skeleton className="w-full py-[80px] my-3" />
                     ))
-                  : data.side.products.map(
+                  : sideProducts.map(
                       ({
                         title,
                         category,
@@ -131,9 +124,9 @@ const Shop = () => {
           <div className="md:ms-[80px] w-full md:order-none  order-1">
             <main className="h-full flex flex-col justify-between">
               <div>
-                <nav className="opacity-70 mb-[30px]">
-                  <a href="/">Home</a> / Shop
-                </nav>
+                <div className="mb-[30px]">
+                  <NavTrack />
+                </div>
 
                 <header className="mb-[50px]">
                   <h1 className="text-5xl font-semibold text-global-color-0">
@@ -142,36 +135,16 @@ const Shop = () => {
                 </header>
 
                 <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-                  {!data ? (
-                    <Skeleton className="py-2 px-[100px]" />
-                  ) : (
-                    <p className="sm:m-0 mb-[20px]">
-                      Showing {start + 1} - {end + 1} of{" "}
-                      {data.productData.amount} results
-                    </p>
-                  )}
-                  <form action="">
-                    <select name="orderby" id="orderby">
-                      <option value="menu_order" selecteds="selected">
-                        Default order
-                      </option>
-                      <option value="popularity">Sort by popularity</option>
-                      <option value="rating">Sort by average rating</option>
-                      <option value="date">Sort by latest</option>
-                      <option value="price">Sort by price: low to high</option>
-                      <option value="price-desc">
-                        Sort by price: high to low
-                      </option>
-                    </select>
-                  </form>
+                  <StatsItems amount={amount} start={start} end={end} />
+                  <DropFilter />
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  {!data
+                  {!product
                     ? [1, 2, 3, 4, 5, 6].map(() => (
                         <Skeleton className="w-full py-[100px]" />
                       ))
-                    : data.productData.product.map(
+                    : product.map(
                         ({
                           title,
                           category,
