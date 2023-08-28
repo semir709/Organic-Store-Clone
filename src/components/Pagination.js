@@ -2,10 +2,11 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-const Pagination = ({ totalPages }) => {
-  const pages = new Array(totalPages).fill(null);
+const Pagination = ({ totalAmount, perPage }) => {
+  const length = Math.ceil(totalAmount / perPage);
 
-  const { current = 1 } = useParams();
+  const pages = Array.from({ length: length });
+  const { current } = useParams();
 
   return (
     <div className="flex items-center h-11">

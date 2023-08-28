@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 import Card from "../components/Card";
@@ -20,40 +20,29 @@ import DropFilter from "../components/DropFilter";
 
 const Shop = () => {
   const [data, setData] = useState(null);
-  const { current } = useParams();
-  const [page, setPage] = useState(current);
-  const [perPage, setPerPage] = useState(2);
-  const [paginationLength, setPaginationLength] = useState(0);
-
-  const [start, setStart] = useState((page - 1) * perPage);
+  const { current = 1 } = useParams();
+  const perPage = 2;
+  const [start, setStart] = useState((current - 1) * perPage);
   const [end, setEnd] = useState(start + perPage - 1);
 
   useEffect(() => {
-    setPage(current);
-  }, [current]);
-
-  useEffect(() => {
-    setStart((page - 1) * perPage);
+    setStart((current - 1) * perPage);
     setEnd(start + perPage - 1);
-  }, [perPage, page, start]);
+  }, [current, start]);
 
   useEffect(() => {
-    setData(null);
     Promise.all([
       sanityClient.fetch(getProducts(start, end)),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
-    ]).then(([product, side, categoryNum]) =>
-      setData({ productData: product, side: side[0], categoryNum: categoryNum })
-    );
+    ]).then(([product, side, categoryNum]) => {
+      setData({
+        productData: product,
+        side: side[0],
+        categoryNum: categoryNum,
+      });
+    });
   }, [start, end]);
-
-  useEffect(() => {
-    if (data) {
-      setPerPage(data.productData.itemsConfig[0].itemsPerPage);
-      setPaginationLength(data?.productData.amount / perPage);
-    }
-  }, [data, perPage]);
 
   const { productData, side, categoryNum } = data || {};
   const { products: sideProducts } = side || {};
@@ -135,7 +124,7 @@ const Shop = () => {
                 </header>
 
                 <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-                  <StatsItems amount={amount} start={start} end={end} />
+                  {/* <StatsItems amount={amount} start={start} end={end} /> */}
                   <DropFilter />
                 </div>
 
@@ -173,7 +162,9 @@ const Shop = () => {
                 </div>
               </div>
               <div>
-                <Pagination totalPages={paginationLength} />
+                {product && (
+                  <Pagination totalAmount={amount} perPage={perPage} />
+                )}
               </div>
             </main>
           </div>
