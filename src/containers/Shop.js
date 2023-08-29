@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 import Card from "../components/Card";
@@ -25,24 +25,31 @@ const Shop = () => {
   const [start, setStart] = useState((current - 1) * perPage);
   const [end, setEnd] = useState(start + perPage - 1);
 
-  useEffect(() => {
-    setStart((current - 1) * perPage);
-    setEnd(start + perPage - 1);
-  }, [current, start]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
+    const newStart = (current - 1) * perPage;
+    const newEnd = newStart + perPage - 1;
+
+    setStart(newStart);
+    setEnd(newEnd);
+
     Promise.all([
-      sanityClient.fetch(getProducts(start, end)),
+      sanityClient.fetch(getProducts(newStart, newEnd)),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
     ]).then(([product, side, categoryNum]) => {
+      setData(null);
       setData({
         productData: product,
         side: side[0],
         categoryNum: categoryNum,
       });
+      setIsLoading(false);
     });
-  }, [start, end]);
+  }, [current]);
 
   const { productData, side, categoryNum } = data || {};
   const { products: sideProducts } = side || {};
@@ -74,7 +81,7 @@ const Shop = () => {
               </div>
 
               <div className="grid md:grid-cols-1 min-[400px]:grid-cols-2 sm:gap-y-0 gap-6">
-                {!sideProducts
+                {isLoading
                   ? [1, 2, 3].map(() => (
                       <Skeleton className="w-full py-[80px] my-3" />
                     ))
@@ -124,12 +131,12 @@ const Shop = () => {
                 </header>
 
                 <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-                  {/* <StatsItems amount={amount} start={start} end={end} /> */}
+                  <StatsItems amount={amount} start={start} end={end} />
                   <DropFilter />
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
-                  {!product
+                  {isLoading
                     ? [1, 2, 3, 4, 5, 6].map(() => (
                         <Skeleton className="w-full py-[100px]" />
                       ))
@@ -162,7 +169,9 @@ const Shop = () => {
                 </div>
               </div>
               <div>
-                {product && (
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
                   <Pagination totalAmount={amount} perPage={perPage} />
                 )}
               </div>

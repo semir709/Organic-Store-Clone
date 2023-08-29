@@ -6,7 +6,7 @@ const Pagination = ({ totalAmount, perPage }) => {
   const length = Math.ceil(totalAmount / perPage);
 
   const pages = Array.from({ length: length });
-  const { current } = useParams();
+  const { current = 1 } = useParams();
 
   return (
     <div className="flex items-center h-11">
