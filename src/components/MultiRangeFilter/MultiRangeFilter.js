@@ -38,16 +38,15 @@ const MultiRangeSlider = ({ min, max }) => {
 
   const inputMin = (e) => {
     const element = e.target;
-
     const value = Math.min(Number(element.value), maxVal - 1);
+    minValRef.current = value;
     setMinVal(value > -1 ? value : 0);
   };
 
   const inputMax = (e) => {
     const element = e.target;
-
     const value = Math.max(Number(element.value), minVal + 1);
-
+    maxValRef.current = value;
     setMaxVal(value < max ? value : max);
   };
 
