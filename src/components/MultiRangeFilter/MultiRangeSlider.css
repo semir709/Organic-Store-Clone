@@ -1,0 +1,119 @@
+.heading {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.container {
+    /* height: 100vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  
+  .slider {
+    position: relative;
+    width: 200px;
+  }
+  
+  .slider__track,
+  .slider__range {
+    position: absolute;
+  }
+  
+  .slider__track,
+  .slider__range {
+    border-radius: 3px;
+    height: 5px;
+  }
+  
+  .slider__track {
+    background-color: #adadad;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .slider__range {
+    background-color: #8bc34a;
+    z-index: 2;
+  }
+
+  .slider__value-container {
+    display: flex;
+    justify-content: end;
+  }
+  
+  .slider__left-value,
+  .slider__right-value {
+    color: #333333;
+    font-size: 15px;
+    margin: 20px 0px 0px 20px;
+    width: 50px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+  
+  }
+  
+  /* .slider__left-value {
+    left: 6px;
+  }
+  
+  .slider__right-value {
+    right: -4px;
+  } */
+  
+  /* Removing the default appearance */
+  .thumb,
+  .thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .thumb {
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    top: 0;
+    width: 200px;
+    outline: none;
+  }
+  
+  .thumb--left {
+    z-index: 3;
+  }
+  
+  .thumb--right {
+    z-index: 4;
+  }
+  
+  /* For Chrome browsers */
+  .thumb::-webkit-slider-thumb {
+    background-color: #f1f5f7;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 1px #ced4da;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    pointer-events: all;
+    position: relative;
+  }
+  
+  /* For Firefox browsers */
+  .thumb::-moz-range-thumb {
+    background-color: #4949ff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin-top: 10px;
+    pointer-events: all;
+    position: relative;
+  }
+  

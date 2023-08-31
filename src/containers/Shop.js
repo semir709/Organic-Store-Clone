@@ -12,11 +12,11 @@ import {
 import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
-import Filter from "../components/Filter";
 import CategoryList from "../components/CategoryList";
 import NavTrack from "../components/NavTrack";
 import StatsItems from "../components/StatsItems";
 import DropFilter from "../components/DropFilter";
+import MultiRangeSlider from "../components/MultiRangeFilter/MultiRangeFilter";
 
 const Shop = () => {
   const [data, setData] = useState(null);
@@ -73,7 +73,13 @@ const Shop = () => {
               </form>
 
               <div className="mb-[30px]">
-                <Filter />
+                <MultiRangeSlider
+                  min={0}
+                  max={1000}
+                  // onChange={({ min, max }) =>
+                  //   console.log(`min = ${min}, max = ${max}`)
+                  // }
+                />
               </div>
 
               <div className="mb-[30px]">
