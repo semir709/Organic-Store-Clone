@@ -4,6 +4,30 @@
   font-weight: 600;
 }
 
+.priceDisplay {
+  margin: 20px 0px;
+}
+
+.priceText {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.close-container {
+  background-color: #dadada;
+  border-radius: 100%;
+  margin-right: 20px;
+  height: fit-content
+}
+
+.close-container:hover {
+  cursor: pointer;
+  background-color: #757575;
+  color: white;
+}
+
 .container {
     /* height: 100vh; */
     display: flex;
