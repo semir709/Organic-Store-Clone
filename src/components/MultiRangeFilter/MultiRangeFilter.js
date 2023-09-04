@@ -138,16 +138,22 @@ const MultiRangeSlider = ({ min, max }) => {
           <div className="slider__track" />
           <div ref={range} className="slider__range" />
           <div className="slider__value-container">
-            <input
-              className="slider__left-value"
-              value={minVal}
-              onChange={inputMin}
-            />
-            <input
-              className="slider__right-value"
-              value={maxVal}
-              onChange={inputMax}
-            />
+            <div className="flex items-center mx-4">
+              <div className="slider__left-value curreny">$</div>
+              <input
+                className="slider__left-value"
+                value={minVal}
+                onChange={inputMin}
+              />
+            </div>
+            <div className="flex items-center mx-4">
+              <div className="slider__right-value curreny">$</div>
+              <input
+                className="slider__right-value"
+                value={maxVal}
+                onChange={inputMax}
+              />
+            </div>
           </div>
         </div>
       </div>

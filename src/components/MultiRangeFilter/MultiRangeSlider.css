@@ -73,13 +73,26 @@
   .slider__right-value {
     color: #333333;
     font-size: 15px;
-    margin: 20px 0px 0px 20px;
+    margin: 20px 0px 0px 0px;
     width: 50px;
     height: 40px;
-    padding: 5px;
+    padding: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 1px solid #c9c9c9;
-  
+    border-left: none;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+
+  .curreny {
+    background: white;
+    border-right: none;
+    border-left: 1px solid #c9c9c9;
+    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: fit-content;
+    padding: 8px 0px 0px 5px;
   }
   
   /* .slider__left-value {
