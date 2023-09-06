@@ -68,6 +68,13 @@
     display: flex;
     justify-content: end;
   }
+
+
+  .value-container {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+  }
   
   .slider__left-value,
   .slider__right-value {

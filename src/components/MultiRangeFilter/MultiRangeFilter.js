@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./MultiRangeSlider.css";
 import { IoIosClose } from "react-icons/io";
 
-const MultiRangeSlider = ({ min, max }) => {
+const MultiRangeSlider = ({ min, max, currency }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -12,6 +12,8 @@ const MultiRangeSlider = ({ min, max }) => {
   const [priceDisplay, setPriceDisplay] = useState(false);
   const [priceRange, setPriceRange] = useState(0);
   const [price, setPrice] = useState({ priceStart: min, priceEnd: max });
+  const [timeoutIdMax, setTimeoutIdMax] = useState(null);
+  const [timeoutIdMin, setTimeoutIdMin] = useState(null);
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -60,6 +62,9 @@ const MultiRangeSlider = ({ min, max }) => {
     const value = Math.min(Number(element.value), maxVal - 1);
     minValRef.current = value;
     setMinVal(value > -1 ? value : 0);
+    setTimeout(() => {
+      setPrice((prev) => ({ ...prev, priceStart: value }));
+    }, 1000);
   };
 
   const inputMax = (e) => {
@@ -67,6 +72,9 @@ const MultiRangeSlider = ({ min, max }) => {
     const value = Math.max(Number(element.value), minVal + 1);
     maxValRef.current = value;
     setMaxVal(value < max ? value : max);
+    setTimeout(() => {
+      setPrice({ ...price, priceEnd: value });
+    }, 1000);
   };
 
   const closeAndRest = () => {
@@ -76,6 +84,31 @@ const MultiRangeSlider = ({ min, max }) => {
     minValRef.current = min;
     setMaxVal(max);
     setMinVal(min);
+  };
+
+  const rangeMinVal = (event) => {
+    const value = Math.min(Number(event.target.value), maxVal - 1);
+    setMinVal(value);
+    minValRef.current = value;
+    if (timeoutIdMin) clearTimeout(timeoutIdMin);
+    let timeID = setTimeout(() => {
+      setPrice((prev) => ({ ...prev, priceStart: value }));
+    }, 1000);
+    setTimeoutIdMin(timeID);
+  };
+
+  const rangeMaxVal = (event) => {
+    const value = Math.max(Number(event.target.value), minVal + 1);
+    setMaxVal(value);
+    maxValRef.current = value;
+
+    if (timeoutIdMax) clearTimeout(timeoutIdMax);
+
+    let timeID = setTimeout(() => {
+      setPrice({ ...price, priceEnd: value });
+    }, 1000);
+
+    setTimeoutIdMax(timeID);
   };
 
   return (
@@ -109,13 +142,7 @@ const MultiRangeSlider = ({ min, max }) => {
           min={min}
           max={max}
           value={minVal}
-          onChange={(event) => {
-            const value = Math.min(Number(event.target.value), maxVal - 1);
-            setMinVal(value);
-            minValRef.current = value;
-
-            setPrice((prev) => ({ ...prev, priceStart: value }));
-          }}
+          onChange={rangeMinVal}
           className="thumb thumb--left"
           style={{ zIndex: minVal > max - 100 && "5" }}
         />
@@ -124,13 +151,7 @@ const MultiRangeSlider = ({ min, max }) => {
           min={min}
           max={max}
           value={maxVal}
-          onChange={(event) => {
-            const value = Math.max(Number(event.target.value), minVal + 1);
-            setMaxVal(value);
-            maxValRef.current = value;
-
-            setPrice({ ...price, priceEnd: value });
-          }}
+          onChange={rangeMaxVal}
           className="thumb thumb--right"
         />
 
@@ -138,16 +159,16 @@ const MultiRangeSlider = ({ min, max }) => {
           <div className="slider__track" />
           <div ref={range} className="slider__range" />
           <div className="slider__value-container">
-            <div className="flex items-center mx-4">
-              <div className="slider__left-value curreny">$</div>
+            <div className="value-container ">
+              <div className="slider__left-value curreny">{currency}</div>
               <input
                 className="slider__left-value"
                 value={minVal}
                 onChange={inputMin}
               />
             </div>
-            <div className="flex items-center mx-4">
-              <div className="slider__right-value curreny">$</div>
+            <div className="value-container ">
+              <div className="slider__right-value curreny">{currency}</div>
               <input
                 className="slider__right-value"
                 value={maxVal}

@@ -1,5 +1,5 @@
 export default {
-  name: 'ItemsConfig',
+  name: 'itemsConfig',
   title: 'Items Config',
   type: 'document',
   fields: [
