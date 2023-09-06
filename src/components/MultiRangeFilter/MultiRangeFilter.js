@@ -59,22 +59,34 @@ const MultiRangeSlider = ({ min, max, currency }) => {
 
   const inputMin = (e) => {
     const element = e.target;
-    const value = Math.min(Number(element.value), maxVal - 1);
+    let value = Math.min(Number(element.value), maxVal - 1);
+    if (isNaN(value)) value = min;
     minValRef.current = value;
     setMinVal(value > -1 ? value : 0);
-    setTimeout(() => {
+
+    if (timeoutIdMin) clearTimeout(timeoutIdMin);
+
+    let timeID = setTimeout(() => {
       setPrice((prev) => ({ ...prev, priceStart: value }));
     }, 1000);
+
+    setTimeoutIdMin(timeID);
   };
 
   const inputMax = (e) => {
     const element = e.target;
-    const value = Math.max(Number(element.value), minVal + 1);
+    let value = Math.max(Number(element.value), minVal + 1);
+    if (isNaN(value)) value = max;
     maxValRef.current = value;
     setMaxVal(value < max ? value : max);
-    setTimeout(() => {
+
+    if (timeoutIdMax) clearTimeout(timeoutIdMax);
+
+    let timeID = setTimeout(() => {
       setPrice({ ...price, priceEnd: value });
     }, 1000);
+
+    setTimeoutIdMax(timeID);
   };
 
   const closeAndRest = () => {
