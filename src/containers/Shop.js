@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Card from "../components/Card";
 import sanityClient from "../client";
 import {
+  getBiggestPrice,
   getCategoryNumber,
   getProducts,
   getSideProducts,
@@ -40,21 +41,24 @@ const Shop = () => {
       sanityClient.fetch(getProducts(newStart, newEnd)),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
-    ]).then(([product, side, categoryNum]) => {
+      sanityClient.fetch(getBiggestPrice),
+    ]).then(([product, side, categoryNum, biggestPrice]) => {
       setData(null);
       setData({
         productData: product,
         side: side[0],
         categoryNum: categoryNum,
+        biggestPrice: biggestPrice,
       });
       setIsLoading(false);
     });
   }, [current]);
 
-  const { productData, side, categoryNum } = data || {};
+  const { productData, side, categoryNum, biggestPrice } = data || {};
   const { products: sideProducts } = side || {};
   const { amount, product } = productData || {};
-  const { currency } = side.products[0];
+  const { currency } = (sideProducts && sideProducts[0]) || {};
+  const { price } = (biggestPrice && biggestPrice) || { price: undefined };
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -74,7 +78,15 @@ const Shop = () => {
               </form>
 
               <div className="mb-[30px]">
-                <MultiRangeSlider min={0} max={1000} currency={currency} />
+                {!price ? (
+                  <Skeleton />
+                ) : (
+                  <MultiRangeSlider
+                    min={0}
+                    max={Math.ceil(Number(price))}
+                    currency={currency}
+                  />
+                )}
               </div>
 
               <div className="mb-[30px]">

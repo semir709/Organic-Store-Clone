@@ -164,6 +164,8 @@ export const getCategoryNumber = `*[_type == "category"] {
   "count": count(*[_type == "product" && references(^._id)])
 } | order(count desc)`;
 
+export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
+
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 

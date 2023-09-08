@@ -15,6 +15,10 @@ const MultiRangeSlider = ({ min, max, currency }) => {
   const [timeoutIdMax, setTimeoutIdMax] = useState(null);
   const [timeoutIdMin, setTimeoutIdMin] = useState(null);
 
+  useEffect(() => {
+    console.log(maxVal);
+  }, [maxVal]);
+
   // Convert to percentage
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
