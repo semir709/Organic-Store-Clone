@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./MultiRangeSlider.css";
 import { IoIosClose } from "react-icons/io";
+import { getDataOnRange } from "../../utils";
+import sanityClient from "../../client";
 
 const MultiRangeSlider = ({ min, max, currency }) => {
   const [minVal, setMinVal] = useState(min);
@@ -16,8 +18,10 @@ const MultiRangeSlider = ({ min, max, currency }) => {
   const [timeoutIdMin, setTimeoutIdMin] = useState(null);
 
   useEffect(() => {
-    console.log(maxVal);
-  }, [maxVal]);
+    sanityClient.fetch(getDataOnRange(20, 1000, 0, 9)).then((data) => {
+      console.log(data);
+    });
+  }, []);
 
   // Convert to percentage
   const getPercent = useCallback(

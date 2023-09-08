@@ -166,6 +166,36 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
+export const getDataOnRange = (
+  startPrice = 0,
+  endPrice = 1000,
+  startIndex,
+  endIndex
+) => {
+  const data = `{
+    'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice}] [${startIndex}..${endIndex}] {
+      image,
+      title,
+      price,
+      category[] -> {
+        name,
+        'slug':slug.current
+      },
+      sale,
+      'slug': slug.current,
+      currency,
+      setPrevious,
+      previusPrice
+    },
+    'amount': count(*[_type == 'product']),
+    'itemsConfig': *[_type == "ItemsConfig"] {
+      itemsPerPage
+    }
+  }`;
+
+  return data;
+};
+
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 
