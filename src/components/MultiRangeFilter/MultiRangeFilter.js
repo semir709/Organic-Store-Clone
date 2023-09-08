@@ -172,7 +172,9 @@ const MultiRangeSlider = ({ min, max, currency }) => {
           <div ref={range} className="slider__range" />
           <div className="slider__value-container">
             <div className="value-container ">
-              <div className="slider__left-value curreny">{currency}</div>
+              <div className="slider__left-value curreny">
+                {currency && currency}
+              </div>
               <input
                 className="slider__left-value"
                 value={minVal}
@@ -180,7 +182,9 @@ const MultiRangeSlider = ({ min, max, currency }) => {
               />
             </div>
             <div className="value-container ">
-              <div className="slider__right-value curreny">{currency}</div>
+              <div className="slider__right-value curreny">
+                {currency && currency}
+              </div>
               <input
                 className="slider__right-value"
                 value={maxVal}

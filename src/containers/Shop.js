@@ -54,8 +54,7 @@ const Shop = () => {
   const { productData, side, categoryNum } = data || {};
   const { products: sideProducts } = side || {};
   const { amount, product } = productData || {};
-
-  console.log(data);
+  const { currency } = side.products[0];
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -75,7 +74,7 @@ const Shop = () => {
               </form>
 
               <div className="mb-[30px]">
-                <MultiRangeSlider min={0} max={1000} currency={"$"} />
+                <MultiRangeSlider min={0} max={1000} currency={currency} />
               </div>
 
               <div className="mb-[30px]">
