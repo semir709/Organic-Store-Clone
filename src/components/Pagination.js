@@ -20,17 +20,18 @@ const Pagination = ({ totalAmount, perPage }) => {
         </Link>
       )}
 
-      {pages.map((el, index) => {
-        return (
-          <Link
-            key={index + 1}
-            className="mx-3 h-full  px-4 border border-global-color-0 text-global-color-0 hover:text-white hover:bg-global-color-0 flex items-center"
-            to={`/shop/all/${index + 1}`}
-          >
-            {index + 1}
-          </Link>
-        );
-      })}
+      {pages.length > 1 &&
+        pages.map((el, index) => {
+          return (
+            <Link
+              key={index + 1}
+              className="mx-3 h-full  px-4 border border-global-color-0 text-global-color-0 hover:text-white hover:bg-global-color-0 flex items-center"
+              to={`/shop/all/${index + 1}`}
+            >
+              {index + 1}
+            </Link>
+          );
+        })}
 
       {current < pages.length && (
         <Link

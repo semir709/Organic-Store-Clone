@@ -187,7 +187,7 @@ export const getDataOnRange = (
       setPrevious,
       previusPrice
     },
-    'amount': count(*[_type == 'product']),
+    'amount': count(*[_type == 'product' && price > ${startPrice} && price < ${endPrice}]),
     'itemsConfig': *[_type == "ItemsConfig"] {
       itemsPerPage
     }
