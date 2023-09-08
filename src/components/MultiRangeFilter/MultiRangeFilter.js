@@ -5,7 +5,14 @@ import { IoIosClose } from "react-icons/io";
 import { getDataOnRange } from "../../utils";
 import sanityClient from "../../client";
 
-const MultiRangeSlider = ({ min, max, currency }) => {
+const MultiRangeSlider = ({
+  min,
+  max,
+  currency,
+  setData,
+  startIndex,
+  endIndex,
+}) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -17,11 +24,11 @@ const MultiRangeSlider = ({ min, max, currency }) => {
   const [timeoutIdMax, setTimeoutIdMax] = useState(null);
   const [timeoutIdMin, setTimeoutIdMin] = useState(null);
 
-  useEffect(() => {
-    sanityClient.fetch(getDataOnRange(20, 1000, 0, 9)).then((data) => {
-      console.log(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   sanityClient.fetch(getDataOnRange(20, 1000, 0, 9)).then((data) => {
+  //     console.log(data);
+  //   });
+  // }, []);
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -63,7 +70,16 @@ const MultiRangeSlider = ({ min, max, currency }) => {
     } else if (price.priceStart === min && price.priceEnd === max) {
       setPriceDisplay(false);
     }
-  }, [price, max, min]);
+    sanityClient
+      .fetch(
+        getDataOnRange(price.priceStart, price.priceEnd, startIndex, endIndex)
+      )
+      .then((data) => {
+        setData((prev) => {
+          return { ...prev, productData: data };
+        });
+      });
+  }, [price, max, min, setData, startIndex, endIndex]);
 
   const inputMin = (e) => {
     const element = e.target;

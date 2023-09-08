@@ -60,6 +60,10 @@ const Shop = () => {
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div className="bg-global-color-4 py-[60px]">
       <div className="max-w-[1300px] mx-auto">
@@ -85,6 +89,9 @@ const Shop = () => {
                     min={0}
                     max={Math.ceil(Number(price))}
                     currency={currency}
+                    setData={setData}
+                    startIndex={start}
+                    endIndex={end}
                   />
                 )}
               </div>
