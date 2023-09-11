@@ -11,7 +11,7 @@ import {
   urlFor,
 } from "../utils";
 import Skeleton from "react-loading-skeleton";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import CategoryList from "../components/CategoryList";
 import NavTrack from "../components/NavTrack";
@@ -28,8 +28,12 @@ const Shop = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const url = useLocation();
+
   useEffect(() => {
     setIsLoading(true);
+
+    console.log(url);
 
     const newStart = (current - 1) * perPage;
     const newEnd = newStart + perPage - 1;
@@ -38,7 +42,9 @@ const Shop = () => {
     setEnd(newEnd);
 
     Promise.all([
-      sanityClient.fetch(getProducts(newStart, newEnd)),
+      sanityClient.fetch(
+        getProducts(newStart, newEnd, url.pathname.slice("/")[2])
+      ),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
       sanityClient.fetch(getBiggestPrice),
@@ -52,17 +58,15 @@ const Shop = () => {
       });
       setIsLoading(false);
     });
-  }, [current]);
+  }, [current, url]);
 
-  const { productData, side, categoryNum, biggestPrice } = data || {};
+  let { productData, side, categoryNum, biggestPrice } = data || {};
   const { products: sideProducts } = side || {};
   const { amount, product } = productData || {};
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">

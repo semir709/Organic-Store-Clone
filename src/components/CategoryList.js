@@ -7,10 +7,10 @@ const CategoryList = ({ data }) => {
     <ul>
       {!data
         ? [1, 2].map(() => <Skeleton />)
-        : data.map(({ name, count }) => (
+        : data.map(({ name, count, slug }) => (
             <li>
               <Link
-                to={"/"}
+                to={`/shop/${slug}`}
                 className="text-global-color-0 hover:text-global-color-1"
               >
                 {name}({count})

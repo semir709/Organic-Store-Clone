@@ -117,27 +117,33 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
-export const getProducts = (start, end) => {
-  const data = `{
-    'product': *[_type == 'product'][${start}..${end}] {
-      image,
-      title,
-      price,
-      category[] -> {
-        name,
-        'slug':slug.current
+export const getProducts = (start, end, category = "all") => {
+  let data = `{
+      'product': *[_type == 'product'${
+        category !== "all"
+          ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+          : ""
+      }][${start}..${end}] {
+        image,
+        title,
+        price,
+        category[] -> {
+          name,
+          'slug':slug.current
+        },
+        sale,
+        'slug': slug.current,
+        currency,
+        setPrevious,
+        previusPrice
       },
-      sale,
-      'slug': slug.current,
-      currency,
-      setPrevious,
-      previusPrice
-    },
-    'amount': count(*[_type == 'product']),
-    'itemsConfig': *[_type == "ItemsConfig"] {
-      itemsPerPage
-    }
-  }`;
+      'amount': count(*[_type == 'product']),
+      'itemsConfig': *[_type == "ItemsConfig"] {
+        itemsPerPage
+      }
+    }`;
+
+  console.log(data);
 
   return data;
 };
@@ -161,6 +167,7 @@ export const getSideProducts = `*[_type == 'sideProducts']{
 
 export const getCategoryNumber = `*[_type == "category"] {
   name,
+  'slug':slug.current,
   "count": count(*[_type == "product" && references(^._id)])
 } | order(count desc)`;
 
