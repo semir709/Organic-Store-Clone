@@ -33,7 +33,7 @@ const Shop = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    console.log(url);
+    console.log(url.pathname.s);
 
     const newStart = (current - 1) * perPage;
     const newEnd = newStart + perPage - 1;
@@ -43,7 +43,7 @@ const Shop = () => {
 
     Promise.all([
       sanityClient.fetch(
-        getProducts(newStart, newEnd, url.pathname.slice("/")[2])
+        getProducts(newStart, newEnd, url.pathname.split("/")[2])
       ),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
