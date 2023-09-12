@@ -33,8 +33,6 @@ const Shop = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    console.log(url.pathname.s);
-
     const newStart = (current - 1) * perPage;
     const newEnd = newStart + perPage - 1;
 
@@ -49,12 +47,13 @@ const Shop = () => {
       sanityClient.fetch(getCategoryNumber),
       sanityClient.fetch(getBiggestPrice),
     ]).then(([product, side, categoryNum, biggestPrice]) => {
-      setData(null);
-      setData({
-        productData: product,
-        side: side[0],
-        categoryNum: categoryNum,
-        biggestPrice: biggestPrice,
+      setData((prev) => {
+        return {
+          productData: product,
+          side: side[0],
+          categoryNum: categoryNum,
+          biggestPrice: biggestPrice,
+        };
       });
       setIsLoading(false);
     });
@@ -65,8 +64,6 @@ const Shop = () => {
   const { amount, product } = productData || {};
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
-
-  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -106,8 +103,8 @@ const Shop = () => {
 
               <div className="grid md:grid-cols-1 min-[400px]:grid-cols-2 sm:gap-y-0 gap-6">
                 {isLoading
-                  ? [1, 2, 3].map(() => (
-                      <Skeleton className="w-full py-[80px] my-3" />
+                  ? [1, 2, 3].map((el, index) => (
+                      <Skeleton key={index} className="w-full py-[80px] my-3" />
                     ))
                   : sideProducts.map(
                       ({
@@ -121,9 +118,8 @@ const Shop = () => {
                         previusPrice,
                         sale,
                       }) => (
-                        <div className="mb-4">
+                        <div className="mb-4" key={slug}>
                           <Card
-                            key={slug}
                             title={title}
                             category={category}
                             price={price}
@@ -161,8 +157,8 @@ const Shop = () => {
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
                   {isLoading
-                    ? [1, 2, 3, 4, 5, 6].map(() => (
-                        <Skeleton className="w-full py-[100px]" />
+                    ? [1, 2, 3, 4, 5, 6].map((el, index) => (
+                        <Skeleton key={index} className="w-full py-[100px]" />
                       ))
                     : product.map(
                         ({

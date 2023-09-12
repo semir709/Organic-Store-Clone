@@ -40,6 +40,7 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
 
           {store.map(({ title, price, amount, img }, index) => (
             <div
+              key={index}
               className={`px-2 py-4 w-full  ${
                 index === 0 ? "border-t-0" : "border-t-[1px]"
               }`}

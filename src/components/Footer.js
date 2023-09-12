@@ -38,8 +38,8 @@ const Footer = () => {
               </section>
               <section className="mb-[40px]">
                 <ul>
-                  {quickLinks.map(({ text, url }) => (
-                    <li className="mb-1">
+                  {quickLinks.map(({ text, url }, index) => (
+                    <li className="mb-1" key={index}>
                       <a
                         href={url}
                         className=" opacity-70 hover:opacity-100 transition duration-300"
@@ -54,8 +54,8 @@ const Footer = () => {
                 <h2 className="text-2xl font-semibold mb-[40px]">Site Links</h2>
                 <nav className=" ">
                   <ul>
-                    {siteLinksfooter.map(({ text, url }) => (
-                      <li className="mb-1">
+                    {siteLinksfooter.map(({ text, url }, index) => (
+                      <li className="mb-1" key={index}>
                         <a
                           href={url}
                           className=" opacity-70 hover:opacity-100 transition duration-300"
@@ -90,8 +90,8 @@ const Footer = () => {
                 </h2>
                 <nav className=" ">
                   <ul>
-                    {quickLinks2.map(({ text, url }) => (
-                      <li className="mb-1">
+                    {quickLinks2.map(({ text, url }, index) => (
+                      <li className="mb-1" key={index}>
                         <a
                           href={url}
                           className=" opacity-100 hover:opacity-70 transition duration-300 text-global-color-0"

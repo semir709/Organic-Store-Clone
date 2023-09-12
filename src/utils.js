@@ -137,13 +137,15 @@ export const getProducts = (start, end, category = "all") => {
         setPrevious,
         previusPrice
       },
-      'amount': count(*[_type == 'product']),
+      'amount': count(*[_type == 'product' ${
+        category !== "all"
+          ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+          : ""
+      }]),
       'itemsConfig': *[_type == "ItemsConfig"] {
         itemsPerPage
       }
     }`;
-
-  console.log(data);
 
   return data;
 };

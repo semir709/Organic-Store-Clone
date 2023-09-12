@@ -33,7 +33,10 @@ const Card = ({
         {!onSide && (
           <div className="flex items-center justify-center">
             {category.map(({ slug, name }) => (
-              <span key={slug} className="opacity-50 text-sm me-2 ">
+              <span
+                key={`categoryCard-${slug}`}
+                className="opacity-50 text-sm me-2 "
+              >
                 {name}
               </span>
             ))}

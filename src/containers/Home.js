@@ -94,8 +94,8 @@ const Home = () => {
         </section>
         <section className="bg-global-color-2 w-full py-[30px]">
           <div className="max-w-[1200px] mx-auto grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
-            {serviceCardList.map(({ text, title, icon }) => (
-              <ServiceCard title={title} text={text} icon={icon} />
+            {serviceCardList.map(({ text, title, icon }, index) => (
+              <ServiceCard key={index} title={title} text={text} icon={icon} />
             ))}
           </div>
         </section>
@@ -109,15 +109,17 @@ const Home = () => {
         <section className="bg-global-color-4 py-[100px]">
           <div className="max-w-[1200px] mx-auto flex lg:items-center justify-between gap-6 px-2 min-[820px]:flex-row flex-col">
             {!homeData
-              ? [1, 2, 3, 4].map(() => (
+              ? [1, 2, 3, 4].map((el, index) => (
                   <Skeleton
+                    key={index}
                     containerClassName="flex-1"
                     className="py-[100px] "
                   />
                 ))
               : homeData.categorySection.category.map(
-                  ({ title, text, image }) => (
+                  ({ title, text, image }, index) => (
                     <CategoryCard
+                      key={index}
                       title={title}
                       text={text}
                       image={urlFor(image).url()}
@@ -266,8 +268,8 @@ const Home = () => {
               </div>
 
               <div className="flex-1 grid min-[950px]:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-20 min-[950px]:pt-0 pt-[40px]">
-                {sponsorList.map(({ svg }) => (
-                  <figure className="">
+                {sponsorList.map(({ svg }, index) => (
+                  <figure className="" key={index}>
                     <div className="w-full">
                       <img src={svg} alt="" className="w-full object-cover" />
                     </div>
