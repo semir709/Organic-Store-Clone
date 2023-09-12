@@ -11,7 +11,7 @@ const ListNav = ({ arrayText }) => {
           className={`p-[20px] text-global-color-3 hover:text-global-color-0 hover:cursor-pointer transition duration-300 md:border-y-0 
           ${index === 0 ? "border-y-[1px]" : "border-b-[1px]"}`}
         >
-          <a href={url}>{text}</a>
+          {text}
         </Link>
       ))}
     </ul>

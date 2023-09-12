@@ -69,7 +69,6 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
                         <IoIosCloseCircleOutline
                           fontSize={25}
                           color="#B2B2B2"
-                          lin
                         />
                       </button>
                     </div>

@@ -42,7 +42,7 @@ const Card = ({
             ))}
           </div>
         )}
-        <a href="/">
+        <span>
           <h2
             className={` ${
               onSide
@@ -52,7 +52,7 @@ const Card = ({
           >
             {title}
           </h2>
-        </a>
+        </span>
         <div
           className={`${
             onSide

@@ -10,7 +10,6 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
     <div className="bg-transparent w-full h-[105px] px-[25px] py-[15px]">
       <div className="bg-transparent w-full h-full flex justify-between items-center">
         <div className="flex items-center">
-          {/*Logo*/}
           <div className="pe-[20px]">
             <span>
               <Link to={"/"} className="text-3xl">
@@ -18,19 +17,17 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
               </Link>
             </span>
           </div>
-          {/* List */}
+
           <nav className="hidden md:block">
             <ListNav arrayText={navData.mainNav} />
           </nav>
         </div>
 
         <div className="flex items-center">
-          {/* List */}
           <nav className="hidden md:block">
             <ListNav arrayText={navData.infoNav} />
           </nav>
 
-          {/*Card*/}
           <div
             className="flex items-center hover:cursor-pointer"
             onClick={() => setCartToggle((prev) => !prev)}
