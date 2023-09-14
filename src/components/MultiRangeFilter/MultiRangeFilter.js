@@ -12,6 +12,7 @@ const MultiRangeSlider = ({
   setData,
   startIndex,
   endIndex,
+  category,
 }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
@@ -23,12 +24,6 @@ const MultiRangeSlider = ({
   const [price, setPrice] = useState({ priceStart: min, priceEnd: max });
   const [timeoutIdMax, setTimeoutIdMax] = useState(null);
   const [timeoutIdMin, setTimeoutIdMin] = useState(null);
-
-  // useEffect(() => {
-  //   sanityClient.fetch(getDataOnRange(20, 1000, 0, 9)).then((data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -72,14 +67,20 @@ const MultiRangeSlider = ({
     }
     sanityClient
       .fetch(
-        getDataOnRange(price.priceStart, price.priceEnd, startIndex, endIndex)
+        getDataOnRange(
+          price.priceStart,
+          price.priceEnd,
+          startIndex,
+          endIndex,
+          category
+        )
       )
       .then((data) => {
         setData((prev) => {
           return { ...prev, productData: data };
         });
       });
-  }, [price, max, min, setData, startIndex, endIndex]);
+  }, [price, max, min, setData, startIndex, endIndex, category]);
 
   const inputMin = (e) => {
     const element = e.target;

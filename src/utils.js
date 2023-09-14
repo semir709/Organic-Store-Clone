@@ -147,6 +147,8 @@ export const getProducts = (start, end, category = "all") => {
       }
     }`;
 
+  // console.log(data);
+
   return data;
 };
 
@@ -179,10 +181,15 @@ export const getDataOnRange = (
   startPrice = 0,
   endPrice = 1000,
   startIndex,
-  endIndex
+  endIndex,
+  category = "all"
 ) => {
   const data = `{
-    'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice}] [${startIndex}..${endIndex}] {
+    'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice} ${
+    category !== "all"
+      ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+      : ""
+  }] [${startIndex}..${endIndex}] {
       image,
       title,
       price,
@@ -196,7 +203,11 @@ export const getDataOnRange = (
       setPrevious,
       previusPrice
     },
-    'amount': count(*[_type == 'product' && price > ${startPrice} && price < ${endPrice}]),
+    'amount': count(*[_type == 'product' && price > ${startPrice} && price < ${endPrice}${
+    category !== "all"
+      ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+      : ""
+  }]),
     'itemsConfig': *[_type == "ItemsConfig"] {
       itemsPerPage
     }

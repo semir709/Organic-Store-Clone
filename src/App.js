@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
@@ -28,8 +28,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop/all/:current" element={<Shop />} />
-        <Route path="/shop/:category" element={<Shop />} />
+        <Route path="/shop/:category/:current?" element={<Shop />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />

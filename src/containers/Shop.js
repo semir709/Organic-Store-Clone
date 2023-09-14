@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 import Card from "../components/Card";
@@ -21,14 +21,17 @@ import MultiRangeSlider from "../components/MultiRangeFilter/MultiRangeFilter";
 
 const Shop = () => {
   const [data, setData] = useState(null);
-  const { current = 1 } = useParams();
+  const { category = "all", current = 1 } = useParams();
+
+  console.log(category, current);
+  // const current = 1;
   const perPage = 2;
   const [start, setStart] = useState((current - 1) * perPage);
   const [end, setEnd] = useState(start + perPage - 1);
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const url = useLocation();
+  const url = useLocation() || "all";
 
   useEffect(() => {
     setIsLoading(true);
@@ -47,6 +50,8 @@ const Shop = () => {
       sanityClient.fetch(getCategoryNumber),
       sanityClient.fetch(getBiggestPrice),
     ]).then(([product, side, categoryNum, biggestPrice]) => {
+      // console.log(product, "product");
+
       setData((prev) => {
         return {
           productData: product,
@@ -64,6 +69,8 @@ const Shop = () => {
   const { amount, product } = productData || {};
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
+
+  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -93,6 +100,7 @@ const Shop = () => {
                     setData={setData}
                     startIndex={start}
                     endIndex={end}
+                    category={url.pathname.split("/")[2]}
                   />
                 )}
               </div>
@@ -140,9 +148,7 @@ const Shop = () => {
           <div className="md:ms-[80px] w-full md:order-none  order-1">
             <main className="h-full flex flex-col justify-between">
               <div>
-                <div className="mb-[30px]">
-                  <NavTrack />
-                </div>
+                <div className="mb-[30px]">{/* <NavTrack /> */}</div>
 
                 <header className="mb-[50px]">
                   <h1 className="text-5xl font-semibold text-global-color-0">
@@ -192,7 +198,11 @@ const Shop = () => {
                 {isLoading ? (
                   <Skeleton />
                 ) : (
-                  <Pagination totalAmount={amount} perPage={perPage} />
+                  <Pagination
+                    totalAmount={amount}
+                    perPage={perPage}
+                    url={url.pathname.split("/")[2]}
+                  />
                 )}
               </div>
             </main>
