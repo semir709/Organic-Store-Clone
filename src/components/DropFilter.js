@@ -13,31 +13,31 @@ const DropFilter = () => {
   };
   return (
     <>
-      <div className=" relative">
+      <div className="relative z-50">
         <div
-          className="px-5 py-3 flex justify-center items-center cursor-pointer"
+          className="sm:px-5 pe-5 ps-2 py-3 flex sm:justify-center items-center cursor-pointer w-[250px]"
           onClick={() => setToggle(!toggle)}
         >
-          <span className="me-2 text-global-color-7 select-none">
+          <span className="me-2 text-global-color-7 select-none ">
             {selected}
           </span>
           <IoIosArrowDown fontSize={20} className="text-global-color-7 mt-1" />
         </div>
         <ul
-          className={`bg-[#e5e4e4] rounded-md absolute top-full w-full  mt-2 py-3 text-global-color-7 cursor-pointer ${
+          className={`bg-[#efeeee]  rounded-md absolute top-full w-full  mt-2 py-3 text-global-color-7 cursor-pointer ${
             toggle ? "block" : "hidden"
           }`}
         >
-          <li onClick={onSelect} className="px-5 hover:bg-white">
+          <li onClick={onSelect} className="sm:px-5 pe-5 ps-2 hover:bg-white">
             Sort by latest
           </li>
-          <li onClick={onSelect} className="px-5 hover:bg-white">
+          <li onClick={onSelect} className="sm:px-5 pe-5 ps-2 hover:bg-white">
             Sort by oldest
           </li>
-          <li onClick={onSelect} className="px-5 hover:bg-white">
+          <li onClick={onSelect} className="sm:px-5 pe-5 ps-2 hover:bg-white">
             Sort by price: low to high
           </li>
-          <li onClick={onSelect} className="px-5 hover:bg-white">
+          <li onClick={onSelect} className="sm:px-5 pe-5 ps-2 hover:bg-white">
             Sort by price: high to low
           </li>
         </ul>
