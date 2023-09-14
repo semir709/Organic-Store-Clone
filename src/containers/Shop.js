@@ -50,8 +50,6 @@ const Shop = () => {
       sanityClient.fetch(getCategoryNumber),
       sanityClient.fetch(getBiggestPrice),
     ]).then(([product, side, categoryNum, biggestPrice]) => {
-      // console.log(product, "product");
-
       setData((prev) => {
         return {
           productData: product,
@@ -69,8 +67,6 @@ const Shop = () => {
   const { amount, product } = productData || {};
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
-
-  console.log(data);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
