@@ -1,9 +1,16 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+} from "react";
 import PropTypes from "prop-types";
 import "./MultiRangeSlider.css";
 import { IoIosClose } from "react-icons/io";
-import { getDataOnRange } from "../../utils";
+import { getDataOnRange, getProduct, getProducts } from "../../utils";
 import sanityClient from "../../client";
+import { DataContext } from "../../App";
 
 const MultiRangeSlider = ({
   min,
@@ -13,6 +20,7 @@ const MultiRangeSlider = ({
   startIndex,
   endIndex,
   category,
+  setRange,
 }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
@@ -65,22 +73,9 @@ const MultiRangeSlider = ({
     } else if (price.priceStart === min && price.priceEnd === max) {
       setPriceDisplay(false);
     }
-    sanityClient
-      .fetch(
-        getDataOnRange(
-          price.priceStart,
-          price.priceEnd,
-          startIndex,
-          endIndex,
-          category
-        )
-      )
-      .then((data) => {
-        setData((prev) => {
-          return { ...prev, productData: data };
-        });
-      });
-  }, [price, max, min, setData, startIndex, endIndex, category]);
+
+    setRange({ start: price.priceStart, end: price.priceEnd });
+  }, [price, max, min, setData, startIndex, endIndex, category, setRange]);
 
   const inputMin = (e) => {
     const element = e.target;

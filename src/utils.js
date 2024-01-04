@@ -117,41 +117,6 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
-export const getProducts = (start, end, category = "all") => {
-  let data = `{
-      'product': *[_type == 'product'${
-        category !== "all"
-          ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-          : ""
-      }][${start}..${end}] {
-        image,
-        title,
-        price,
-        category[] -> {
-          name,
-          'slug':slug.current
-        },
-        sale,
-        'slug': slug.current,
-        currency,
-        setPrevious,
-        previusPrice
-      },
-      'amount': count(*[_type == 'product' ${
-        category !== "all"
-          ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-          : ""
-      }]),
-      'itemsConfig': *[_type == "ItemsConfig"] {
-        itemsPerPage
-      }
-    }`;
-
-  // console.log(data);
-
-  return data;
-};
-
 export const getSideProducts = `*[_type == 'sideProducts']{
   products [] -> {
     image,
@@ -177,19 +142,58 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
-export const getDataOnRange = (
-  startPrice = 0,
-  endPrice = 1000,
+// export const getProducts = (start, end, category = "all") => {
+//   let data = `{
+//       'product': *[_type == 'product'${
+//         category !== "all"
+//           ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+//           : ""
+//       }][${start}..${end}] {
+//         image,
+//         title,
+//         price,
+//         category[] -> {
+//           name,
+//           'slug':slug.current
+//         },
+//         sale,
+//         'slug': slug.current,
+//         currency,
+//         setPrevious,
+//         previusPrice
+//       },
+//       'amount': count(*[_type == 'product' ${
+//         category !== "all"
+//           ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+//           : ""
+//       }]),
+//       'itemsConfig': *[_type == "ItemsConfig"] {
+//         itemsPerPage
+//       }
+//     }`;
+
+//   // console.log(data);
+
+//   return data;
+// };
+
+export const getProducts = (
   startIndex,
   endIndex,
-  category = "all"
+  category = "all",
+  startPrice = 0,
+  endPrice = 1000,
+  time = true,
+  sort = 0
 ) => {
   const data = `{
     'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice} ${
     category !== "all"
       ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
       : ""
-  }] [${startIndex}..${endIndex}] {
+  }] | order(${time ? "_createdAt" : "price"} ${
+    sort === 0 ? "desc" : "asc"
+  }) [${startIndex}..${endIndex}] {
       image,
       title,
       price,
@@ -239,7 +243,7 @@ export const useInterval = (callback, delay) => {
 export const navData = {
   mainNav: [
     { text: "Everything", url: "/shop/all" },
-    { text: "Groceries", url: "/shop/groceries" },
+    { text: "Groceries", url: "/shop/grocies" },
     { text: "Juice", url: "/shop/juice" },
   ],
   infoNav: [
@@ -248,7 +252,7 @@ export const navData = {
   ],
   allNav: [
     { text: "Everything", url: "/shop/all" },
-    { text: "Groceries", url: "/shop/groceries" },
+    { text: "Groceries", url: "/shop/grocies" },
     { text: "Juice", url: "/shop/juice" },
     { text: "About", url: "/about" },
     { text: "Contact", url: "/contact" },
@@ -399,3 +403,29 @@ export const dataProducts = [
     slug: "assorted-coffee",
   },
 ];
+
+export const convertFilterToRequest = (filterValue) => {
+  const obj = {
+    time: true,
+    sort: 0,
+  };
+
+  if (filterValue === "latest") {
+    obj.time = true;
+    obj.sort = 0;
+  } else if (filterValue === "oldest") {
+    obj.time = true;
+    obj.sort = 1;
+  } else if (filterValue === "lowToHigh") {
+    obj.time = false;
+    obj.sort = 1;
+  } else if (filterValue === "highToLow") {
+    obj.time = false;
+    obj.sort = 0;
+  } else {
+    obj.time = true;
+    obj.sort = 0;
+  }
+
+  return obj;
+};

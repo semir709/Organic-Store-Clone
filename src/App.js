@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
@@ -11,6 +11,8 @@ import ContactUs from "./containers/ContactUs";
 import Product from "./containers/Product";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+
+export const DataContext = React.createContext();
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);

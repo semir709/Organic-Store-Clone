@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Card from "../components/Card";
 import sanityClient from "../client";
 import {
+  convertFilterToRequest,
   getBiggestPrice,
   getCategoryNumber,
   getProducts,
@@ -23,15 +24,15 @@ const Shop = () => {
   const [data, setData] = useState(null);
   const { category = "all", current = 1 } = useParams();
 
-  console.log(category, current);
-  // const current = 1;
   const perPage = 2;
   const [start, setStart] = useState((current - 1) * perPage);
   const [end, setEnd] = useState(start + perPage - 1);
-
   const [isLoading, setIsLoading] = useState(true);
-
   const url = useLocation() || "all";
+
+  const [range, setRange] = useState({ start: 0, end: 0 });
+
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,9 +43,19 @@ const Shop = () => {
     setStart(newStart);
     setEnd(newEnd);
 
+    const { time, sort } = convertFilterToRequest(filterValue);
+
     Promise.all([
       sanityClient.fetch(
-        getProducts(newStart, newEnd, url.pathname.split("/")[2])
+        getProducts(
+          newStart,
+          newEnd,
+          url.pathname.split("/")[2],
+          range.start,
+          range.end,
+          time,
+          sort
+        )
       ),
       sanityClient.fetch(getSideProducts),
       sanityClient.fetch(getCategoryNumber),
@@ -60,13 +71,17 @@ const Shop = () => {
       });
       setIsLoading(false);
     });
-  }, [current, url]);
+  }, [current, url, range, filterValue]);
 
   let { productData, side, categoryNum, biggestPrice } = data || {};
   const { products: sideProducts } = side || {};
   const { amount, product } = productData || {};
   const { currency } = (sideProducts && sideProducts[0]) || {};
   const { price } = (biggestPrice && biggestPrice) || { price: undefined };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div className="bg-global-color-4 py-[60px]">
@@ -97,6 +112,7 @@ const Shop = () => {
                     startIndex={start}
                     endIndex={end}
                     category={url.pathname.split("/")[2]}
+                    setRange={setRange}
                   />
                 )}
               </div>
@@ -144,7 +160,9 @@ const Shop = () => {
           <div className="md:ms-[80px] w-full md:order-none  order-1">
             <main className="h-full flex flex-col justify-between">
               <div>
-                <div className="mb-[30px]">{/* <NavTrack /> */}</div>
+                <div className="mb-[30px]">
+                  <NavTrack />
+                </div>
 
                 <header className="mb-[50px]">
                   <h1 className="text-5xl font-semibold text-global-color-0">
@@ -154,7 +172,7 @@ const Shop = () => {
 
                 <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
                   <StatsItems amount={amount} start={start} end={end} />
-                  <DropFilter />
+                  <DropFilter setValue={setFilterValue} />
                 </div>
 
                 <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
