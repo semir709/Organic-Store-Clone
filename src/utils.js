@@ -117,7 +117,7 @@ export const getAbout = `*[_type == 'about'] {
   }
 }`;
 
-export const getSideProducts = `*[_type == 'sideProducts']{
+export const getSideProducts = `*[_type == 'sideProducts'][0]{
   products [] -> {
     image,
     title,
@@ -142,41 +142,6 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
-// export const getProducts = (start, end, category = "all") => {
-//   let data = `{
-//       'product': *[_type == 'product'${
-//         category !== "all"
-//           ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-//           : ""
-//       }][${start}..${end}] {
-//         image,
-//         title,
-//         price,
-//         category[] -> {
-//           name,
-//           'slug':slug.current
-//         },
-//         sale,
-//         'slug': slug.current,
-//         currency,
-//         setPrevious,
-//         previusPrice
-//       },
-//       'amount': count(*[_type == 'product' ${
-//         category !== "all"
-//           ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-//           : ""
-//       }]),
-//       'itemsConfig': *[_type == "ItemsConfig"] {
-//         itemsPerPage
-//       }
-//     }`;
-
-//   // console.log(data);
-
-//   return data;
-// };
-
 export const getProducts = (
   startIndex,
   endIndex,
@@ -184,16 +149,17 @@ export const getProducts = (
   startPrice = 0,
   endPrice = 1000,
   time = true,
-  sort = 0
+  sort = 0,
+  searchInput = ""
 ) => {
   const data = `{
     'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice} ${
     category !== "all"
       ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
       : ""
-  }] | order(${time ? "_createdAt" : "price"} ${
-    sort === 0 ? "desc" : "asc"
-  }) [${startIndex}..${endIndex}] {
+  } && title match '${searchInput}*'] | order(${
+    time ? "_createdAt" : "price"
+  } ${sort === 0 ? "desc" : "asc"}) [${startIndex}..${endIndex}] {
       image,
       title,
       price,

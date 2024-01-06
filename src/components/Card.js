@@ -1,43 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { urlFor } from "../utils";
 
-const Card = ({
-  title,
-  category,
-  price,
-  img,
-  slug,
-  currency,
-  setPrevious,
-  previusPrice,
-  sale,
-  onSide = false,
-}) => {
+const Card = ({ data, onSide = false }) => {
   const navigation = useNavigate();
 
   const whenClick = () => {
-    navigation(`/product/${slug}`);
+    navigation(`/product/${data?.slug}`);
   };
   return (
-    <div onClick={whenClick} className="w-full relative">
-      {sale && (
+    <div onClick={whenClick} className="w-full relative ">
+      {data.sale && (
         <div className="absolute top-[-10px] right-[-10px] bg-global-color-0 px-2 py-3 rounded-full">
           <span>Sale!</span>
         </div>
       )}
-      <div className="w-full">
-        <img src={img} alt={img} className="w-full object-cover" />
+      <div className="w-full ">
+        <img
+          src={urlFor(data.image).url()}
+          alt={data.image.caption}
+          className="w-full object-cover"
+        />
       </div>
 
       <div className="mt-5 text-center">
         {!onSide && (
           <div className="flex items-center justify-center">
-            {category.map(({ slug, name }) => (
+            {data?.category?.map(({ slug, name }) => (
               <span
                 key={`categoryCard-${slug}`}
                 className="opacity-50 text-sm me-2 "
               >
-                {name}
+                {data.name}
               </span>
             ))}
           </div>
@@ -50,7 +44,7 @@ const Card = ({
                 : "text-center text-lg font-semibold text-global-color-2 "
             }`}
           >
-            {title}
+            {data.title}
           </h2>
         </span>
         <div
@@ -60,15 +54,15 @@ const Card = ({
               : "text-center text-lg font-semibold"
           }`}
         >
-          {setPrevious && isNaN(previusPrice) === false && (
+          {data.setPrevious && isNaN(data.previusPrice) === false && (
             <span className="me-2 line-through text-gray-400 ">
-              {currency}
-              <span>{previusPrice}</span>
+              {data.currency}
+              <span>{data.previusPrice}</span>
             </span>
           )}
           <span className="">
-            {currency}
-            <span>{price}</span>
+            {data.currency}
+            <span>{data.price}</span>
           </span>
         </div>
       </div>
