@@ -1,20 +1,20 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Pagination = ({ totalAmount, perPage, url }) => {
   const length = Math.ceil(totalAmount / perPage);
 
   const pages = Array.from({ length: length });
-  const { current = 1 } = useParams();
+  const { page = 1 } = useParams();
 
   return (
     <div className="flex items-center h-11">
-      {current > 1 && (
+      {page > 1 && (
         <Link
           key={0}
           className="mx-3 h-full  px-4 border border-global-color-0 text-global-color-0 hover:text-white hover:bg-global-color-0 flex items-center"
-          to={`/shop/${url}/${current - 1}`}
+          to={`/${url}/${page - 1}`}
         >
           <BsArrowLeft />
         </Link>
@@ -26,18 +26,18 @@ const Pagination = ({ totalAmount, perPage, url }) => {
             <Link
               key={index + 1}
               className="mx-3 h-full  px-4 border border-global-color-0 text-global-color-0 hover:text-white hover:bg-global-color-0 flex items-center"
-              to={`/shop/${url}/${index + 1}`}
+              to={`/${url}/${index + 1}`}
             >
               {index + 1}
             </Link>
           );
         })}
 
-      {current < pages.length && (
+      {page < pages.length && (
         <Link
           key={0}
           className=" h-full mx-3  px-4 border border-global-color-0 text-global-color-0 hover:text-white hover:bg-global-color-0 flex items-center"
-          to={`/shop/${url}/${parseInt(current) + 1}`}
+          to={`/${url}/${parseInt(page) + 1}`}
         >
           <BsArrowRight />
         </Link>

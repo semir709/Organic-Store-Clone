@@ -142,49 +142,73 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
-export const getProducts = (
-  startIndex,
-  endIndex,
-  category = "all",
-  startPrice = 0,
-  endPrice = 1000,
-  time = true,
-  sort = 0,
-  searchInput = ""
-) => {
-  const data = `{
-    'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice} ${
-    category !== "all"
-      ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-      : ""
-  } && title match '${searchInput}*'] | order(${
-    time ? "_createdAt" : "price"
-  } ${sort === 0 ? "desc" : "asc"}) [${startIndex}..${endIndex}] {
-      image,
-      title,
-      price,
-      category[] -> {
-        name,
-        'slug':slug.current
-      },
-      sale,
-      'slug': slug.current,
-      currency,
-      setPrevious,
-      previusPrice
-    },
-    'amount': count(*[_type == 'product' && price > ${startPrice} && price < ${endPrice}${
-    category !== "all"
-      ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
-      : ""
-  }]),
-    'itemsConfig': *[_type == "ItemsConfig"] {
-      itemsPerPage
+export const getAllProducts = () => {
+  const query = `{
+    'products': *[_type == 'product']{
+        image,
+        title,
+        price,
+        category[] -> {
+          name,
+          'slug':slug.current
+        },
+        sale,
+        'slug': slug.current,
+        currency,
+        setPrevious,
+        previusPrice
+      }[0..1],
+    'amount': count(*[_type == 'product']),
+    'perPage': *[_type == 'ItemsConfig'][0] {
+      'pageNum': itemsPerPage
     }
   }`;
-
-  return data;
+  return query;
 };
+
+// export const getProducts = (
+//   startIndex,
+//   endIndex,
+//   category = "all",
+//   startPrice = 0,
+//   endPrice = 1000,
+//   time = true,
+//   sort = 0,
+//   searchInput = ""
+// ) => {
+//   const data = `{
+//     'product': *[_type == 'product' && price > ${startPrice} && price < ${endPrice} ${
+//     category !== "all"
+//       ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+//       : ""
+//   } && title match '${searchInput}*'] | order(${
+//     time ? "_createdAt" : "price"
+//   } ${sort === 0 ? "desc" : "asc"}) [${startIndex}..${endIndex}] {
+//       image,
+//       title,
+//       price,
+//       category[] -> {
+//         name,
+//         'slug':slug.current
+//       },
+//       sale,
+//       'slug': slug.current,
+//       currency,
+//       setPrevious,
+//       previusPrice
+//     },
+//     'amount': count(*[_type == 'product' && price > ${startPrice} && price < ${endPrice}${
+//     category !== "all"
+//       ? `&& references(*[_type == "category" && slug.current == '${category}']._id)`
+//       : ""
+//   }]),
+//     'itemsConfig': *[_type == "ItemsConfig"] {
+//       itemsPerPage
+//     }
+//   }`;
+
+//   return data;
+// };
 
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();

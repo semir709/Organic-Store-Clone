@@ -3,12 +3,8 @@ import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
 import MobileMenu from "./components/MobileMenu";
-import Home from "./containers/Home";
-import Shop from "./containers/Shop";
 import Footer from "./components/Footer";
-import AboutUs from "./containers/AboutUs";
-import ContactUs from "./containers/ContactUs";
-import Product from "./containers/Product";
+import { AboutUs, ContactUs, Product, Home, Shop } from "./containers/index";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -30,7 +26,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop/:category/:current?" element={<Shop />} />
+        {/* <Route path="/shop/:category/:current?" element={<Shop />} /> */}
+        <Route path="/shop/*" element={<Shop />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />

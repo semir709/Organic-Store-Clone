@@ -9,7 +9,7 @@ const Card = ({ data, onSide = false }) => {
     navigation(`/product/${data?.slug}`);
   };
   return (
-    <div onClick={whenClick} className="w-full relative ">
+    <div onClick={whenClick} className="w-full relative " key={data.slug}>
       {data.sale && (
         <div className="absolute top-[-10px] right-[-10px] bg-global-color-0 px-2 py-3 rounded-full">
           <span>Sale!</span>
