@@ -151,7 +151,7 @@ const Shop = () => {
                 <Route path="/products/:page?" element={<ProductsPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route
-                  path="/category/:category?"
+                  path="/category/:category?/:page?"
                   element={<CategoriesPage />}
                 />
                 <Route path="/range" element={<RangePage />} />

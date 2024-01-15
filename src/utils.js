@@ -175,6 +175,40 @@ export const getAllProducts = (
   return query;
 };
 
+export const getCategoryProducts = (
+  category,
+  page = 1,
+  perPage = 6,
+  time = true,
+  sort = 0
+) => {
+  const newStart = (page - 1) * perPage;
+  const newEnd = newStart + perPage - 1;
+  const query = `{
+    'products': *[_type == 'product' && references(*[_type == "category" && slug.current == '${category}']._id)]{
+        image,
+        title,
+        price,
+        category[] -> {
+          name,
+          'slug':slug.current
+        },
+        sale,
+        'slug': slug.current,
+        currency,
+        setPrevious,
+        previusPrice,
+        _createdAt
+      } | order(${time ? "_createdAt" : "price"} ${
+    sort === 0 ? "desc" : "asc"
+  }) [${newStart}..${newEnd}],
+    'amount': count(*[_type == 'product' && references(*[_type == "category" && slug.current == '${category}']._id)])
+
+  }`;
+
+  return query;
+};
+
 // export const getProducts = (
 //   startIndex,
 //   endIndex,
