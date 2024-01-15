@@ -4,6 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import sanityClient from "../client";
 import { getAllProducts } from "../utils";
 import { useParams } from "react-router-dom";
+import StatsItems from "../components/StatsItems";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState(null);
@@ -34,7 +35,7 @@ const ProductsPage = () => {
         </header>
 
         <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-          {/* <StatsItems amount={amount} start={start} end={end} /> */}
+          <StatsItems amount={amount} perPage={perPage} page={page} />
           {/* <DropFilter setValue={setFilterValue} /> */}
         </div>
 
