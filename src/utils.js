@@ -142,7 +142,9 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
-export const getAllProducts = () => {
+export const getAllProducts = (page = 1, perPage = 6) => {
+  const newStart = (page - 1) * perPage;
+  const newEnd = newStart + perPage - 1;
   const query = `{
     'products': *[_type == 'product']{
         image,
@@ -157,11 +159,9 @@ export const getAllProducts = () => {
         currency,
         setPrevious,
         previusPrice
-      }[0..1],
-    'amount': count(*[_type == 'product']),
-    'perPage': *[_type == 'ItemsConfig'][0] {
-      'pageNum': itemsPerPage
-    }
+      }[${newStart}..${newEnd}],
+    'amount': count(*[_type == 'product'])
+
   }`;
   return query;
 };
@@ -232,18 +232,18 @@ export const useInterval = (callback, delay) => {
 
 export const navData = {
   mainNav: [
-    { text: "Everything", url: "/shop/all" },
-    { text: "Groceries", url: "/shop/grocies" },
-    { text: "Juice", url: "/shop/juice" },
+    { text: "Everything", url: "/shop/products" },
+    { text: "Groceries", url: "/shop/category/grocies" },
+    { text: "Juice", url: "/shop/category/juice" },
   ],
   infoNav: [
     { text: "About", url: "/about" },
     { text: "Contact", url: "/contact" },
   ],
   allNav: [
-    { text: "Everything", url: "/shop/all" },
-    { text: "Groceries", url: "/shop/grocies" },
-    { text: "Juice", url: "/shop/juice" },
+    { text: "Everything", url: "/shop/category/products" },
+    { text: "Groceries", url: "/shop/category/grocies" },
+    { text: "Juice", url: "/shop/category/juice" },
     { text: "About", url: "/about" },
     { text: "Contact", url: "/contact" },
   ],

@@ -8,23 +8,20 @@ import { useParams } from "react-router-dom";
 const ProductsPage = () => {
   const [products, setProducts] = useState(null);
   const [amount, setAmount] = useState(null);
-  const [perPage, setPerPage] = useState(null);
+  const perPage = 2;
   const [productsLoading, setProductsLoading] = useState(true);
 
-  // const { page = 1 } = useParams();
-
-  // console.log(page);
+  const { page = 1 } = useParams();
 
   useEffect(() => {
     sanityClient
-      .fetch(getAllProducts())
-      .then(({ products, amount, perPage }) => {
+      .fetch(getAllProducts(page, perPage))
+      .then(({ products, amount }) => {
         setProducts(products);
         setAmount(amount);
-        setPerPage(perPage.pageNum);
         setProductsLoading(false);
       });
-  }, []);
+  }, [page]);
   return (
     <div className="flex flex-col justify-between h-full ">
       <div>
@@ -53,7 +50,11 @@ const ProductsPage = () => {
         {productsLoading ? (
           <Skeleton />
         ) : (
-          <Pagination totalAmount={amount} perPage={perPage} url={"shop/all"} />
+          <Pagination
+            totalAmount={amount}
+            perPage={perPage}
+            url={"shop/products"}
+          />
         )}
       </div>
     </div>

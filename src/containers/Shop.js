@@ -148,9 +148,12 @@ const Shop = () => {
           <div className="md:ms-[80px] w-full md:order-none  order-1">
             <main className="h-full flex flex-col justify-between">
               <Routes>
-                <Route path="/all/:page?" element={<ProductsPage />} />
+                <Route path="/products/:page?" element={<ProductsPage />} />
                 <Route path="/search" element={<SearchPage />} />
-                <Route path=":category" element={<CategoriesPage />} />
+                <Route
+                  path="/category/:category?"
+                  element={<CategoriesPage />}
+                />
                 <Route path="/range" element={<RangePage />} />
               </Routes>
             </main>
