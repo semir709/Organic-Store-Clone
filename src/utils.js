@@ -209,6 +209,26 @@ export const getCategoryProducts = (
   return query;
 };
 
+export const getSearchProducts = (searchTerm) => {
+  const query = `*[_type == 'product' && title match '${searchTerm}*']{
+    image,
+    title,
+    price,
+    category[] -> {
+      name,
+      'slug':slug.current
+    },
+    sale,
+    'slug': slug.current,
+    currency,
+    setPrevious,
+    previusPrice,
+    _createdAt
+  }[0..5]`;
+
+  return query;
+};
+
 // export const getProducts = (
 //   startIndex,
 //   endIndex,
