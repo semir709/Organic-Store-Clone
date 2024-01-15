@@ -142,7 +142,12 @@ export const getCategoryNumber = `*[_type == "category"] {
 
 export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
-export const getAllProducts = (page = 1, perPage = 6) => {
+export const getAllProducts = (
+  page = 1,
+  perPage = 6,
+  time = true,
+  sort = 0
+) => {
   const newStart = (page - 1) * perPage;
   const newEnd = newStart + perPage - 1;
   const query = `{
@@ -158,11 +163,15 @@ export const getAllProducts = (page = 1, perPage = 6) => {
         'slug': slug.current,
         currency,
         setPrevious,
-        previusPrice
-      }[${newStart}..${newEnd}],
+        previusPrice,
+        _createdAt
+      } | order(${time ? "_createdAt" : "price"} ${
+    sort === 0 ? "desc" : "asc"
+  }) [${newStart}..${newEnd}],
     'amount': count(*[_type == 'product'])
 
   }`;
+
   return query;
 };
 

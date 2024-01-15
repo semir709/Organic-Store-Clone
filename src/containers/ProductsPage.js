@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, NavTrack, Pagination } from "../components/index";
+import { Card, DropFilter, NavTrack, Pagination } from "../components/index";
 import Skeleton from "react-loading-skeleton";
 import sanityClient from "../client";
 import { getAllProducts } from "../utils";
@@ -11,18 +11,20 @@ const ProductsPage = () => {
   const [amount, setAmount] = useState(null);
   const perPage = 2;
   const [productsLoading, setProductsLoading] = useState(true);
+  const [filterValue, setFilterValue] = useState({ time: true, sort: 0 });
 
   const { page = 1 } = useParams();
 
   useEffect(() => {
     sanityClient
-      .fetch(getAllProducts(page, perPage))
+      .fetch(getAllProducts(page, perPage, filterValue.time, filterValue.sort))
       .then(({ products, amount }) => {
         setProducts(products);
         setAmount(amount);
         setProductsLoading(false);
       });
-  }, [page]);
+  }, [page, filterValue]);
+
   return (
     <div className="flex flex-col justify-between h-full ">
       <div>
@@ -36,7 +38,7 @@ const ProductsPage = () => {
 
         <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
           <StatsItems amount={amount} perPage={perPage} page={page} />
-          {/* <DropFilter setValue={setFilterValue} /> */}
+          <DropFilter setValue={setFilterValue} />
         </div>
 
         <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">

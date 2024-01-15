@@ -12,7 +12,15 @@ const DropFilter = ({ setValue }) => {
     setSelected(text);
     setToggle(false);
 
-    setValue(value);
+    if (value === "oldest") {
+      setValue({ time: true, sort: 1 });
+    } else if (value === "lowToHigh") {
+      setValue({ time: false, sort: 1 });
+    } else if (value === "highToLow") {
+      setValue({ time: false, sort: 0 });
+    } else {
+      setValue({ time: true, sort: 0 });
+    }
   };
   return (
     <>
