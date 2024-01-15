@@ -112,7 +112,7 @@ const Shop = () => {
         <div className="flex mx-5 md:flex-row flex-col">
           <div className="md:border-e-[1px] border-gray-400 md:pe-[50px] md:order-none  order-2 md:m-0 mt-[70px]">
             <div className="w-full ">
-              {/* <SearchInput setInput={setSearchInput} /> */}
+              <SearchInput />
               {/* <div className="mb-[30px]">
                 {!price ? (
                   <Skeleton />
