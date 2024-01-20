@@ -18,11 +18,14 @@ import CategoryList from "../components/CategoryList";
 import NavTrack from "../components/NavTrack";
 import StatsItems from "../components/StatsItems";
 import DropFilter from "../components/DropFilter";
-import MultiRangeSlider from "../components/MultiRangeFilter/MultiRangeFilter";
+// import MultiRangeSlider from "../components/MultiRangeFilter/MultiRangeFilter";
+
 import SearchInput from "../components/SearchInput";
 import Products from "./ProductsPage";
 import Search from "./SearchPage";
 import Categories from "./CategoriesPage";
+
+import { MultiRangeSlider } from "../components/index";
 
 import { RangePage, ProductsPage, CategoriesPage, SearchPage } from "./index";
 
@@ -113,22 +116,9 @@ const Shop = () => {
           <div className="md:border-e-[1px] border-gray-400 md:pe-[50px] md:order-none  order-2 md:m-0 mt-[70px]">
             <div className="w-full ">
               <SearchInput />
-              {/* <div className="mb-[30px]">
-                {!price ? (
-                  <Skeleton />
-                ) : (
-                  <MultiRangeSlider
-                    min={0}
-                    max={Math.ceil(Number(price))}
-                    currency={currency}
-                    setData={setData}
-                    startIndex={start}
-                    endIndex={end}
-                    category={url.pathname.split("/")[2]}
-                    setRange={setRange}
-                  />
-                )}
-              </div> */}
+              <div className="mb-[30px]">
+                <MultiRangeSlider />
+              </div>
               <div className="mb-[30px]">
                 <CategoryList data={catgeoryCount} />
               </div>
@@ -150,11 +140,12 @@ const Shop = () => {
               <Routes>
                 <Route path="/products/:page?" element={<ProductsPage />} />
                 <Route path="/search/:searchTerm" element={<SearchPage />} />
+
                 <Route
                   path="/category/:category?/:page?"
                   element={<CategoriesPage />}
                 />
-                <Route path="/range" element={<RangePage />} />
+                <Route path="/range/:rangeTearm" element={<RangePage />} />
               </Routes>
             </main>
           </div>

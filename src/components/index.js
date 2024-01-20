@@ -22,3 +22,4 @@ export { default as SearchInput } from "./SearchInput";
 export { default as ServiceCard } from "./ServiceCard";
 export { default as ShopingCart } from "./ShopingCart";
 export { default as SwiperCom } from "./SwiperCom";
+export { default as MultiRangeSlider } from "./MultRangeFilterComp/MultiRangeSlider";
