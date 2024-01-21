@@ -14,15 +14,9 @@ const ProductSection = ({ title, products }) => {
         <ul className="grid md:grid-cols-4 min-[450px]:grid-cols-2  gap-4 sm:mx-2 mx-[30px]">
           {!products
             ? [1, 2, 3, 4].map(() => <Skeleton className="py-[100px]" />)
-            : products.map(({ title, price, category, image, slug }) => (
+            : products.map((data) => (
                 <li>
-                  <Card
-                    title={title}
-                    price={price}
-                    category={category}
-                    img={urlFor(image)}
-                    slug={slug}
-                  />
+                  <Card data={data} />
                 </li>
               ))}
         </ul>

@@ -241,17 +241,9 @@ const Product = () => {
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
             {!dataReletedProducts
               ? [1, 2, 3, 4].map(() => <Skeleton className="py-[100px]" />)
-              : dataReletedProducts?.relatedProducts.map(
-                  ({ title, price, image, slug, category }) => (
-                    <Card
-                      title={title}
-                      price={price}
-                      category={category}
-                      img={urlFor(image)}
-                      slug={slug}
-                    />
-                  )
-                )}
+              : dataReletedProducts?.relatedProducts.map((data) => (
+                  <Card data={data} />
+                ))}
           </div>
         </section>
       </div>

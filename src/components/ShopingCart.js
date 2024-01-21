@@ -18,10 +18,10 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
   const [store, setStore] = useState(local); // replace with real data stored inside local storage
   const total = "12.00";
   return (
-    <div className="">
+    <div className=" bg-red-300">
       <BlackFilter toggle={cartToggle} />
       <div
-        className={`fixed w-1/3 h-full bg-white top-0 right-0  duration-300 border flex flex-col 
+        className={`fixed z-50 w-1/3 h-full bg-white top-0 right-0  duration-300 border flex flex-col 
        ${cartToggle ? " translate-x-[0] " : "  translate-x-[100%] "}`}
       >
         <div className="flex justify-between p-5 items-center border-b-[1px] flex-1">
