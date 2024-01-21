@@ -145,7 +145,10 @@ const Shop = () => {
                   path="/category/:category?/:page?"
                   element={<CategoriesPage />}
                 />
-                <Route path="/range/:rangeTearm" element={<RangePage />} />
+                <Route
+                  path="/range/:rangeMin/:rangeMax/:page"
+                  element={<RangePage />}
+                />
               </Routes>
             </main>
           </div>

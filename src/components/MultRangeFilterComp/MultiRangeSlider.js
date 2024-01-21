@@ -4,7 +4,7 @@ import DisplayFilter from "./DisplayFilter";
 import RangeSlideInputs from "./RangeSlideInputs";
 import { useNavigate } from "react-router-dom";
 const MultiRangeSlider = () => {
-  const min = 50;
+  const min = 0;
   const max = 100;
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
@@ -13,7 +13,7 @@ const MultiRangeSlider = () => {
   useEffect(() => {
     const time = setTimeout(() => {
       if (minValue > min || maxValue < max)
-        navigate(`/shop/range/${minValue}&${maxValue}`);
+        navigate(`/shop/range/${minValue}/${maxValue}/1`);
     }, 1000);
 
     return () => {

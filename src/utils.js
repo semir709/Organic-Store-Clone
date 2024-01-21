@@ -229,6 +229,42 @@ export const getSearchProducts = (searchTerm) => {
   return query;
 };
 
+export const getRangeProducts = (
+  min,
+  max,
+  page = 1,
+  perPage = 6,
+  time = true,
+  sort = 0
+) => {
+  const newStart = (page - 1) * perPage;
+  const newEnd = newStart + perPage - 1;
+  const query = `{
+    'products': *[_type == 'product' && price > ${min} && price < ${max}]{
+        image,
+        title,
+        price,
+        category[] -> {
+          name,
+          'slug':slug.current
+        },
+        sale,
+        'slug': slug.current,
+        currency,
+        setPrevious,
+        previusPrice,
+        _createdAt
+      } | order(${time ? "_createdAt" : "price"} ${
+    sort === 0 ? "desc" : "asc"
+  }) [${newStart}..${newEnd}],
+    'amount': count(*[_type == 'product' && price > ${min} && price < ${max}])
+
+  }`;
+
+  console.log(query);
+  return query;
+};
+
 // export const getProducts = (
 //   startIndex,
 //   endIndex,
