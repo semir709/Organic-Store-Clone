@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "react";
-import "./rangeStyle.css";
 
 const RangeSlideInputs = ({
   min,

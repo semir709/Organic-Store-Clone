@@ -1,3 +1,5 @@
+   /*INPUTS RANGE*/
+   
    /* Removing the default appearance */
   .thumb,
   .thumb::-webkit-slider-thumb {
@@ -11,18 +13,10 @@
     height: 0;
     top: 0;
     width: 100%;
-    /* width: 200px; */
     outline: none;
     z-index: 3
   }
   
-  /* .thumb--left {
-    z-index: 3;
-  }
-  
-  .thumb--right {
-    z-index: 4;
-  } */
   
   /* For Chrome browsers */
   .thumb::-webkit-slider-thumb {
@@ -59,13 +53,7 @@
     border-radius: 3px;
     height: 5px;
   }
-/*   
-  .slider__track,
-  .slider__range {
-    border-radius: 3px;
-    height: 5px;
-  }
-   */
+
   .slider__track {
     background-color: #adadad;
     width: 100%;
@@ -75,6 +63,18 @@
   .slider__range {
     background-color: #8bc34a;
     z-index: 2;
-    
+  }
+
+  /*INPUT NUMBER*/
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+  }
+
+  input[type=number] {
+    appearance: textfield;
+      -moz-appearance: textfield;
   }
   

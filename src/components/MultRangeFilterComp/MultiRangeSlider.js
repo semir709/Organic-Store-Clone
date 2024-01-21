@@ -3,6 +3,7 @@ import InputRange from "./InputRange";
 import DisplayFilter from "./DisplayFilter";
 import RangeSlideInputs from "./RangeSlideInputs";
 import { useNavigate } from "react-router-dom";
+import "./rangeStyle.css";
 const MultiRangeSlider = () => {
   const min = 0;
   const max = 100;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IoCloseCircle } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 const DisplayFilter = ({
@@ -59,10 +59,12 @@ const DisplayFilter = ({
             <span className="font-semibold uppercase ">Price:</span>
             <div className="flex items-center mt-1">
               <span
-                className="me-1 hover:cursor-pointer "
+                className="me-1 hover:cursor-pointer group"
                 onClick={resetFilter}
               >
-                <IoCloseCircle size={17} />
+                <div className="p-[2px] bg-gray-300 rounded-full group-hover:bg-gray-500">
+                  <IoCloseSharp className="group-hover:text-white" />
+                </div>
               </span>
               <span>{filterRangeMesage}</span>
             </div>
