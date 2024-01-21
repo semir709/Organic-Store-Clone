@@ -4,9 +4,13 @@ import DisplayFilter from "./DisplayFilter";
 import RangeSlideInputs from "./RangeSlideInputs";
 import { useNavigate } from "react-router-dom";
 import "./rangeStyle.css";
+import sanityClient from "../../client";
+import Skeleton from "react-loading-skeleton";
+import { getMinAndMax } from "../../utils";
 const MultiRangeSlider = () => {
-  const min = 0;
-  const max = 100;
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(100);
+  const [isLoading, setIsLoading] = useState(true);
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
   const navigate = useNavigate();
@@ -22,32 +26,51 @@ const MultiRangeSlider = () => {
     };
   }, [minValue, maxValue]);
 
+  useEffect(() => {
+    sanityClient.fetch(getMinAndMax).then(({ min, max }) => {
+      setMin(min.price);
+      setMax(max.price);
+      setIsLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    setMinValue(min);
+    setMaxValue(max);
+  }, [min, max]);
+
   return (
     <>
-      <DisplayFilter
-        min={min}
-        max={max}
-        minValue={minValue}
-        maxValue={maxValue}
-        setMaxValue={setMaxValue}
-        setMinValue={setMinValue}
-      />
-      <RangeSlideInputs
-        min={min}
-        max={max}
-        minValue={minValue}
-        maxValue={maxValue}
-        setMaxValue={setMaxValue}
-        setMinValue={setMinValue}
-      />
-      <InputRange
-        min={min}
-        max={max}
-        minValue={minValue}
-        maxValue={maxValue}
-        setMaxValue={setMaxValue}
-        setMinValue={setMinValue}
-      />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <div>
+          <DisplayFilter
+            min={min}
+            max={max}
+            minValue={minValue}
+            maxValue={maxValue}
+            setMaxValue={setMaxValue}
+            setMinValue={setMinValue}
+          />
+          <RangeSlideInputs
+            min={min}
+            max={max}
+            minValue={minValue}
+            maxValue={maxValue}
+            setMaxValue={setMaxValue}
+            setMinValue={setMinValue}
+          />
+          <InputRange
+            min={min}
+            max={max}
+            minValue={minValue}
+            maxValue={maxValue}
+            setMaxValue={setMaxValue}
+            setMinValue={setMinValue}
+          />
+        </div>
+      )}
     </>
   );
 };

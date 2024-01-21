@@ -140,7 +140,7 @@ export const getCategoryNumber = `*[_type == "category"] {
   "count": count(*[_type == "product" && references(^._id)])
 } | order(count desc)`;
 
-export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
+// export const getBiggestPrice = `*[_type == 'product'] | order(price desc) {price}[0]`;
 
 export const getAllProducts = (
   page = 1,
@@ -240,7 +240,7 @@ export const getRangeProducts = (
   const newStart = (page - 1) * perPage;
   const newEnd = newStart + perPage - 1;
   const query = `{
-    'products': *[_type == 'product' && price > ${min} && price < ${max}]{
+    'products': *[_type == 'product' && price >= ${min} && price <= ${max}]{
         image,
         title,
         price,
@@ -261,9 +261,13 @@ export const getRangeProducts = (
 
   }`;
 
-  console.log(query);
   return query;
 };
+
+export const getMinAndMax = `{
+    'min': *[_type == 'product'] | order(price asc) {price}[0],
+    'max': *[_type == 'product'] | order(price desc) {price}[0],
+  }`;
 
 // export const getProducts = (
 //   startIndex,
