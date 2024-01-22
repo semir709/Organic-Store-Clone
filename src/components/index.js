@@ -23,3 +23,5 @@ export { default as ServiceCard } from "./ServiceCard";
 export { default as ShopingCart } from "./ShopingCart";
 export { default as SwiperCom } from "./SwiperCom";
 export { default as MultiRangeSlider } from "./MultRangeFilterComp/MultiRangeSlider";
+export { default as InfoReview } from "./InfoReview";
+export { default as ReletedProductComponents } from "./ReletedProductComponents";

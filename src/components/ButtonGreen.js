@@ -1,11 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ButtonGreen = ({ text, icon, iconPosition, url }) => {
+const ButtonGreen = ({ text, icon = "", iconPosition = "left", url = "" }) => {
   const navigate = useNavigate();
 
   const whenClick = () => {
-    console.log(url);
     navigate(url);
   };
   return (

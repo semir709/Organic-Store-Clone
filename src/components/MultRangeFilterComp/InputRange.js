@@ -40,7 +40,7 @@ const InputRange = ({
         <div className="">$</div>
         <div className="w-[40px]">
           <input
-            className="w-full"
+            className="w-full input-range"
             type="number"
             value={minNumberRange}
             onChange={inputTypeMin}
@@ -51,7 +51,7 @@ const InputRange = ({
         <div className="">$</div>
         <div className="w-[40px]">
           <input
-            className="w-full"
+            className="w-full input-range"
             type="number"
             value={maxNumberRange}
             onChange={inputTypeMax}

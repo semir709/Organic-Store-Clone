@@ -7,3 +7,4 @@ export { default as ProductsPage } from "./ProductsPage";
 export { default as RangePage } from "./RangePage";
 export { default as SearchPage } from "./SearchPage";
 export { default as Shop } from "./Shop";
+export { default as CartPage } from "./CartPage";

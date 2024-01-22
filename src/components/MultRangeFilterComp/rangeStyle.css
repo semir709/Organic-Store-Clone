@@ -67,13 +67,13 @@
 
   /*INPUT NUMBER*/
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
+  .input-range::-webkit-outer-spin-button,
+  .input-range::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
   }
 
-  input[type=number] {
+  .input-range[type=number] {
     appearance: textfield;
       -moz-appearance: textfield;
   }

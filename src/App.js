@@ -4,7 +4,14 @@ import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
 import MobileMenu from "./components/MobileMenu";
 import Footer from "./components/Footer";
-import { AboutUs, ContactUs, Product, Home, Shop } from "./containers/index";
+import {
+  AboutUs,
+  ContactUs,
+  Product,
+  Home,
+  Shop,
+  CartPage,
+} from "./containers/index";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -31,6 +38,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
 
       <Footer />
