@@ -25,3 +25,4 @@ export { default as SwiperCom } from "./SwiperCom";
 export { default as MultiRangeSlider } from "./MultRangeFilterComp/MultiRangeSlider";
 export { default as InfoReview } from "./InfoReview";
 export { default as ReletedProductComponents } from "./ReletedProductComponents";
+export { default as TableOfProducts } from "./TableOfProducts";
