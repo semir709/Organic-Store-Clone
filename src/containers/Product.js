@@ -13,6 +13,7 @@ const Product = () => {
   const slug = useParams();
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);
+  const [amount, setAmount] = useState(1);
 
   useEffect(() => {
     setDataReletedProducts(null);
@@ -35,6 +36,11 @@ const Product = () => {
 
     fetchProductData();
   }, [slug]);
+
+  const saveProduct = () => {
+    const data = { id: product.id, amount: amount };
+    localStorage.setItem(product.slug, JSON.stringify(data));
+  };
 
   return (
     <div className="py-[40px] bg-global-color-4">
@@ -81,23 +87,22 @@ const Product = () => {
               {!product ? (
                 <Skeleton className="py-3 my-2" />
               ) : (
-                <div>
-                  <form
-                    action=""
-                    className="flex items-center py-5 border-b-gray-300 border-b-[1px] mb-3"
+                <div className="flex items-center py-5 border-b-gray-300 border-b-[1px] mb-3">
+                  <input
+                    type="number"
+                    value={amount}
+                    min={1}
+                    size={4}
+                    onChange={(e) => setAmount(e.target.value)}
+                    inputMode="numeric"
+                    className="p-2 me-4 text-center"
+                  />
+                  <button
+                    onClick={saveProduct}
+                    className="uppercase px-[80px] py-2 bg-global-color-1 hover:bg-global-color-0 text-white font-semibold rounded-md"
                   >
-                    <input
-                      type="number"
-                      value={1}
-                      min={1}
-                      size={4}
-                      inputMode="numeric"
-                      className="p-2 me-4 text-center"
-                    />
-                    <button className="uppercase px-[80px] py-2 bg-global-color-1 hover:bg-global-color-0 text-white font-semibold rounded-md">
-                      Add to chart
-                    </button>
-                  </form>
+                    Add to chart
+                  </button>
                 </div>
               )}
               <div>

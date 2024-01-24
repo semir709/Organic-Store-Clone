@@ -82,6 +82,7 @@ export const getCategoryDesc = (categories) => {
 
 export const getProduct = ({ slug }) => {
   const data = `*[_type == 'product' && slug.current == '${slug}'] {
+    'id': _id,
     title,
     image,
     price,
