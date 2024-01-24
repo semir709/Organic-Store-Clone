@@ -14,14 +14,14 @@ const local = [
 
 const TableOfProducts = () => {
   return (
-    <div>
+    <form>
       <div className="md:block hidden">
         <TabelDesktop />
       </div>
       <div className="md:hidden block">
         <TabelMobile />
       </div>
-    </div>
+    </form>
   );
 };
 

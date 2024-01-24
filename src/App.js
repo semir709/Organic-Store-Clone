@@ -11,6 +11,7 @@ import {
   Home,
   Shop,
   CartPage,
+  CheckoutPage,
 } from "./containers/index";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
 
       <Footer />

@@ -18,9 +18,7 @@ const CartPage = () => {
         <h1 className="font-bold text-3xl">Cart</h1>
 
         <div className="my-5 ">
-          <form action="">
-            <TableOfProducts />
-          </form>
+          <TableOfProducts />
         </div>
 
         <div className="border-2 max-w-[550px] ms-auto pb-5 mb-5">
@@ -41,7 +39,7 @@ const CartPage = () => {
               </tbody>
             </table>
 
-            <ButtonGreen text={"Proceed to checkout"} />
+            <ButtonGreen text={"Proceed to checkout"} url={"/checkout"} />
           </div>
         </div>
       </div>
