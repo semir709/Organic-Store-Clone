@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
-
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ButtonGreen from "./ButtonGreen";
 import BlackFilter from "./BlackFilter";
@@ -17,6 +16,7 @@ const local = [
 const ShopingCart = ({ setCartToggle, cartToggle }) => {
   const [store, setStore] = useState(local); // replace with real data stored inside local storage
   const total = "12.00";
+
   return (
     <div className=" bg-red-300">
       <BlackFilter toggle={cartToggle} />

@@ -15,15 +15,14 @@ import {
 } from "./containers/index";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-
-export const DataContext = React.createContext();
+import CartContextCustom from "./utils/context/CartContextCustom";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
 
   return (
-    <>
+    <CartContextCustom>
       <ScrollToTop />
       <header className="bg-global-color-4">
         <Header
@@ -50,7 +49,7 @@ function App() {
         setMobileMenuToggle={setMobileMenuToggle}
       />
       <ShopingCart setCartToggle={setCartToggle} cartToggle={cartToggle} />
-    </>
+    </CartContextCustom>
   );
 }
 

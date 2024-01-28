@@ -38,9 +38,10 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
             </span>
 
             <div className="relative">
-              <div className="after:content-['0'] after:absolute after:top-[-10px] after:right-[-14px] after:text-[11px] after:font-bold after:bg-global-color-0 after:rounded-full after:px-[7px] ">
-                <BsBasket2Fill />
+              <div className="absolute top-[-10px] right-[-14px] text-[11px] font-bold bg-global-color-0 rounded-full px-[7px]">
+                0
               </div>
+              <BsBasket2Fill />
             </div>
           </div>
 

@@ -7,6 +7,8 @@ import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { InfoReview } from "../components/index";
+import { useCart } from "../utils/context/CartContextCustom";
+import { localSave } from "../utils/localSave";
 
 const Product = () => {
   // const [section, setSection] = useState(0);
@@ -37,9 +39,11 @@ const Product = () => {
     fetchProductData();
   }, [slug]);
 
+  const { saveCartContext } = useCart();
+
   const saveProduct = () => {
-    const data = { id: product.id, amount: amount };
-    localStorage.setItem(product.slug, JSON.stringify(data));
+    const local = localSave(product, amount);
+    saveCartContext(local);
   };
 
   return (
