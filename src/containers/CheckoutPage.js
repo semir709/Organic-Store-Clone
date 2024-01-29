@@ -1,7 +1,11 @@
 import React from "react";
 import { ButtonGreen, RadioPaymantInput } from "../components/index";
+import { useCart } from "../utils/context/CartContextCustom";
 
 const CheckoutPage = () => {
+  const { cart, caculateFinalPrice } = useCart();
+
+  const total = caculateFinalPrice();
   return (
     <div className="bg-global-color-4 py-5">
       <form className="flex items-start max-w-[1200px] mx-auto gap-10 md:flex-row flex-col">
@@ -138,19 +142,23 @@ const CheckoutPage = () => {
                 </tr>
               </thead>
               <tbody className="text-left">
-                <tr className="border-b-2 ">
-                  <td className="py-3">Cashew Butter × 2</td>
-                  <td className="py-3">$50</td>
-                </tr>
+                {cart.map(({ id, title, amount, price }) => (
+                  <tr className="border-b-2 ">
+                    <td className="py-3">
+                      {title} × {amount}
+                    </td>
+                    <td className="py-3">${price * amount}</td>
+                  </tr>
+                ))}
               </tbody>
               <tfoot className="text-left ">
                 <tr className="border-b-2 ">
                   <th className="font-normal py-3">Subtotal</th>
-                  <th className="font-normal py-3">$50</th>
+                  <th className="font-normal py-3">${total}</th>
                 </tr>
                 <tr className="border-b-2 ">
                   <th className="font-normal py-3">Total</th>
-                  <th className="font-normal py-3">$50</th>
+                  <th className="font-normal py-3">${total}</th>
                 </tr>
               </tfoot>
             </table>
