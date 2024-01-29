@@ -5,6 +5,7 @@ export const localSave = (product, amount) => {
 
   const newData = {
     id: product.id,
+    slug: product.slug,
     title: product.title,
     image: product.image,
     price: product.price,

@@ -18,6 +18,16 @@ const CartContextCustom = ({ children }) => {
     setCart(local);
   };
 
+  const updateQuantity = (id, newAmount) => {
+    const updatedCart = cart.map((product) => {
+      if (product.id === id) {
+        return { ...product, amount: newAmount };
+      } else return product;
+    });
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
   const removeItem = (id) => {
     const updatedCart = cart.filter((product) => product.id !== id);
     setCart(updatedCart);
@@ -50,6 +60,7 @@ const CartContextCustom = ({ children }) => {
     itemsCount,
     caculateFinalPrice,
     removeItem,
+    updateQuantity,
   };
 
   return (

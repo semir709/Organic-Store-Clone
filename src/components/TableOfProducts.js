@@ -1,25 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { ButtonGreen } from "../components/index";
+import { urlFor } from "../utils";
+import { useCart } from "../utils/context/CartContextCustom";
 
-const local = [
-  {
-    title: "Pizza Extra Spicy",
-    price: "12.00",
-    amount: 1,
-    img: "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-];
-
-const TableOfProducts = () => {
+const TableOfProducts = ({ products }) => {
+  const { updateQuantity, removeItem } = useCart();
   return (
     <form>
       <div className="md:block hidden">
-        <TabelDesktop />
+        <TabelDesktop
+          products={products}
+          removeItem={removeItem}
+          updateQuantity={updateQuantity}
+        />
       </div>
       <div className="md:hidden block">
-        <TabelMobile />
+        {/* <TabelMobile products={products} /> */}
       </div>
     </form>
   );
@@ -27,7 +25,7 @@ const TableOfProducts = () => {
 
 export default TableOfProducts;
 
-const TabelDesktop = () => {
+const TabelDesktop = ({ products, removeItem, updateQuantity }) => {
   return (
     <table className=" w-full">
       <thead className="bg-white text-left border-2">
@@ -36,47 +34,48 @@ const TabelDesktop = () => {
         <th className="py-3 px-2">Product</th>
         <th className="py-3 px-2">Price</th>
         <th className="py-3 px-2">Quantity</th>
-        <th className="py-3 px-2">Quantity</th>
+        <th className="py-3 px-2">Subtotal</th>
       </thead>
       <tbody>
-        <tr className="border-2 border-t-0">
-          <td className="py-3 px-2 text-center">
-            <span>
-              <IoCloseCircleOutline
-                size={24}
-                className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
+        {products.map(({ id, title, price, image, amount, slug }) => (
+          <tr className="border-2 border-t-0" key={id}>
+            <td className="py-3 px-2 text-center">
+              <span>
+                <IoCloseCircleOutline
+                  size={24}
+                  className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
+                  onClick={() => removeItem(id)}
+                />
+              </span>
+            </td>
+            <td className="py-3 px-2">
+              <img
+                className="w-full h-full object-cover max-w-[70px]"
+                src={image && urlFor(image)}
+                alt={image.caption}
               />
-            </span>
-          </td>
-          <td className="py-3 px-2">
-            <img
-              className="w-full h-full object-cover max-w-[70px]"
-              src={local[0].img}
-              alt="image"
-            />
-          </td>
-          <td className="py-3 px-2">
-            <span className="text-global-color-0">
-              <Link to={"/"}>{local[0].title}</Link>
-            </span>
-          </td>
-          <td className="py-3 px-2">
-            <span>${local[0].price}</span>
-          </td>
-          <td className="py-3 px-2">
-            <div>
-              <input
-                type="number"
-                min={1}
-                value={1}
-                className="max-w-[75px] px-3 py-2"
+            </td>
+            <td className="py-3 px-2">
+              <span className="text-global-color-0">
+                <Link to={`/product/${slug}`}>{title}</Link>
+              </span>
+            </td>
+            <td className="py-3 px-2">
+              <span>${price}</span>
+            </td>
+            <td className="py-3 px-2">
+              <InputTableQuantity
+                id={id}
+                amount={amount}
+                updateQuantity={updateQuantity}
               />
-            </div>
-          </td>
-          <td className="py-3 px-2">
-            <span>${local[0].price}</span>
-          </td>
-        </tr>
+            </td>
+            <td className="py-3 px-2">
+              <span>${price * amount}</span>
+            </td>
+          </tr>
+        ))}
+
         <tr className="border-2 border-t-0">
           <td colSpan={6} className="py-3 px-2 ">
             <div className="flex items-center">
@@ -94,10 +93,41 @@ const TabelDesktop = () => {
   );
 };
 
-const TabelMobile = () => {
+const InputTableQuantity = ({ id, amount, updateQuantity }) => {
+  const [qunantity, setQuantity] = useState(amount);
+
+  const change = (e) => {
+    const value = e.target.value;
+    setQuantity(value);
+  };
+
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      console.log("Save");
+      updateQuantity(id, qunantity);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [qunantity]);
+  return (
+    <div>
+      <input
+        type="number"
+        min={1}
+        value={qunantity}
+        onChange={change}
+        className="max-w-[75px] px-3 py-2"
+      />
+    </div>
+  );
+};
+
+const TabelMobile = ({ products }) => {
   return (
     <table className="w-full  my-3">
-      <tbody>
+      {/* <tbody>
         <tr className="border-2 text-lg ">
           <th className="py-3 font-normal text-left "></th>
           <td className="text-right pe-2">
@@ -163,7 +193,7 @@ const TabelMobile = () => {
             </div>
           </td>
         </tr>
-      </tbody>
+      </tbody> */}
     </table>
   );
 };

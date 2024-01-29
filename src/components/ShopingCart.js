@@ -79,8 +79,8 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
 
         <div className="flex-1 ">
           {cart.length === 0 ? (
-            <div className="mx-4">
-              <ButtonGreen text={"Continue Shopping"} />
+            <div className="mx-4" onClick={() => setCartToggle(false)}>
+              <ButtonGreen text={"Continue Shopping"} url="/shop/products" />
             </div>
           ) : (
             <div className="w-full">
@@ -91,9 +91,9 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
                 </p>
               </div>
 
-              <div className="mx-4 mt-4">
-                <ButtonGreen text={"View Cart"} />
-                <ButtonGreen text={"Checkout"} />
+              <div className="mx-4 mt-4" onClick={() => setCartToggle(false)}>
+                <ButtonGreen text={"View Cart"} url="/cart" />
+                <ButtonGreen text={"Checkout"} url="/checkout" />
               </div>
             </div>
           )}
