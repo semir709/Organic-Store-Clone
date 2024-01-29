@@ -11,7 +11,6 @@ import { useCart } from "../utils/context/CartContextCustom";
 import { localSave } from "../utils/localSave";
 
 const Product = () => {
-  // const [section, setSection] = useState(0);
   const slug = useParams();
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ListNav from "./ListNav";
 import { BsBasket2Fill } from "react-icons/bs";
 import { GrMenu } from "react-icons/gr";
 import { navData } from "../utils";
 import { Link } from "react-router-dom";
+import { useCart } from "../utils/context/CartContextCustom";
 
 const Header = ({ setCartToggle, setMobileMenuToggle }) => {
+  const { itemsCount, caculateFinalPrice } = useCart();
+
+  let amount = itemsCount();
+  let price = caculateFinalPrice();
+
   return (
     <div className="bg-transparent w-full h-[105px] px-[25px] py-[15px]">
       <div className="bg-transparent w-full h-full flex justify-between items-center">
@@ -34,12 +40,12 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
           >
             <span className="text-global-color-0 me-3">
               <span>€</span>
-              0.00
+              {price}
             </span>
 
             <div className="relative">
               <div className="absolute top-[-10px] right-[-14px] text-[11px] font-bold bg-global-color-0 rounded-full px-[7px]">
-                0
+                {amount}
               </div>
               <BsBasket2Fill />
             </div>

@@ -3,19 +3,13 @@ import { GrFormClose } from "react-icons/gr";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import ButtonGreen from "./ButtonGreen";
 import BlackFilter from "./BlackFilter";
-
-const local = [
-  {
-    title: "Pizza Extra Spicy",
-    price: "12.00",
-    amount: 1,
-    img: "https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-];
+import { useCart } from "../utils/context/CartContextCustom";
+import { urlFor } from "../utils";
 
 const ShopingCart = ({ setCartToggle, cartToggle }) => {
-  const [store, setStore] = useState(local); // replace with real data stored inside local storage
-  const total = "12.00";
+  const { cart, caculateFinalPrice, removeItem } = useCart();
+
+  const total = caculateFinalPrice();
 
   return (
     <div className=" bg-red-300">
@@ -32,15 +26,15 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
         </div>
 
         <div className=" h-full w-full flex-2 relative overflow-auto px-3">
-          {store.length === 0 && (
+          {cart.length === 0 && (
             <p className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
               No products in chart.
             </p>
           )}
 
-          {store.map(({ title, price, amount, img }, index) => (
+          {cart.map(({ id, title, price, amount, image }, index) => (
             <div
-              key={index}
+              key={id}
               className={`px-2 py-4 w-full  ${
                 index === 0 ? "border-t-0" : "border-t-[1px]"
               }`}
@@ -49,8 +43,8 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
                 <div className="me-2">
                   <a href="/">
                     <img
-                      src={img}
-                      alt=""
+                      src={image && urlFor(image)}
+                      alt={image.caption}
                       className="object-cover w-[64px] h-[64px]"
                     />
                   </a>
@@ -65,7 +59,7 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
                       {title}
                     </a>
                     <div className="">
-                      <button>
+                      <button onClick={() => removeItem(id)}>
                         <IoIosCloseCircleOutline
                           fontSize={25}
                           color="#B2B2B2"
@@ -84,7 +78,7 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
         </div>
 
         <div className="flex-1 ">
-          {store.length === 0 ? (
+          {cart.length === 0 ? (
             <div className="mx-4">
               <ButtonGreen text={"Continue Shopping"} />
             </div>
