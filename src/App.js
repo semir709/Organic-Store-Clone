@@ -33,7 +33,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/shop/:category/:current?" element={<Shop />} /> */}
         <Route path="/shop/*" element={<Shop />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/product/:slug" element={<Product />} />

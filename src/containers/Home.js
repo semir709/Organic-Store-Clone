@@ -1,38 +1,24 @@
 import React, { useEffect, useState } from "react";
-import fruit from "../img/fruit.png";
 import leafDraw from "../img/leafDraw.png";
-import bigLeaf from "../img/BigLeaf.png";
-import newFruit from "../img/newFruit.png";
 import ButtonGreen from "../components/ButtonGreen";
 import { HiShoppingCart } from "react-icons/hi";
 import ServiceCard from "../components/ServiceCard";
 import { getHomePage, serviceCardList, urlFor } from "../utils";
 import ProductSection from "../components/ProductSection";
-import leafImg from "../img/imageLeaf.png";
 import CategoryCard from "../components/CategoryCard";
-import { BsFacebook, BsFillTriangleFill } from "react-icons/bs";
+import { BsFillTriangleFill } from "react-icons/bs";
 import Head from "../components/Head";
 import RecCard from "../components/RecCard";
-import pap from "../img/pap.jpg";
-import {
-  AiFillTwitterCircle,
-  AiOutlineArrowRight,
-  AiOutlineInstagram,
-} from "react-icons/ai";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import bigLeaf2 from "../img/leaf2.png";
 import { sponsorList } from "../utils";
-import { siteLinksfooter } from "../utils";
-import { quickLinks } from "../utils";
-import { quickLinks2 } from "../utils";
-import googlePlay from "../img/googlePlay.png";
-import appStore from "../img/app-store.png";
 import LeafCenter from "../components/LeafCenter";
 import BgLeaf from "../components/BgLeaf";
-import { dataProducts } from "../utils";
 import sanityClient from "../client";
-
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
+import { MainSection } from "../sections/index";
 
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
@@ -45,7 +31,8 @@ const Home = () => {
   return (
     <main>
       <div>
-        <section className="bg-global-color-4 w-full py-[120px] relative">
+        <MainSection data={homeData} />
+        {/* <section className="bg-global-color-4 w-full py-[120px] relative">
           <BgLeaf />
           <div className="flex sm:flex-row max-w-[1200px] mx-auto items-center flex-col relative">
             <div className="sm:w-1/2 w-full sm:order-1 order-2 sm:mt-0 mt-5 px-5">
@@ -91,7 +78,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section className="bg-global-color-2 w-full py-[30px]">
           <div className="max-w-[1200px] mx-auto grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
             {serviceCardList.map(({ text, title, icon }, index) => (
