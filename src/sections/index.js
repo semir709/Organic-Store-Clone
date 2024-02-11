@@ -4,3 +4,6 @@ export { default as CategorySection } from "./CategorySection";
 export { default as DiscountSection } from "./DiscountSection";
 export { default as ReviewsSection } from "./ReviewsSection";
 export { default as FeaturedBrandsSection } from "./FeaturedBrandsSection";
+export { default as AboutInfoSection } from "./AboutInfoSection";
+export { default as NumStatsSection } from "./NumStatsSection";
+export { default as CertifedSection } from "./CertifedSection";

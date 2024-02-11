@@ -21,8 +21,8 @@ const SwiperCom = ({ array }) => {
         loop={true}
         className="mySwiper bg-global-color-4 "
       >
-        {array.map(({ asset, captionSlideImage }) => (
-          <SwiperSlide>
+        {array.map(({ asset, captionSlideImage }, index) => (
+          <SwiperSlide key={index}>
             <div className="w-full h-full ">
               <img
                 className="w-full object-cover rounded-lg"
