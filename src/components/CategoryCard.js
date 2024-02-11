@@ -21,11 +21,11 @@ const CategoryCard = ({ image, title, text }) => {
         </div>
 
         <div className="flex min-[450px]:justify-end justify-center flex-2 ">
-          <div className="lg:w-2/3 w-[110px] h-[200px]">
+          <div className="lg:w-2/3 w-[110px] p-3">
             <img
               src={urlFor(image).url()}
               alt={image}
-              className="object-cover w-full  h-full"
+              className="object-cover w-full "
             />
           </div>
         </div>
