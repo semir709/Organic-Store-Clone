@@ -5,7 +5,6 @@ import apple from "../img/apple.png";
 import { urlFor } from "../utils";
 
 const CategoryCard = ({ image, title, text }) => {
-  console.log(image);
   return (
     <div className="p-[40px] pb-0 bg-white rounded-lg drop-shadow-md min-[450px]:text-start text-center ">
       <h3 className="text-3xl font-semibold mb-5">{title}</h3>
