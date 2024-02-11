@@ -21,7 +21,7 @@ const MainSection = ({ data }) => {
             )}
             <img
               style={imageLoaded ? {} : { display: "none" }}
-              src={data ? urlFor(data.mainSection.image).url() : {}}
+              src={data ? urlFor(data.image).url() : {}}
               onLoad={() => setImageLoaded(true)}
             />
           </div>
@@ -37,11 +37,11 @@ const MainSection = ({ data }) => {
           </h5>
 
           <h1 className="mb-[30px] text-4xl  font-bold selection:bg-global-color-0 md:text-5xl sm:text-left text-center w-full">
-            {data?.mainSection.title || <Skeleton />}
+            {data?.title || <Skeleton />}
           </h1>
 
           <p className="mb-[30px] text-global-color-2 w-full sm:text-left text-center">
-            {data?.mainSection.text || <Skeleton className="py-5" />}
+            {data?.text || <Skeleton className="py-5" />}
           </p>
 
           <div className="w-[200px]">

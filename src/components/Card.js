@@ -8,8 +8,13 @@ const Card = ({ data, onSide = false }) => {
   const whenClick = () => {
     navigation(`/product/${data?.slug}`);
   };
+
   return (
-    <div onClick={whenClick} className="w-full relative " key={data.slug}>
+    <div
+      onClick={whenClick}
+      className="w-full relative hover:cursor-pointer"
+      key={data.slug}
+    >
       {data.sale && (
         <div className="absolute top-[-10px] right-[-10px] bg-global-color-0 px-2 py-3 rounded-full">
           <span>Sale!</span>
@@ -56,13 +61,11 @@ const Card = ({ data, onSide = false }) => {
         >
           {data.setPrevious && isNaN(data.previusPrice) === false && (
             <span className="me-2 line-through text-gray-400 ">
-              {data.currency}
-              <span>{data.previusPrice}</span>
+              {/* {data.currency} */}$<span>{data.previusPrice}</span>
             </span>
           )}
           <span className="">
-            {data.currency}
-            <span>{data.price}</span>
+            {/* {data.currency} */}$<span>{data.price}</span>
           </span>
         </div>
       </div>

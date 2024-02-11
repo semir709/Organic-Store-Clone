@@ -7,7 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const ProductSection = ({ title, products }) => {
   return (
-    <div className="">
+    <section className="pt-[140px] pb-[100px]">
       <Head title={title} />
 
       <div className="max-w-[1200px] mx-auto mt-[30px]">
@@ -21,7 +21,7 @@ const ProductSection = ({ title, products }) => {
               ))}
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 
