@@ -12,16 +12,33 @@ const FreqAskQuesSection = ({ data }) => {
         <Head title={"Frequently Asked Question!"} />
 
         <section className="mt-5 mx-5 ">
-          <div className="grid gap-x-20 md:grid-cols-2">
-            {!data
-              ? [1, 2, 3, 4, 5, 6].map(() => <Skeleton className="py-5 my-2" />)
-              : data?.map(({ question, answer }, index) => (
-                  <QuestionDrop
-                    key={index}
-                    question={question}
-                    answer={answer}
-                  />
-                ))}
+          <div className="flex items-start justify-between gap-7">
+            <div className="w-1/2">
+              {!data
+                ? [1, 2, 3].map(() => <Skeleton className="py-5 my-2" />)
+                : data
+                    ?.slice(0, Math.ceil(data.length / 2))
+                    .map(({ question, answer }, index) => (
+                      <QuestionDrop
+                        key={index}
+                        question={question}
+                        answer={answer}
+                      />
+                    ))}
+            </div>
+            <div className="w-1/2">
+              {!data
+                ? [1, 2, 3].map(() => <Skeleton className="py-5 my-2" />)
+                : data
+                    ?.slice(Math.ceil(data.length / 2))
+                    .map(({ question, answer }, index) => (
+                      <QuestionDrop
+                        key={index}
+                        question={question}
+                        answer={answer}
+                      />
+                    ))}
+            </div>
           </div>
         </section>
       </div>
