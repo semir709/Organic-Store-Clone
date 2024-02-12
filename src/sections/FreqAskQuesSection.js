@@ -15,7 +15,9 @@ const FreqAskQuesSection = ({ data }) => {
           <div className="flex items-start justify-between gap-7">
             <div className="w-1/2">
               {!data
-                ? [1, 2, 3].map(() => <Skeleton className="py-5 my-2" />)
+                ? [1, 2, 3].map((el, index) => (
+                    <Skeleton key={index} className="py-5 my-2" />
+                  ))
                 : data
                     ?.slice(0, Math.ceil(data.length / 2))
                     .map(({ question, answer }, index) => (
@@ -28,7 +30,9 @@ const FreqAskQuesSection = ({ data }) => {
             </div>
             <div className="w-1/2">
               {!data
-                ? [1, 2, 3].map(() => <Skeleton className="py-5 my-2" />)
+                ? [1, 2, 3].map((el, index) => (
+                    <Skeleton key={index} className="py-5 my-2" />
+                  ))
                 : data
                     ?.slice(Math.ceil(data.length / 2))
                     .map(({ question, answer }, index) => (
