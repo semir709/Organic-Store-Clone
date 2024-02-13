@@ -12,8 +12,8 @@ const FreqAskQuesSection = ({ data }) => {
         <Head title={"Frequently Asked Question!"} />
 
         <section className="mt-5 mx-5 ">
-          <div className="flex items-start justify-between gap-7">
-            <div className="w-1/2">
+          <div className="flex items-start justify-between md:gap-7 flex-wrap md:flex-nowrap">
+            <div className="">
               {!data
                 ? [1, 2, 3].map((el, index) => (
                     <Skeleton key={index} className="py-5 my-2" />
@@ -28,7 +28,7 @@ const FreqAskQuesSection = ({ data }) => {
                       />
                     ))}
             </div>
-            <div className="w-1/2">
+            <div className="">
               {!data
                 ? [1, 2, 3].map((el, index) => (
                     <Skeleton key={index} className="py-5 my-2" />

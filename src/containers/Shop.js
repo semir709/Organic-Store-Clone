@@ -1,99 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
-
 import Card from "../components/Card";
 import sanityClient from "../client";
-import {
-  convertFilterToRequest,
-  getBiggestPrice,
-  getCategoryNumber,
-  getProducts,
-  getSideProducts,
-  urlFor,
-} from "../utils";
+import { getCategoryNumber, getSideProducts } from "../utils";
 import Skeleton from "react-loading-skeleton";
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import CategoryList from "../components/CategoryList";
-import NavTrack from "../components/NavTrack";
-import StatsItems from "../components/StatsItems";
-import DropFilter from "../components/DropFilter";
-// import MultiRangeSlider from "../components/MultiRangeFilter/MultiRangeFilter";
-
 import SearchInput from "../components/SearchInput";
-import Products from "./ProductsPage";
-import Search from "./SearchPage";
-import Categories from "./CategoriesPage";
-
 import { MultiRangeSlider } from "../components/index";
-
 import { RangePage, ProductsPage, CategoriesPage, SearchPage } from "./index";
 
 const Shop = () => {
-  // const [data, setData] = useState(null);
-  // const { category = "all", current = 1 } = useParams();
-
-  // const perPage = 2;
-  // const [start, setStart] = useState((current - 1) * perPage);
-  // const [end, setEnd] = useState(start + perPage - 1);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const url = useLocation() || "all";
-
-  // const [range, setRange] = useState({ start: 0, end: 0 });
-
-  // const [filterValue, setFilterValue] = useState("");
-  // const [searchInput, setSearchInput] = useState("");
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-
-  //   const newStart = (current - 1) * perPage;
-  //   const newEnd = newStart + perPage - 1;
-
-  //   setStart(newStart);
-  //   setEnd(newEnd);
-
-  //   const { time, sort } = convertFilterToRequest(filterValue);
-
-  //   Promise.all([
-  //     sanityClient.fetch(
-  //       getProducts(
-  //         newStart,
-  //         newEnd,
-  //         url.pathname.split("/")[2],
-  //         range.start,
-  //         range.end,
-  //         time,
-  //         sort,
-  //         searchInput
-  //       )
-  //     ),
-  //     sanityClient.fetch(getSideProducts),
-  //     sanityClient.fetch(getCategoryNumber),
-  //     sanityClient.fetch(getBiggestPrice),
-  //   ]).then(([product, side, categoryNum, biggestPrice]) => {
-  //     setData((prev) => {
-  //       return {
-  //         productData: product,
-  //         side: side[0],
-  //         categoryNum: categoryNum,
-  //         biggestPrice: biggestPrice,
-  //       };
-  //     });
-  //     setIsLoading(false);
-  //   });
-  // }, [current, url, range, filterValue, searchInput]);
-
-  // let { productData, side, categoryNum, biggestPrice } = data || {};
-  // const { products: sideProducts } = side || {};
-  // const { amount, product } = productData || {};
-  // const { currency } = (sideProducts && sideProducts[0]) || {};
-  // const { price } = (biggestPrice && biggestPrice) || { price: undefined };
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
-
   const [sideData, setSideData] = useState(null);
   const [catgeoryCount, setCatgeoryCount] = useState(null);
   const [sideLoading, setSideLoading] = useState(true);

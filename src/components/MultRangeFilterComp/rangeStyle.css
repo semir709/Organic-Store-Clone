@@ -1,80 +1,77 @@
-   /*INPUTS RANGE*/
-   
-   /* Removing the default appearance */
-  .thumb,
-  .thumb::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .thumb {
-    pointer-events: none;
-    position: absolute;
-    height: 0;
-    top: 0;
-    width: 100%;
-    outline: none;
-    z-index: 3
-  }
-  
-  
-  /* For Chrome browsers */
-  .thumb::-webkit-slider-thumb {
-    background-color: #4949ff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin-top: 10px;
-    pointer-events: all;
-    position: relative;
-  }
-  
-  /* For Firefox browsers */
-  .thumb::-moz-range-thumb {
-    background-color: #4949ff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin-top: 10px;
-    pointer-events: all;
-    position: relative;
-  }
-  
+/*INPUTS RANGE*/
 
-  /*Slide track */
+/* Removing the default appearance */
+.thumb,
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .slider__track,
-  .slider__range {
-    position: absolute;
-    border-radius: 3px;
-    height: 5px;
-  }
+.thumb {
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  top: 0;
+  width: 101%;
+  outline: none;
+  z-index: 3;
+}
 
-  .slider__track {
-    background-color: #adadad;
-    width: 100%;
-    z-index: 1;
-  }
-  
-  .slider__range {
-    background-color: #8bc34a;
-    z-index: 2;
-  }
+/* For Chrome browsers */
+.thumb::-webkit-slider-thumb {
+  background-color: #4949ff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin-top: 10px;
+  pointer-events: all;
+  position: relative;
+}
 
-  /*INPUT NUMBER*/
+/* For Firefox browsers */
+.thumb::-moz-range-thumb {
+  background-color: #4949ff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin-top: 10px;
+  pointer-events: all;
+  position: relative;
+}
 
-  .input-range::-webkit-outer-spin-button,
-  .input-range::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-  }
+/*Slide track */
 
-  .input-range[type=number] {
-    appearance: textfield;
-      -moz-appearance: textfield;
-  }
-  
+.slider__track,
+.slider__range {
+  position: absolute;
+  border-radius: 3px;
+  height: 5px;
+}
+
+.slider__track {
+  background-color: #adadad;
+  width: 100%;
+  z-index: 1;
+}
+
+.slider__range {
+  background-color: #8bc34a;
+  z-index: 2;
+}
+
+/*INPUT NUMBER*/
+
+.input-range::-webkit-outer-spin-button,
+.input-range::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-range[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}

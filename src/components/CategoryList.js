@@ -10,7 +10,7 @@ const CategoryList = ({ data }) => {
         : data.map(({ name, count, slug }) => (
             <li key={slug}>
               <Link
-                to={`/shop/${slug}`}
+                to={`/shop/category/${slug}`}
                 className="text-global-color-0 hover:text-global-color-1"
               >
                 {name}({count})

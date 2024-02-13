@@ -16,7 +16,7 @@ const ContactUs = () => {
 
   return (
     <div>
-      {/* {/* <SectionMessage title={"Get In Touch"} /> */}
+      <SectionMessage title={"Get In Touch"} />
       <ContactInfoSection data={contact} />
       <FreqAskQuesSection data={questions} />
     </div>

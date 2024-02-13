@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlFor } from "../utils";
 
@@ -12,7 +11,7 @@ const Card = ({ data, onSide = false }) => {
   return (
     <div
       onClick={whenClick}
-      className="w-full relative hover:cursor-pointer"
+      className="w-full  relative hover:cursor-pointer "
       key={data.slug}
     >
       {data.sale && (
@@ -20,11 +19,11 @@ const Card = ({ data, onSide = false }) => {
           <span>Sale!</span>
         </div>
       )}
-      <div className="w-full ">
+      <div className="w-full h-[270px]">
         <img
           src={urlFor(data.image).url()}
           alt={data.image.caption}
-          className="w-full object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
 
