@@ -258,7 +258,7 @@ export const getRangeProducts = (
       } | order(${time ? "_createdAt" : "price"} ${
     sort === 0 ? "desc" : "asc"
   }) [${newStart}..${newEnd}],
-    'amount': count(*[_type == 'product' && price > ${min} && price < ${max}])
+    'amount': count(*[_type == 'product' && price >= ${min} && price <= ${max}])
 
   }`;
 

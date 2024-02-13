@@ -26,4 +26,5 @@ export { default as MultiRangeSlider } from "./MultRangeFilterComp/MultiRangeSli
 export { default as InfoReview } from "./InfoReview";
 export { default as ReletedProductComponents } from "./ReletedProductComponents";
 export { default as TableOfProducts } from "./TableOfProducts";
-export { default as RadioPaymantInput } from ".//RadioPaymantInput";
+export { default as RadioPaymantInput } from "./RadioPaymantInput";
+export { default as InfoMessage } from "./InfoMessage";

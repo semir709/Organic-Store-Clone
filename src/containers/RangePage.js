@@ -7,12 +7,15 @@ import StatsItems from "../components/StatsItems";
 import Skeleton from "react-loading-skeleton";
 import { Pagination } from "../components/index";
 
+import { InfoMessage } from "../components/index";
+
 const RangePage = () => {
   const [products, setProducts] = useState(null);
   const [amount, setAmount] = useState(null);
   const perPage = 6;
   const [productsLoading, setProductsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState({ time: true, sort: 0 });
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const { rangeMin, rangeMax, page = 1 } = useParams();
 
@@ -31,9 +34,14 @@ const RangePage = () => {
       .then(({ products, amount }) => {
         setProducts(products);
         setAmount(amount);
+        setIsEmpty(amount === 0 ? true : false);
         setProductsLoading(false);
       });
   }, [rangeMin, rangeMax, page, filterValue]);
+
+  useEffect(() => {
+    console.log(amount);
+  }, [amount]);
 
   return (
     <div className="flex flex-col justify-between h-full ">
@@ -46,10 +54,16 @@ const RangePage = () => {
           <h1 className="text-5xl font-semibold text-global-color-0">Range</h1>
         </header>
 
-        <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
-          <StatsItems amount={amount} perPage={perPage} page={page} />
-          <DropFilter setValue={setFilterValue} />
-        </div>
+        {isEmpty ? (
+          <InfoMessage
+            text={"No products were found matching your selection."}
+          />
+        ) : (
+          <div className="flex justify-between sm:items-center w-full mb-[50px] sm:flex-row flex-col items-start">
+            <StatsItems amount={amount} perPage={perPage} page={page} />
+            <DropFilter setValue={setFilterValue} />
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
           {productsLoading
