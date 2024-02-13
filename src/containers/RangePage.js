@@ -10,7 +10,7 @@ import { Pagination } from "../components/index";
 const RangePage = () => {
   const [products, setProducts] = useState(null);
   const [amount, setAmount] = useState(null);
-  const perPage = 2;
+  const perPage = 6;
   const [productsLoading, setProductsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState({ time: true, sort: 0 });
 
