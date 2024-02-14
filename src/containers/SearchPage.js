@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, NavTrack } from "../components";
+import { Card, InfoMessage, NavTrack } from "../components/index";
 import Skeleton from "react-loading-skeleton";
 import { getSearchProducts } from "../utils";
 import { useParams } from "react-router-dom";
@@ -8,12 +8,13 @@ import sanityClient from "../client";
 const SearchPage = () => {
   const [products, setProducts] = useState(null);
   const [productsLoading, setProductsLoading] = useState(true);
-
+  const [isEmpty, setIsEmpty] = useState(false);
   const { searchTerm } = useParams();
 
   useEffect(() => {
     sanityClient.fetch(getSearchProducts(searchTerm)).then((data) => {
       setProducts(data);
+      setIsEmpty(data.length === 0 ? true : false);
       setProductsLoading(false);
     });
   }, [searchTerm]);
@@ -27,6 +28,12 @@ const SearchPage = () => {
         <header className="mb-[50px]">
           <h1 className="text-5xl font-semibold text-global-color-0">Search</h1>
         </header>
+
+        {isEmpty && (
+          <InfoMessage
+            text={"No products were found matching your selection."}
+          />
+        )}
 
         <div className="grid lg:grid-cols-3 min-[400px]:grid-cols-2 grid-cols-1 gap-6">
           {productsLoading

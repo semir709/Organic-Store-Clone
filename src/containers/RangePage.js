@@ -39,10 +39,6 @@ const RangePage = () => {
       });
   }, [rangeMin, rangeMax, page, filterValue]);
 
-  useEffect(() => {
-    console.log(amount);
-  }, [amount]);
-
   return (
     <div className="flex flex-col justify-between h-full ">
       <div>
