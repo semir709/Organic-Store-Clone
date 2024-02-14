@@ -46,7 +46,7 @@ const ProductsPage = () => {
             ? [1, 2, 3, 4, 5, 6].map((el, index) => (
                 <Skeleton key={index} className="w-full py-[100px]" />
               ))
-            : products.map((data) => <Card data={data} />)}
+            : products.map((data) => <Card key={data.id} data={data} />)}
         </div>
       </div>
       <div>

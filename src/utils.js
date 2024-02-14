@@ -153,6 +153,7 @@ export const getAllProducts = (
   const newEnd = newStart + perPage - 1;
   const query = `{
     'products': *[_type == 'product']{
+        'id':_id,
         image,
         title,
         price,
@@ -187,6 +188,7 @@ export const getCategoryProducts = (
   const newEnd = newStart + perPage - 1;
   const query = `{
     'products': *[_type == 'product' && references(*[_type == "category" && slug.current == '${category}']._id)]{
+        'id': _id,
         image,
         title,
         price,
@@ -212,6 +214,7 @@ export const getCategoryProducts = (
 
 export const getSearchProducts = (searchTerm) => {
   const query = `*[_type == 'product' && title match '${searchTerm}*']{
+    'id': _id,
     image,
     title,
     price,
@@ -242,6 +245,7 @@ export const getRangeProducts = (
   const newEnd = newStart + perPage - 1;
   const query = `{
     'products': *[_type == 'product' && price >= ${min} && price <= ${max}]{
+        'id': _id,
         image,
         title,
         price,
