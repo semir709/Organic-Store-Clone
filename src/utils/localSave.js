@@ -21,10 +21,21 @@ export const localSave = (product, amount) => {
     return el;
   });
 
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(newEntry ? [...local, newData] : [...checkedData])
-  );
+  let error = "";
 
-  return newEntry ? [...local, newData] : [...checkedData];
+  try {
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(newEntry ? [...local, newData] : [...checkedData])
+    );
+  } catch (err) {
+    error = err.message;
+  }
+
+  const data = {
+    local: newEntry ? [...local, newData] : [...checkedData],
+    error,
+  };
+
+  return data;
 };

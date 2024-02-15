@@ -6,7 +6,7 @@ import { getProduct, getRelatedProducts, urlFor } from "../utils";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { InfoReview, PreviusPrice } from "../components/index";
+import { InfoMessage, InfoReview, PreviusPrice } from "../components/index";
 import { useCart } from "../utils/context/CartContextCustom";
 import { localSave } from "../utils/localSave";
 
@@ -15,6 +15,11 @@ const Product = () => {
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);
   const [amount, setAmount] = useState(1);
+  const [message, setMessage] = useState({
+    title: ``,
+    mode: "accept",
+    error: false,
+  });
 
   useEffect(() => {
     setDataReletedProducts(null);
@@ -41,14 +46,47 @@ const Product = () => {
   const { saveCartContext } = useCart();
 
   const saveProduct = () => {
-    const local = localSave(product, amount);
-    saveCartContext(local);
+    const { local, error } = localSave(product, amount);
+
+    if (error.length)
+      setMessage({
+        title: error,
+        mode: "danger",
+        error: true,
+      });
+    else {
+      saveCartContext(local);
+      setMessage({
+        title: `"${product.title}" has been added to your cart. `,
+        mode: "accept",
+        error: false,
+      });
+    }
   };
+
+  useEffect(() => {
+    setMessage({
+      title: ``,
+      mode: "accept",
+      error: false,
+      show: false,
+    });
+  }, [slug]);
 
   return (
     <div className="py-[40px] bg-global-color-4">
       <div className="max-w-[1200px] mx-auto">
-        <main className="mx-4">
+        {!message.error && message.title.length > 0 && (
+          <div className="my-5">
+            <InfoMessage text={message.title} mode={message.mode} />
+          </div>
+        )}
+        {message.error && (
+          <div className="my-5">
+            <InfoMessage text={message.title} mode={message.mode} />
+          </div>
+        )}
+        <main className="md:mx-0 mx-4">
           <div className="flex lg:flex-row flex-col gap-10 ">
             {/* Image */}
             <div className="lg:w-1/2">

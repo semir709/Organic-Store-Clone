@@ -14,7 +14,9 @@ const InfoReview = ({ description }) => {
             section === 0 ? "border-global-color-0" : "border-transparent"
           }`}
         >
-          <Link className="font-semibold text-global-color-3">Description</Link>
+          <Link className="font-semibold text-global-color-3 hover:text-global-color-0">
+            Description
+          </Link>
         </li>
         <li
           onClick={() => setSection(1)}
@@ -22,7 +24,7 @@ const InfoReview = ({ description }) => {
             section === 1 ? "border-global-color-0" : "border-transparent"
           }`}
         >
-          <Link className="font-semibold text-global-color-3">
+          <Link className="font-semibold text-global-color-3 hover:text-global-color-0">
             Reviews (0){" "}
           </Link>
         </li>
