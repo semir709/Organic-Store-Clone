@@ -56,6 +56,8 @@ export const getRelatedProducts = (categories) => {
       title,
       image,
       price,
+      previusPrice,
+      sale,
       'slug': slug.current,
       category[]->{
         name,
@@ -80,7 +82,7 @@ export const getCategoryDesc = (categories) => {
   return data;
 };
 
-export const getProduct = ({ slug }) => {
+export const getProduct = (slug) => {
   const data = `*[_type == 'product' && slug.current == '${slug}'] {
     'id': _id,
     title,

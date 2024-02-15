@@ -11,7 +11,7 @@ import { useCart } from "../utils/context/CartContextCustom";
 import { localSave } from "../utils/localSave";
 
 const Product = () => {
-  const slug = useParams();
+  const { slug } = useParams();
   const [dataReletedProducts, setDataReletedProducts] = useState(null);
   const [product, setProduct] = useState(null);
   const [amount, setAmount] = useState(1);
@@ -37,10 +37,6 @@ const Product = () => {
 
     fetchProductData();
   }, [slug]);
-
-  useEffect(() => {
-    console.log(product);
-  }, [product]);
 
   const { saveCartContext } = useCart();
 
@@ -100,7 +96,12 @@ const Product = () => {
               </div>
 
               <p className="text-global-color-2">
-                {product?.description || <Skeleton className="py-[40px]" />}
+                {(
+                  <span>
+                    {product?.description.substring(0, 200)}{" "}
+                    {product?.description.length > 200 && "..."}{" "}
+                  </span>
+                ) || <Skeleton className="py-[40px]" />}
               </p>
               {!product ? (
                 <Skeleton className="py-3 my-2" />
@@ -145,20 +146,22 @@ const Product = () => {
           </div>
 
           {/* Info product component  */}
-          <InfoReview />
+          <InfoReview description={product?.description} />
         </main>
 
         {/* Releted products commpoent */}
-        {/* <section className="mt-5 mx-4">
+        <section className="mt-5 mx-4">
           <h2 className="text-4xl font-semibold mb-5">Related Products</h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
             {!dataReletedProducts
               ? [1, 2, 3, 4].map(() => <Skeleton className="py-[100px]" />)
-              : dataReletedProducts?.relatedProducts.map((data) => (
-                  <Card data={data} />
-                ))}
+              : dataReletedProducts?.relatedProducts.map((data) => {
+                  if (slug !== data.slug) {
+                    return <Card data={data} />;
+                  }
+                })}
           </div>
-        </section> */}
+        </section>
       </div>
     </div>
   );

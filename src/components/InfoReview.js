@@ -3,10 +3,10 @@ import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { ButtonGreen } from "./index";
 
-const InfoReview = () => {
+const InfoReview = ({ description }) => {
   const [section, setSection] = useState(0);
   return (
-    <div className="py-[40px]">
+    <div className="py-[40px] ">
       <ul className="border-t-[1px] flex items-center">
         <li
           onClick={() => setSection(0)}
@@ -31,13 +31,11 @@ const InfoReview = () => {
       <div className="my-5">
         {section === 0 && (
           <div>
-            {/* {!dataReletedProducts ? (
+            {!description ? (
               <Skeleton className="py-[50px]" />
             ) : (
-              dataReletedProducts?.description.map(({ description }) => (
-                <p className="my-2 ">{description}</p>
-              ))
-            )} */}
+              <p className="my-2 ">{description}</p>
+            )}
           </div>
         )}
 
