@@ -6,7 +6,7 @@ import { getProduct, getRelatedProducts, urlFor } from "../utils";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { InfoReview } from "../components/index";
+import { InfoReview, PreviusPrice } from "../components/index";
 import { useCart } from "../utils/context/CartContextCustom";
 import { localSave } from "../utils/localSave";
 
@@ -38,6 +38,10 @@ const Product = () => {
     fetchProductData();
   }, [slug]);
 
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
+
   const { saveCartContext } = useCart();
 
   const saveProduct = () => {
@@ -55,11 +59,18 @@ const Product = () => {
               {!product?.image ? (
                 <Skeleton className="h-full w-full" />
               ) : (
-                <img
-                  src={urlFor(product?.image)}
-                  alt={product?.image.caption}
-                  className="object-cover w-full h-full"
-                />
+                <div className="relative">
+                  {product.sale && (
+                    <div className="absolute top-[-10px] right-[-10px] bg-global-color-0 px-2 py-3 rounded-full">
+                      <span>Sale!</span>
+                    </div>
+                  )}
+                  <img
+                    src={urlFor(product?.image)}
+                    alt={product?.image.caption}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
               )}
             </div>
 
@@ -73,8 +84,12 @@ const Product = () => {
                   <Skeleton className="py-2" />
                 ) : (
                   <div className="flex items-center mb-1">
-                    <p className="font-semibold text-2xl">{product?.price}</p>
-                    <span className="text-md">
+                    <p className="font-semibold text-2xl">
+                      <PreviusPrice price={product.previusPrice} />
+
+                      <span>${product?.price}</span>
+                    </p>
+                    <span className="text-md ms-3">
                       +{" "}
                       {product?.shipping === 0
                         ? "Free shipping"

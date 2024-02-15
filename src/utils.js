@@ -93,7 +93,9 @@ export const getProduct = ({ slug }) => {
     },
     description,
     shipping,
-    previusPrice
+    previusPrice,
+    sale
+  
   }`;
 
   return data;
@@ -164,7 +166,6 @@ export const getAllProducts = (
         sale,
         'slug': slug.current,
         currency,
-        setPrevious,
         previusPrice,
         _createdAt
       } | order(${time ? "_createdAt" : "price"} ${
@@ -437,7 +438,7 @@ export const quickLinks = [
   },
   {
     text: "Shop",
-    url: "/shop",
+    url: "/shop/products",
   },
 ];
 

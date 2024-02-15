@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { urlFor } from "../utils";
+import { PreviusPrice } from "./index";
 
 const Card = ({ data, onSide = false }) => {
   const navigation = useNavigate();
@@ -58,11 +59,12 @@ const Card = ({ data, onSide = false }) => {
               : "text-center text-lg font-semibold"
           }`}
         >
-          {data.setPrevious && isNaN(data.previusPrice) === false && (
+          {/* {data.setPrevious && isNaN(data.previusPrice) === false && (
             <span className="me-2 line-through text-gray-400 ">
-              {/* {data.currency} */}$<span>{data.previusPrice}</span>
+             $<span>{data.previusPrice}</span>
             </span>
-          )}
+          )} */}
+          <PreviusPrice price={data.previusPrice} />
           <span className="">
             {/* {data.currency} */}$<span>{data.price}</span>
           </span>
