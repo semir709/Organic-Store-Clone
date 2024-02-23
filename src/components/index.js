@@ -29,3 +29,4 @@ export { default as TableOfProducts } from "./TableOfProducts";
 export { default as RadioPaymantInput } from "./RadioPaymantInput";
 export { default as InfoMessage } from "./InfoMessage";
 export { default as PreviusPrice } from "./PreviusPrice";
+export { default as CouponInput } from "./CouponInput";

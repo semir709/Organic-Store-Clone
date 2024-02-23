@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { ButtonGreen } from "../components/index";
+import { ButtonGreen, CouponInput, InfoMessage } from "../components/index";
 import { urlFor } from "../utils";
 import { useCart } from "../utils/context/CartContextCustom";
 
 const TableOfProducts = ({ products }) => {
   const { updateQuantity, removeItem } = useCart();
+  const [message, setMessage] = useState({ flag: false, message: "" });
+
   return (
-    <form>
-      <div className="md:block hidden">
-        <TabelDesktop
-          products={products}
-          removeItem={removeItem}
-          updateQuantity={updateQuantity}
-        />
+    <>
+      <div className="my-3">
+        {message.flag && <InfoMessage text={message.message} mode="danger" />}
       </div>
-      <div className="md:hidden block">
-        <TabelMobile
-          products={products}
-          removeItem={removeItem}
-          updateQuantity={updateQuantity}
-        />
-      </div>
-    </form>
+      <form>
+        <div className="md:block hidden">
+          <TabelDesktop
+            products={products}
+            removeItem={removeItem}
+            updateQuantity={updateQuantity}
+            setMessage={setMessage}
+          />
+        </div>
+        <div className="md:hidden block">
+          <TabelMobile
+            products={products}
+            removeItem={removeItem}
+            updateQuantity={updateQuantity}
+            setMessage={setMessage}
+          />
+        </div>
+      </form>
+    </>
   );
 };
 
 export default TableOfProducts;
 
-const TabelDesktop = ({ products, removeItem, updateQuantity }) => {
+const TabelDesktop = ({ products, removeItem, updateQuantity, setMessage }) => {
   return (
     <table className=" w-full">
       <thead className="bg-white text-left border-2">
@@ -82,14 +91,7 @@ const TabelDesktop = ({ products, removeItem, updateQuantity }) => {
 
         <tr className="border-2 border-t-0">
           <td colSpan={6} className="py-3 px-2 ">
-            <div className="flex items-center">
-              <input
-                type="text"
-                placeholder="Coupon code"
-                className="border-2 px-2 py-1 me-2"
-              />
-              <ButtonGreen text={"Apply coupon"} />
-            </div>
+            <CouponInput text={"apply coupon"} setMessage={setMessage} />
           </td>
         </tr>
       </tbody>
@@ -128,7 +130,7 @@ const InputTableQuantity = ({ id, amount, updateQuantity }) => {
   );
 };
 
-const TabelMobile = ({ products, removeItem, updateQuantity }) => {
+const TabelMobile = ({ products, removeItem, updateQuantity, setMessage }) => {
   return (
     <table className="w-full  my-3">
       <tbody>
@@ -191,14 +193,15 @@ const TabelMobile = ({ products, removeItem, updateQuantity }) => {
 
         <tr className="border-2 border-t-0">
           <td colSpan={6} className="py-3 px-2 ">
-            <div className="flex items-center">
+            <CouponInput text={"apply coupon"} setMessage={setMessage} />
+            {/* <div className="flex items-center">
               <input
                 type="text"
                 placeholder="Coupon code"
                 className="border-2 px-2 py-1 me-2 w-full"
               />
               <ButtonGreen text={"Apply coupon"} />
-            </div>
+            </div> */}
           </td>
         </tr>
       </tbody>
