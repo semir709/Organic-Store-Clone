@@ -16,7 +16,7 @@ export const localSave = (product, amount) => {
   let checkedData = local.map((el) => {
     if (el.id === product.id) {
       newEntry = false;
-      return { ...el, amount: parseInt(el.amount) + parseInt(amount) };
+      return { ...el, amount };
     }
     return el;
   });
