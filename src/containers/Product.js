@@ -192,7 +192,9 @@ const Product = () => {
           <h2 className="text-4xl font-semibold mb-5">Related Products</h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
             {!dataReletedProducts
-              ? [1, 2, 3, 4].map(() => <Skeleton className="py-[100px]" />)
+              ? [1, 2, 3, 4].map((el, index) => (
+                  <Skeleton key={index} className="py-[100px]" />
+                ))
               : dataReletedProducts?.relatedProducts.map((data) => {
                   if (slug !== data.slug) {
                     return <Card data={data} />;

@@ -25,10 +25,6 @@ const ProductsPage = () => {
       });
   }, [page, filterValue]);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
   return (
     <div className="flex flex-col justify-between h-full ">
       <div>
