@@ -12,14 +12,17 @@ import {
   Shop,
   CartPage,
   CheckoutPage,
+  ProtectedRoute,
 } from "./containers/index";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import CartContextCustom from "./utils/context/CartContextCustom";
+import CartContextCustom, { useCart } from "./utils/context/CartContextCustom";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
+
+  const products = JSON.parse(localStorage.getItem("cart"));
 
   return (
     <CartContextCustom>
@@ -38,7 +41,14 @@ function App() {
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute cart={products}>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Footer />

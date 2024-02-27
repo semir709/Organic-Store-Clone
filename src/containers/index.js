@@ -9,3 +9,6 @@ export { default as SearchPage } from "./SearchPage";
 export { default as Shop } from "./Shop";
 export { default as CartPage } from "./CartPage";
 export { default as CheckoutPage } from "./CheckoutPage";
+export { default as SelectContactInfoPage } from "./SelectContactInfoPage";
+export { default as CreateContactInfoPage } from "./CreateContactInfoPage";
+export { default as ProtectedRoute } from "./ProtectedRoute";
