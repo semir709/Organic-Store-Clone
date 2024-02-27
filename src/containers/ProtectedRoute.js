@@ -6,7 +6,7 @@ const ProtectedRoute = ({
   redirectPath = "/shop/products",
   children,
 }) => {
-  if (cart.length <= 0) return <Navigate to={redirectPath} replace />;
+  if (!cart || cart.length <= 0) return <Navigate to={redirectPath} replace />;
   return children;
 };
 

@@ -42,7 +42,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/cart" element={<CartPage />} />
         <Route
-          path="/checkout"
+          path="/checkout/*"
           element={
             <ProtectedRoute cart={products}>
               <CheckoutPage />
