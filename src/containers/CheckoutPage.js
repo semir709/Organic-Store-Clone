@@ -84,17 +84,6 @@ const CheckoutPage = () => {
       <Routes>
         <Route path="/createContactInfo" element={<CreateContactInfoPage />} />
         <Route
-          path="/*"
-          element={
-            <ProtectedRoute
-              cart={contact}
-              redirectPath="/checkout/createContactInfo"
-            >
-              <SelectContactInfoPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/selectContactInfo"
           element={
             <ProtectedRoute

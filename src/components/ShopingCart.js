@@ -93,7 +93,10 @@ const ShopingCart = ({ setCartToggle, cartToggle }) => {
 
               <div className="mx-4 mt-4" onClick={() => setCartToggle(false)}>
                 <ButtonGreen text={"View Cart"} url="/cart" />
-                <ButtonGreen text={"Checkout"} url="/checkout" />
+                <ButtonGreen
+                  text={"Checkout"}
+                  url="/checkout/selectContactInfo"
+                />
               </div>
             </div>
           )}

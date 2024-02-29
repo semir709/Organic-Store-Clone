@@ -289,8 +289,13 @@ const CreateContactInfoPage = () => {
             </table>
             <div className="">
               <RadioPaymantInput />
-              <button onClick={handleSubmit}>Place holder</button>
-              {/* <ButtonGreen text={"Palce holder"} /> */}
+
+              <button
+                className="bg-global-color-1 hover:bg-global-color-0 text-white px-5 py-2 rounded-md"
+                onClick={handleSubmit}
+              >
+                Place holder
+              </button>
             </div>
           </div>
         </div>
