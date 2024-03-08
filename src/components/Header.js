@@ -3,14 +3,22 @@ import ListNav from "./ListNav";
 import { BsBasket2Fill } from "react-icons/bs";
 import { GrMenu } from "react-icons/gr";
 import { navData } from "../utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../utils/context/CartContextCustom";
 
 const Header = ({ setCartToggle, setMobileMenuToggle }) => {
   const { itemsCount, caculateFinalPrice } = useCart();
+  const [allowCart, setAllowCart] = useState(true);
 
   let amount = itemsCount();
   let price = caculateFinalPrice();
+
+  const naviagte = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname.startsWith("/checkout")) setAllowCart(false);
+    else setAllowCart(true);
+  }, [naviagte]);
 
   return (
     <div className="bg-transparent w-full h-[105px] px-[25px] py-[15px]">
@@ -34,22 +42,24 @@ const Header = ({ setCartToggle, setMobileMenuToggle }) => {
             <ListNav arrayText={navData.infoNav} />
           </nav>
 
-          <div
-            className="flex items-center hover:cursor-pointer"
-            onClick={() => setCartToggle((prev) => !prev)}
-          >
-            <span className="text-global-color-0 me-3">
-              <span>€</span>
-              {price}
-            </span>
+          {allowCart && (
+            <div
+              className="flex items-center hover:cursor-pointer"
+              onClick={() => setCartToggle((prev) => !prev)}
+            >
+              <span className="text-global-color-0 me-3">
+                <span>€</span>
+                {price}
+              </span>
 
-            <div className="relative">
-              <div className="absolute top-[-10px] right-[-14px] text-[11px] font-bold bg-global-color-0 rounded-full px-[7px]">
-                {amount}
+              <div className="relative">
+                <div className="absolute top-[-10px] right-[-14px] text-[11px] font-bold bg-global-color-0 rounded-full px-[7px]">
+                  {amount}
+                </div>
+                <BsBasket2Fill />
               </div>
-              <BsBasket2Fill />
             </div>
-          </div>
+          )}
 
           <div
             className="md:hidden block ms-[20px] hover:cursor-pointer"
