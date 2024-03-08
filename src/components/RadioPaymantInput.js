@@ -13,7 +13,7 @@ const RadioPaymantInput = () => {
           type="radio"
           id="checkPaymant"
           className="me-5 cursor-pointer"
-          onClick={() => setSwitchInput(0)}
+          onChange={() => setSwitchInput(0)}
           checked={switchInput === 0 ? true : false}
         />
         <label htmlFor="checkPaymant" className="cursor-pointer">
@@ -29,7 +29,7 @@ const RadioPaymantInput = () => {
           type="radio"
           id="cashDelivery"
           className="me-5 cursor-pointer"
-          onClick={() => setSwitchInput(1)}
+          onChange={() => setSwitchInput(1)}
           checked={switchInput === 0 ? false : true}
         />
         <label htmlFor="cashDelivery" className="cursor-pointer">
@@ -50,7 +50,7 @@ const RadioMessage = ({ show = false, text }) => {
   return (
     <div className="">
       <div
-        class={`w-0 h-0 
+        className={`w-0 h-0 
             border-l-[15px] border-l-transparent
             border-b-[18px] border-b-gray-300
             border-r-[15px] border-r-transparent

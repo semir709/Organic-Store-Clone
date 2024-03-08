@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../utils/context/CartContextCustom";
 import { InfoMessage, RadioPaymantInput } from "../components/index";
+import { useNavigate } from "react-router-dom";
+import { localStorageContact } from "../utils/localStorageContatct";
 
 const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const phonePattern =
@@ -14,7 +16,7 @@ const defaultForm = {
   country: "bosnia",
   email: "",
   firstName: "",
-  houseNum: "",
+  street: "",
   lastName: "",
   phone: "",
   postCode: "",
@@ -25,8 +27,9 @@ const CreateContactInfoPage = () => {
   const { caculateFinalPrice } = useCart();
   const { cart } = useCart();
   const [message, setMessage] = useState(null);
-  //   const [contactInfoLocal, setContactInfoLocal] = useState(null);
   const [form, setForm] = useState(defaultForm);
+
+  const navigate = useNavigate();
 
   const total = caculateFinalPrice();
 
@@ -36,6 +39,8 @@ const CreateContactInfoPage = () => {
 
     setForm({ ...form, [name]: value });
   };
+
+  const { setHasContactInfo } = useCart();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +83,20 @@ const CreateContactInfoPage = () => {
       }
     }
 
-    if (save) localStorage.setItem("contactInfo", JSON.stringify(form));
+    if (save) {
+      const { local, error } = localStorageContact(form);
+
+      if (error.length)
+        setMessage({
+          title: error,
+          mode: "danger",
+          error: true,
+        });
+      else {
+        setHasContactInfo(!!local);
+        navigate("/checkout/purchasedItemsInfo");
+      }
+    }
   };
 
   return (
@@ -152,14 +170,14 @@ const CreateContactInfoPage = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="houseNum" className="font-bold">
+              <label htmlFor="street" className="font-bold">
                 Street address *
               </label>
               <input
-                id="houseNum"
-                value={form.houseNum || ""}
+                id="street"
+                value={form.street || ""}
                 onChange={handleChanges}
-                name="houseNum"
+                name="street"
                 type="text"
                 className="border-2 p-2 w-full mb-2 "
                 placeholder="House number and street name"
@@ -267,8 +285,8 @@ const CreateContactInfoPage = () => {
                 </tr>
               </thead>
               <tbody className="text-left">
-                {cart.map(({ id, title, amount, price }) => (
-                  <tr className="border-b-2 ">
+                {cart.map(({ id, title, amount, price }, index) => (
+                  <tr className="border-b-2 " key={index}>
                     <td className="py-3">
                       {title} × {amount}
                     </td>

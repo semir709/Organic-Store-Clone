@@ -1,12 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useCart } from "../utils/context/CartContextCustom";
 
-const ProtectedRoute = ({
-  cart,
-  redirectPath = "/shop/products",
-  children,
-}) => {
-  if (!cart || cart.length <= 0) return <Navigate to={redirectPath} replace />;
+const ProtectedRoute = ({ isOpen = false, redirectPath, children }) => {
+  if (!isOpen) {
+    return <Navigate to={redirectPath} />;
+  }
   return children;
 };
 

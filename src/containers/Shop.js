@@ -55,6 +55,7 @@ const Shop = () => {
             <main className="h-full flex flex-col justify-between">
               <Routes>
                 <Route path="/products/:page?" element={<ProductsPage />} />
+
                 <Route path="/search/:searchTerm" element={<SearchPage />} />
 
                 <Route

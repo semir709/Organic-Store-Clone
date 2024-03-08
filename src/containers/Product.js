@@ -43,7 +43,7 @@ const Product = () => {
     fetchProductData();
   }, [slug]);
 
-  const { saveCartContext } = useCart();
+  const { saveCartContext, setHasProducts } = useCart();
 
   const saveProduct = () => {
     const { local, error } = localSave(product, amount);
@@ -56,6 +56,7 @@ const Product = () => {
       });
     else {
       saveCartContext(local);
+      setHasProducts(!!local);
       setMessage({
         title: `"${product.title}" has been added to your cart. `,
         mode: "accept",

@@ -12,3 +12,4 @@ export { default as CheckoutPage } from "./CheckoutPage";
 export { default as SelectContactInfoPage } from "./SelectContactInfoPage";
 export { default as CreateContactInfoPage } from "./CreateContactInfoPage";
 export { default as ProtectedRoute } from "./ProtectedRoute";
+export { default as PurchasedItemsInfo } from "./PurchasedItemsInfo";

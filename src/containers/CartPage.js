@@ -35,7 +35,10 @@ const CartPage = () => {
                   </tbody>
                 </table>
 
-                <ButtonGreen text={"Proceed to checkout"} url={"/checkout"} />
+                <ButtonGreen
+                  text={"Proceed to checkout"}
+                  url={"/checkout/selectContactInfo"}
+                />
               </div>
             </div>
           </>

@@ -8,6 +8,12 @@ export function useCart() {
 
 const CartContextCustom = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [hasProducts, setHasProducts] = useState(
+    !!JSON.parse(localStorage.getItem("cart"))
+  );
+  const [hasContactInfo, setHasContactInfo] = useState(
+    !!JSON.parse(localStorage.getItem("contactInfo"))
+  );
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("cart"));
@@ -61,6 +67,10 @@ const CartContextCustom = ({ children }) => {
     caculateFinalPrice,
     removeItem,
     updateQuantity,
+    hasProducts,
+    setHasProducts,
+    hasContactInfo,
+    setHasContactInfo,
   };
 
   return (

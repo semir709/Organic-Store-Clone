@@ -9,88 +9,48 @@ import { IoAddOutline } from "react-icons/io5";
 import CreateContactInfoPage from "./CreateContactInfoPage";
 import SelectContactInfoPage from "./SelectContactInfoPage";
 import { Route, Routes } from "react-router-dom";
-import { ProtectedRoute } from "../containers/index";
+import { ProtectedRoute, PurchasedItemsInfo } from "../containers/index";
 
 const CheckoutPage = () => {
-  // const { caculateFinalPrice } = useCart();
-  // const [form, setForm] = useState(defaultForm);
-  // const [message, setMessage] = useState(null);
   const [isValidated, setIsValidated] = useState(false);
   const [contactInfoLocal, setContactInfoLocal] = useState(null);
 
-  // const total = caculateFinalPrice();
+  const { hasProducts, hasContactInfo } = useCart();
 
-  // const handleChanges = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-
-  //   setForm({ ...form, [name]: value });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   setIsValidated(true);
-  //   for (const key in form) {
-  //     if (
-  //       form[key].length === 0 &&
-  //       key !== "company" &&
-  //       key !== "apartment" &&
-  //       key !== "canton" &&
-  //       key !== "additional"
-  //     ) {
-  //       document.getElementById(key).style.border = "1px red solid";
-  //       setMessage({
-  //         title: "Some fields are empty, please fill all required fileds",
-  //         mode: "danger",
-  //       });
-  //       setIsValidated(false);
-  //     } else {
-  //       document.getElementById(key).style.border = "1px green solid";
-  //       if (key === "phone" && !form[key].match(phonePattern)) {
-  //         document.getElementById(key).style.border = "1px red solid";
-  //         setMessage({
-  //           title: "phone field is wrong format type",
-  //           mode: "danger",
-  //         });
-  //         setIsValidated(false);
-  //       } else if (key === "email" && !form[key].match(emailPattern)) {
-  //         document.getElementById(key).style.border = "1px red solid";
-  //         setMessage({
-  //           title: "email field is wrong format type",
-  //           mode: "danger",
-  //         });
-  //         setIsValidated(false);
-  //       }
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (isValidated) {
-  //     localStorage.setItem("contactInfo", JSON.stringify(form));
-  //   }
-  // }, [isValidated]);
-
-  // useEffect(() => {
-  //   setContactInfoLocal(
-  //     JSON.parse(localStorage.getItem("contactInfo")) || null
-  //   );
-  // }, []);
-
-  const contact = JSON.parse(localStorage.getItem("contactInfo"));
   return (
     <>
       <Routes>
-        <Route path="/createContactInfo" element={<CreateContactInfoPage />} />
+        <Route path="/*" element={<>Wrong url path</>} />
+        <Route
+          path="/createContactInfo"
+          element={
+            <ProtectedRoute
+              isOpen={hasProducts}
+              redirectPath={"/shop/products"}
+            >
+              <CreateContactInfoPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/selectContactInfo"
           element={
             <ProtectedRoute
-              cart={contact}
+              isOpen={hasContactInfo}
               redirectPath="/checkout/createContactInfo"
             >
               <SelectContactInfoPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/purchasedItemsInfo"
+          element={
+            <ProtectedRoute
+              isOpen={hasContactInfo}
+              redirectPath="/checkout/createContactInfo"
+            >
+              <PurchasedItemsInfo />
             </ProtectedRoute>
           }
         />
@@ -351,3 +311,67 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
+// const { caculateFinalPrice } = useCart();
+// const [form, setForm] = useState(defaultForm);
+// const [message, setMessage] = useState(null);
+
+// const total = caculateFinalPrice();
+
+// const handleChanges = (e) => {
+//   const name = e.target.name;
+//   const value = e.target.value;
+
+//   setForm({ ...form, [name]: value });
+// };
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+
+//   setIsValidated(true);
+//   for (const key in form) {
+//     if (
+//       form[key].length === 0 &&
+//       key !== "company" &&
+//       key !== "apartment" &&
+//       key !== "canton" &&
+//       key !== "additional"
+//     ) {
+//       document.getElementById(key).style.border = "1px red solid";
+//       setMessage({
+//         title: "Some fields are empty, please fill all required fileds",
+//         mode: "danger",
+//       });
+//       setIsValidated(false);
+//     } else {
+//       document.getElementById(key).style.border = "1px green solid";
+//       if (key === "phone" && !form[key].match(phonePattern)) {
+//         document.getElementById(key).style.border = "1px red solid";
+//         setMessage({
+//           title: "phone field is wrong format type",
+//           mode: "danger",
+//         });
+//         setIsValidated(false);
+//       } else if (key === "email" && !form[key].match(emailPattern)) {
+//         document.getElementById(key).style.border = "1px red solid";
+//         setMessage({
+//           title: "email field is wrong format type",
+//           mode: "danger",
+//         });
+//         setIsValidated(false);
+//       }
+//     }
+//   }
+// };
+
+// useEffect(() => {
+//   if (isValidated) {
+//     localStorage.setItem("contactInfo", JSON.stringify(form));
+//   }
+// }, [isValidated]);
+
+// useEffect(() => {
+//   setContactInfoLocal(
+//     JSON.parse(localStorage.getItem("contactInfo")) || null
+//   );
+// }, []);

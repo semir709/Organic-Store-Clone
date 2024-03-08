@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import ShopingCart from "./components/ShopingCart";
@@ -14,15 +14,13 @@ import {
   CheckoutPage,
   ProtectedRoute,
 } from "./containers/index";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import CartContextCustom, { useCart } from "./utils/context/CartContextCustom";
 
 function App() {
   const [cartToggle, setCartToggle] = useState(false);
   const [mobileMenuToggle, setMobileMenuToggle] = useState(false);
-
-  const products = JSON.parse(localStorage.getItem("cart"));
 
   return (
     <CartContextCustom>
@@ -34,22 +32,17 @@ function App() {
         />
       </header>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop/*" element={<Shop />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/product/:slug" element={<Product />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route
-          path="/checkout/*"
-          element={
-            <ProtectedRoute cart={products}>
-              <CheckoutPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+      <div className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop/*" element={<Shop />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/product/:slug" element={<Product />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout/*" element={<CheckoutPage />} />
+        </Routes>
+      </div>
 
       <Footer />
 
