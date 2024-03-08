@@ -37,7 +37,8 @@ const CartContextCustom = ({ children }) => {
   const removeItem = (id) => {
     const updatedCart = cart.filter((product) => product.id !== id);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    if (updatedCart.length === 0) localStorage.removeItem("cart");
+    else localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const itemsCount = () => {
