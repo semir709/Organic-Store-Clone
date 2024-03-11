@@ -36,7 +36,7 @@ const CheckoutPage = () => {
           path="/selectContactInfo"
           element={
             <ProtectedRoute
-              isOpen={hasContactInfo}
+              isOpen={hasContactInfo && hasProducts}
               redirectPath="/checkout/createContactInfo"
             >
               <SelectContactInfoPage />
@@ -47,7 +47,7 @@ const CheckoutPage = () => {
           path="/purchasedItemsInfo"
           element={
             <ProtectedRoute
-              isOpen={hasContactInfo}
+              isOpen={hasContactInfo && hasProducts}
               redirectPath="/checkout/createContactInfo"
             >
               <PurchasedItemsInfo />

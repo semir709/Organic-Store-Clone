@@ -5,7 +5,7 @@ import { ButtonGreen, CouponInput, InfoMessage } from "../components/index";
 import { urlFor } from "../utils";
 import { useCart } from "../utils/context/CartContextCustom";
 
-const TableOfProducts = ({ products }) => {
+const TableOfProducts = ({ products, read = false }) => {
   const { updateQuantity, removeItem } = useCart();
   const [message, setMessage] = useState({ flag: false, message: "" });
 
@@ -21,6 +21,7 @@ const TableOfProducts = ({ products }) => {
             removeItem={removeItem}
             updateQuantity={updateQuantity}
             setMessage={setMessage}
+            read={read}
           />
         </div>
         <div className="md:hidden block">
@@ -29,6 +30,7 @@ const TableOfProducts = ({ products }) => {
             removeItem={removeItem}
             updateQuantity={updateQuantity}
             setMessage={setMessage}
+            read={read}
           />
         </div>
       </form>
@@ -38,7 +40,13 @@ const TableOfProducts = ({ products }) => {
 
 export default TableOfProducts;
 
-const TabelDesktop = ({ products, removeItem, updateQuantity, setMessage }) => {
+const TabelDesktop = ({
+  products,
+  removeItem,
+  updateQuantity,
+  setMessage,
+  read,
+}) => {
   return (
     <table className=" w-full">
       <thead className="bg-white text-left border-2">
@@ -53,13 +61,17 @@ const TabelDesktop = ({ products, removeItem, updateQuantity, setMessage }) => {
         {products.map(({ id, title, price, image, amount, slug }) => (
           <tr className="border-2 border-t-0" key={id}>
             <td className="py-3 px-2 text-center">
-              <span>
-                <IoCloseCircleOutline
-                  size={24}
-                  className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
-                  onClick={() => removeItem(id)}
-                />
-              </span>
+              {!read ? (
+                <span>
+                  <IoCloseCircleOutline
+                    size={24}
+                    className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
+                    onClick={() => removeItem(id)}
+                  />
+                </span>
+              ) : (
+                <span className="text-global-color-1  uppercase">Sent</span>
+              )}
             </td>
             <td className="py-3 px-2">
               <img
@@ -130,7 +142,13 @@ const InputTableQuantity = ({ id, amount, updateQuantity }) => {
   );
 };
 
-const TabelMobile = ({ products, removeItem, updateQuantity, setMessage }) => {
+const TabelMobile = ({
+  products,
+  removeItem,
+  updateQuantity,
+  setMessage,
+  read,
+}) => {
   return (
     <table className="w-full  my-3">
       <tbody>
@@ -139,13 +157,17 @@ const TabelMobile = ({ products, removeItem, updateQuantity, setMessage }) => {
             <tr className="border-2 text-lg ">
               <th className="py-3 font-normal text-left "></th>
               <td className="text-right pe-2">
-                <span>
-                  <IoCloseCircleOutline
-                    size={24}
-                    className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
-                    onClick={() => removeItem(id)}
-                  />
-                </span>
+                {!read ? (
+                  <span>
+                    <IoCloseCircleOutline
+                      size={24}
+                      className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
+                      onClick={() => removeItem(id)}
+                    />
+                  </span>
+                ) : (
+                  <span className="text-global-color-1 uppercase">Sent</span>
+                )}
               </td>
             </tr>
             <tr className="border-2 text-lg ">

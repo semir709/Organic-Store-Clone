@@ -30,3 +30,4 @@ export { default as RadioPaymantInput } from "./RadioPaymantInput";
 export { default as InfoMessage } from "./InfoMessage";
 export { default as PreviusPrice } from "./PreviusPrice";
 export { default as CouponInput } from "./CouponInput";
+export { default as ContactCards } from "./ContactCards";
