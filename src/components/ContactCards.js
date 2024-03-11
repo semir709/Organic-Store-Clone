@@ -1,8 +1,13 @@
 import React from "react";
 
-const ContactCards = () => {
+const ContactCards = ({ select, handleClick }) => {
   return (
-    <div className="bg-white py-2 px-3 text-global-color-2 rounded-lg border min-w-[350px] shadow-md hover:cursor-pointer hover:translate-y-[-10px] transition">
+    <div
+      onClick={handleClick}
+      className={`${
+        select ? "border-global-color-0" : ""
+      } bg-white py-2 px-3 text-global-color-2 rounded-lg border-2 min-w-[350px] shadow-md hover:cursor-pointer hover:translate-y-[-10px] transition`}
+    >
       <div className="w-full flex justify-center mb-5">
         <span>Semir Selman</span>
       </div>
