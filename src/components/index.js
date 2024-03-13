@@ -31,3 +31,4 @@ export { default as InfoMessage } from "./InfoMessage";
 export { default as PreviusPrice } from "./PreviusPrice";
 export { default as CouponInput } from "./CouponInput";
 export { default as ContactCards } from "./ContactCards";
+export { default as PopUpConfirmContact } from "./PopUpConfirmContact";
