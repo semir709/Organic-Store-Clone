@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ContactCards, PopUpConfirmContact } from "../components/index";
+import {
+  ContactCards,
+  PopUpConfirmContact,
+  PopUpConfirmDelete,
+} from "../components/index";
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
@@ -12,18 +16,16 @@ const SelectContactInfoPage = () => {
     JSON.parse(localStorage.getItem("contactInfo"))[0] // these should be new created or last selected
   );
   const [popUpConfirm, setPopUpConfirm] = useState(false);
+  const [popUpDelete, setPopUpDelete] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   console.log(contact);
-  // }, [contact]);
-
-  useEffect(() => {
-    console.log(selectedData);
-  }, [selectedData]);
 
   const handlePopUpShow = () => {
     setPopUpConfirm(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const handlePopUpDelete = () => {
+    setPopUpDelete(true);
     document.body.style.overflow = "hidden";
   };
 
@@ -61,8 +63,16 @@ const SelectContactInfoPage = () => {
       </div>
 
       <div className="w-full flex justify-end">
-        <button className="text-gray-500 hover:text-red-500">Delete</button>
+        <button
+          onClick={handlePopUpDelete}
+          className="text-gray-500 hover:text-red-500"
+        >
+          Delete
+        </button>
       </div>
+      {popUpDelete && (
+        <PopUpConfirmDelete data={contact} setPopUpDelete={setPopUpDelete} />
+      )}
       {popUpConfirm && (
         <PopUpConfirmContact
           data={selectedData}
