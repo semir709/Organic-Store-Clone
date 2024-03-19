@@ -3,7 +3,7 @@ export const localStorageContact = (form) => {
   const local = storage ? JSON.parse(storage) : [];
   let newEntry = true;
 
-  console.log(form);
+  form.id = crypto.randomUUID();
 
   let checkedData = local.map((el) => {
     if (
