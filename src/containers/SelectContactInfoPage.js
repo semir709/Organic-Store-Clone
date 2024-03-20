@@ -17,6 +17,7 @@ const SelectContactInfoPage = () => {
   );
   const [popUpConfirm, setPopUpConfirm] = useState(false);
   const [popUpDelete, setPopUpDelete] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const navigate = useNavigate();
 
   const handlePopUpShow = () => {
@@ -28,6 +29,16 @@ const SelectContactInfoPage = () => {
     setPopUpDelete(true);
     document.body.style.overflow = "hidden";
   };
+
+  useEffect(() => {
+    setPopUpDelete(false);
+    document.body.style.overflow = "auto";
+
+    if (isDeleted) {
+      setContact(JSON.parse(localStorage.getItem("contactInfo")));
+      setIsDeleted(false);
+    }
+  }, [isDeleted]);
 
   return (
     <div className="p-[100px] bg-global-color-4">
@@ -71,7 +82,11 @@ const SelectContactInfoPage = () => {
         </button>
       </div>
       {popUpDelete && (
-        <PopUpConfirmDelete data={contact} setPopUpDelete={setPopUpDelete} />
+        <PopUpConfirmDelete
+          data={contact}
+          setPopUpDelete={setPopUpDelete}
+          setIsDeleted={setIsDeleted}
+        />
       )}
       {popUpConfirm && (
         <PopUpConfirmContact
