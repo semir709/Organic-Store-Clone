@@ -4,16 +4,14 @@ import {
   PopUpConfirmContact,
   PopUpConfirmDelete,
 } from "../components/index";
-import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const SelectContactInfoPage = () => {
+  const localStorageContact = localStorage.getItem("contactInfo");
   const [selectCard, setSelectCard] = useState(0);
-  const [contact, setContact] = useState(
-    JSON.parse(localStorage.getItem("contactInfo"))
-  );
+  const [contact, setContact] = useState(JSON.parse(localStorageContact));
   const [selectedData, setSelectedData] = useState(
-    JSON.parse(localStorage.getItem("contactInfo"))[0] // these should be new created or last selected
+    localStorageContact ? JSON.parse(localStorageContact)[0] : null // these should be new created or last selected
   );
   const [popUpConfirm, setPopUpConfirm] = useState(false);
   const [popUpDelete, setPopUpDelete] = useState(false);
@@ -35,7 +33,12 @@ const SelectContactInfoPage = () => {
     document.body.style.overflow = "auto";
 
     if (isDeleted) {
-      setContact(JSON.parse(localStorage.getItem("contactInfo")));
+      const contact = localStorage.getItem("contactInfo");
+
+      contact
+        ? setContact(JSON.parse(contact))
+        : navigate("/checkout/createContactInfo");
+
       setIsDeleted(false);
     }
   }, [isDeleted]);

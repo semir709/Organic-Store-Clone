@@ -27,14 +27,14 @@ export const localStorageContact = (form) => {
   try {
     localStorage.setItem(
       "contactInfo",
-      JSON.stringify(newEntry ? [...local, form] : [...checkedData])
+      JSON.stringify(newEntry ? [form, ...local] : [...checkedData])
     );
   } catch (err) {
     error = err.message;
   }
 
   const data = {
-    local: newEntry ? [...local, form] : [...checkedData],
+    local: newEntry ? [form, ...local] : [...checkedData],
     error,
   };
 

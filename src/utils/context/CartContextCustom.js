@@ -11,6 +11,9 @@ const CartContextCustom = ({ children }) => {
   const [hasProducts, setHasProducts] = useState(
     !!JSON.parse(localStorage.getItem("cart"))
   );
+
+  console.log("context initial");
+
   const [hasContactInfo, setHasContactInfo] = useState(
     !!JSON.parse(localStorage.getItem("contactInfo"))
   );
