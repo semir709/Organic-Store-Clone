@@ -10,11 +10,7 @@ export const localStorageContact = (form) => {
       el.firstName === form.firstName &&
       el.lastName === form.lastName &&
       el.phone === form.phone &&
-      el.email === form.email &&
-      el.country === form.country &&
-      el.postCode === form.postCode &&
-      el.street === form.street &&
-      el.townCity === form.townCity
+      el.email === form.email
     ) {
       newEntry = false;
       return { ...el };

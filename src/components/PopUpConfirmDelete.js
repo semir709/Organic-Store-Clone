@@ -37,9 +37,6 @@ const PopUpConfirmDelete = ({ data, setPopUpDelete, setIsDeleted = false }) => {
     }
 
     setIsDeleted(true);
-
-    //reloading solution
-    // navigate(0);
   };
 
   return (
