@@ -7,9 +7,12 @@ const ContactCards = ({
   selectedData,
   notInteractive = true,
 }) => {
-  useEffect(() => {
-    if (select) selectedData(data);
-  }, [select]);
+  // useEffect(() => {
+  //   if (select) {
+  //     selectedData(data);
+  //     localStorage.setItem("selectedContact", JSON.stringify(data));
+  //   }
+  // }, [select]);
   return (
     <div
       onClick={handleClick}

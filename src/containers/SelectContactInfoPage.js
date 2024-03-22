@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const SelectContactInfoPage = () => {
   const localStorageContact = localStorage.getItem("contactInfo");
-  const [selectCard, setSelectCard] = useState(0);
+  const localStorageContactSelected = localStorage.getItem("selectedContact");
+  const [selectCardIndex, setSelectCardIndex] = useState(0);
   const [contact, setContact] = useState(JSON.parse(localStorageContact));
   const [selectedData, setSelectedData] = useState(
-    localStorageContact ? JSON.parse(localStorageContact)[0] : null // these should be new created or last selected
+    localStorageContactSelected ? JSON.parse(localStorageContactSelected) : null // these should be new created or last selected
   );
   const [popUpConfirm, setPopUpConfirm] = useState(false);
   const [popUpDelete, setPopUpDelete] = useState(false);
@@ -43,6 +44,11 @@ const SelectContactInfoPage = () => {
     }
   }, [isDeleted]);
 
+  const handleSelectedData = (data) => {
+    setSelectedData(data);
+    localStorage.setItem("selectedContact", JSON.stringify(data));
+  };
+
   return (
     <div className="p-[100px] bg-global-color-4">
       <div className="w-full flex justify-center mb-[70px]">
@@ -51,11 +57,18 @@ const SelectContactInfoPage = () => {
       <div className="mx-[50px] flex flex-wrap gap-7 justify-center mb-[70px]">
         {contact.map((data, index) => (
           <ContactCards
-            select={selectCard === index}
-            handleClick={() => setSelectCard(index)}
+            select={selectedData.id === data.id}
+            // handleClick={() => setSelectCardIndex(index)}
+            handleClick={() => handleSelectedData(data)}
             data={data}
-            selectedData={setSelectedData}
+            // selectedData={setSelectedData}
           />
+          // <ContactCards
+          //   select={selectCardIndex === index}
+          //   handleClick={() => setSelectCardIndex(index)}
+          //   data={data}
+          //   selectedData={setSelectedData}
+          // />
         ))}
       </div>
 

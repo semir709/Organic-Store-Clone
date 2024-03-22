@@ -29,6 +29,11 @@ export const localStorageContact = (form) => {
       "contactInfo",
       JSON.stringify(newEntry ? [form, ...local] : [...checkedData])
     );
+    const selectedData = JSON.parse(localStorage.getItem("selectedContact"));
+    localStorage.setItem(
+      "selectedContact",
+      JSON.stringify(newEntry ? form : selectedData)
+    );
   } catch (err) {
     error = err.message;
   }
