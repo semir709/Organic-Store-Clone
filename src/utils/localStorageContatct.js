@@ -5,6 +5,8 @@ export const localStorageContact = (form) => {
 
   form.id = crypto.randomUUID();
 
+  console.log(form, "form");
+
   let checkedData = local.map((el) => {
     if (
       el.firstName === form.firstName &&
@@ -13,12 +15,25 @@ export const localStorageContact = (form) => {
       el.email === form.email
     ) {
       newEntry = false;
-      return { ...el };
+      return {
+        ...el,
+        additional: form.additional,
+        apartment: form.apartment,
+        canton: form.canton,
+        company: form.company,
+        country: form.country,
+        postCode: form.postCode,
+        street: form.street,
+        townCity: form.townCity,
+      };
     }
     return el;
   });
 
   let error = "";
+
+  console.log(newEntry, "new Entry");
+  console.log(checkedData, "checkData");
 
   try {
     localStorage.setItem(

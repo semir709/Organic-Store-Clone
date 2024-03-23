@@ -6,6 +6,8 @@ const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
     setPopUpConfirm(false);
     document.body.style.overflow = "auto";
   };
+
+  console.log(data);
   return (
     <>
       <div className="bg-black min-w-full min-h-full fixed top-0 left-0 opacity-50 z-10"></div>
@@ -17,7 +19,105 @@ const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
           </div>
         </div>
         <div className="mb-5">
-          <ContactCards data={data} notInteractive={false} />
+          {/* <ContactCards data={data} notInteractive={false} /> */}
+          <div className="border p-5">
+            <div className="mb-5">
+              <div className="flex items-center w-full gap-14 mb-3">
+                <div className="grow flex">
+                  <span className="block font-bold ">First name:</span>
+                  <p className="ms-3">
+                    <span>{data.firstName}</span>
+                  </p>
+                </div>
+                <div className="grow flex">
+                  <span htmlFor="lastName" className="block font-bold ">
+                    Last name:
+                  </span>
+                  <p className="ms-3">
+                    <span>{data.lastName}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="company" className="block font-bold ">
+                  Company name:
+                </span>
+                <p className="ms-3">
+                  <span>{data.company}</span>
+                </p>
+              </div>
+
+              <div className="mb-3 flex">
+                <span htmlFor="country" className="block font-bold ">
+                  Country / Region:
+                </span>
+                <p className="ms-3">
+                  <span>{data.country}</span>
+                </p>
+              </div>
+
+              <div className="mb-3 flex">
+                <span htmlFor="street" className="font-bold">
+                  Street address:
+                </span>
+                <p className="ms-3">
+                  <span>{data.street}</span>
+                </p>
+                <p className="ms-3">
+                  <span>{data.apartment}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="postCode" className="block font-bold ">
+                  Postcode / ZIP:
+                </span>
+                <p className="ms-3">
+                  <span>{data.postCode}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="townCity" className="block font-bold ">
+                  Town / City:
+                </span>
+                <p className="ms-3">
+                  <span>{data.townCity}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="canton" className="block font-bold ">
+                  Canton:
+                </span>
+                <p className="ms-3">
+                  <span>{data.canton}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="phone" className="block font-bold ">
+                  Phone:
+                </span>
+                <p className="ms-3">
+                  <span>{data.phone}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span htmlFor="email" className="block font-bold ">
+                  Email address:
+                </span>
+                <p className="ms-3">
+                  <span>{data.email}</span>
+                </p>
+              </div>
+              <div className="mb-3 flex">
+                <span className="block font-bold">Additional notes:</span>
+                <p className="ms-3">
+                  <span>
+                    {data.additional.substring(0, 10)}{" "}
+                    {data.additional.length > 11 && "..."}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="w-full flex justify-around items-center">
           <div>
