@@ -44,6 +44,10 @@ const CartContextCustom = ({ children }) => {
     else localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const removeAllItems = () => {
+    setCart([]);
+  };
+
   const itemsCount = () => {
     let amount = cart.reduce(
       (accumlator, currentValue) => accumlator + parseInt(currentValue.amount),
@@ -66,6 +70,7 @@ const CartContextCustom = ({ children }) => {
 
   const storage = {
     cart,
+    removeAllItems,
     saveCartContext,
     itemsCount,
     caculateFinalPrice,

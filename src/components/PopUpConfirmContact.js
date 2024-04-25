@@ -1,5 +1,6 @@
 import React from "react";
 import ContactCards from "./ContactCards";
+import { useNavigate } from "react-router-dom";
 
 const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
   const handleClose = () => {
@@ -7,7 +8,7 @@ const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
     document.body.style.overflow = "auto";
   };
 
-  console.log(data);
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-black min-w-full min-h-full fixed top-0 left-0 opacity-50 z-10"></div>
@@ -126,7 +127,10 @@ const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
             </button>
           </div>
           <div>
-            <button className="bg-global-color-1 py-2 px-4 rounded-md text-white hover:bg-global-color-0">
+            <button
+              onClick={() => navigate("/checkout/purchasedItemsInfo")}
+              className="bg-global-color-1 py-2 px-4 rounded-md text-white hover:bg-global-color-0"
+            >
               Confirm
             </button>
           </div>

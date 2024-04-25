@@ -5,7 +5,7 @@ import { ButtonGreen, CouponInput, InfoMessage } from "../components/index";
 import { urlFor } from "../utils";
 import { useCart } from "../utils/context/CartContextCustom";
 
-const TableOfProducts = ({ products, read = false }) => {
+const TableOfProducts = ({ products }) => {
   const { updateQuantity, removeItem } = useCart();
   const [message, setMessage] = useState({ flag: false, message: "" });
 
@@ -21,7 +21,6 @@ const TableOfProducts = ({ products, read = false }) => {
             removeItem={removeItem}
             updateQuantity={updateQuantity}
             setMessage={setMessage}
-            read={read}
           />
         </div>
         <div className="md:hidden block">
@@ -30,7 +29,6 @@ const TableOfProducts = ({ products, read = false }) => {
             removeItem={removeItem}
             updateQuantity={updateQuantity}
             setMessage={setMessage}
-            read={read}
           />
         </div>
       </form>
@@ -40,13 +38,7 @@ const TableOfProducts = ({ products, read = false }) => {
 
 export default TableOfProducts;
 
-const TabelDesktop = ({
-  products,
-  removeItem,
-  updateQuantity,
-  setMessage,
-  read,
-}) => {
+const TabelDesktop = ({ products, removeItem, updateQuantity, setMessage }) => {
   return (
     <table className=" w-full">
       <thead className="bg-white text-left border-2">
@@ -61,17 +53,17 @@ const TabelDesktop = ({
         {products.map(({ id, title, price, image, amount, slug }) => (
           <tr className="border-2 border-t-0" key={id}>
             <td className="py-3 px-2 text-center">
-              {!read ? (
-                <span>
-                  <IoCloseCircleOutline
-                    size={24}
-                    className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
-                    onClick={() => removeItem(id)}
-                  />
-                </span>
-              ) : (
-                <span className="text-global-color-1  uppercase">Sent</span>
-              )}
+              {/* {!read ? ( */}
+              <span>
+                <IoCloseCircleOutline
+                  size={24}
+                  className="text-gray-400 hover:cursor-pointer hover:text-black inline-block"
+                  onClick={() => removeItem(id)}
+                />
+              </span>
+              {/* // ) : ( //{" "}
+              <span className="text-global-color-1  uppercase">Sent</span>
+              // )} */}
             </td>
             <td className="py-3 px-2">
               <img

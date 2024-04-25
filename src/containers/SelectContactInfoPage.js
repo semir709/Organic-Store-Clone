@@ -58,17 +58,9 @@ const SelectContactInfoPage = () => {
         {contact.map((data, index) => (
           <ContactCards
             select={selectedData.id === data.id}
-            // handleClick={() => setSelectCardIndex(index)}
             handleClick={() => handleSelectedData(data)}
             data={data}
-            // selectedData={setSelectedData}
           />
-          // <ContactCards
-          //   select={selectCardIndex === index}
-          //   handleClick={() => setSelectCardIndex(index)}
-          //   data={data}
-          //   selectedData={setSelectedData}
-          // />
         ))}
       </div>
 
