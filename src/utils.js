@@ -352,7 +352,7 @@ export const navData = {
     { text: "Contact", url: "/contact" },
   ],
   allNav: [
-    { text: "Everything", url: "/shop/category/products" },
+    { text: "Everything", url: "/shop/products" },
     { text: "Groceries", url: "/shop/category/grocies" },
     { text: "Juice", url: "/shop/category/juice" },
     { text: "About", url: "/about" },

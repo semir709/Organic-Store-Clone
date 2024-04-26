@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BlackFilter from "./BlackFilter";
 import { GrFormClose } from "react-icons/gr";
 import ListNav from "./ListNav";
 import { navData } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 const MobileMenu = ({ mobileMenuToggle, setMobileMenuToggle }) => {
+  const url = useNavigate();
+  useEffect(() => {
+    setMobileMenuToggle(false);
+  }, [url]);
   return (
     <div>
       <BlackFilter toggle={mobileMenuToggle} />
       <div
-        className={`fixed w-4/5 h-full bg-white top-0 right-0  duration-300 border flex flex-col 
+        className={`fixed z-50 w-4/5 h-full bg-white top-0 right-0  duration-300 border flex flex-col 
        ${mobileMenuToggle ? " translate-x-[0] " : "  translate-x-[100%] "}`}
       >
         <div className="w-full flex flex-row-reverse p-4">
