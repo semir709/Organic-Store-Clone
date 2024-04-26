@@ -428,7 +428,7 @@ export const quickLinks = [
   },
   {
     text: "Checkout",
-    url: "/checkout",
+    url: "/cart",
   },
   {
     text: "Contact",
@@ -451,7 +451,7 @@ export const quickLinks2 = [
   },
   {
     text: "Visit Store",
-    url: "/store",
+    url: "/shop/products",
   },
   {
     text: "Let’s Connect",

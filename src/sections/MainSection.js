@@ -9,7 +9,7 @@ import leafDraw from "../img/leafDraw.png";
 const MainSection = ({ data }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
-    <section className="bg-global-color-4 w-full py-[120px] relative">
+    <section className="bg-global-color-4 w-full py-[50px] relative">
       <BgLeaf />
       <div className="flex sm:flex-row max-w-[1200px] mx-auto items-center flex-col relative">
         <div className="sm:w-1/2 w-full sm:order-1 order-2 sm:mt-0 mt-5 px-5">
