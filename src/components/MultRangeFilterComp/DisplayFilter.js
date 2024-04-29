@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DisplayFilter = ({
   min,
@@ -12,6 +12,7 @@ const DisplayFilter = ({
 }) => {
   const [displayFilterMesage, setDisplayFilterMesage] = useState(false);
   const [filterRangeMesage, setFilterRangeMesage] = useState(null);
+  const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -29,20 +30,30 @@ const DisplayFilter = ({
   };
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      if (minValue === min && maxValue === max) {
-        setDisplayFilterMesage(false);
-      } else {
+    let time = null;
+
+    if (minValue === min && maxValue === max) {
+      setDisplayFilterMesage(false);
+    } else {
+      time = setTimeout(() => {
         setDisplayFilterMesage(true);
         const msg = showFilter(minValue, maxValue, min, max);
         setFilterRangeMesage(msg);
-      }
-    }, 1000);
+      }, 1000);
+    }
 
     return () => {
       clearTimeout(time);
     };
   }, [minValue, maxValue]);
+
+  useEffect(() => {
+    if (!location.pathname.startsWith("/shop/range")) {
+      setDisplayFilterMesage(false);
+      setMaxValue(max);
+      setMinValue(min);
+    }
+  }, [location]);
 
   const resetFilter = () => {
     setDisplayFilterMesage(false);

@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowForward, IoIosCloseCircleOutline } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
   const targetRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const [canClear, setCanClear] = useState(false);
   const getData = () => {
     const target = targetRef.current;
@@ -15,6 +16,12 @@ const SearchInput = () => {
       navigate(`/shop/search/${target.value}`);
     }
   };
+
+  useEffect(() => {
+    if (!location.pathname.startsWith("/shop/search")) {
+      targetRef.current.value = "";
+    }
+  }, [location]);
 
   const inputHover = () => {
     const target = targetRef.current;

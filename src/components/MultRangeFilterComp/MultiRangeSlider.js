@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputRange from "./InputRange";
 import DisplayFilter from "./DisplayFilter";
 import RangeSlideInputs from "./RangeSlideInputs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./rangeStyle.css";
 import sanityClient from "../../client";
 import Skeleton from "react-loading-skeleton";
@@ -14,11 +14,26 @@ const MultiRangeSlider = () => {
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/shop/search")) {
+      setMinValue(min);
+      setMaxValue(max);
+    }
+  }, [location]);
 
   useEffect(() => {
     const time = setTimeout(() => {
       if (minValue > min || maxValue < max)
         navigate(`/shop/range/${minValue}/${maxValue}/1`);
+      else if (
+        minValue === min &&
+        maxValue === max &&
+        location.pathname.startsWith("/shop/range")
+      ) {
+        navigate(`/shop/products`);
+      }
     }, 1000);
 
     return () => {
