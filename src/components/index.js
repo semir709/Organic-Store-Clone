@@ -33,3 +33,4 @@ export { default as CouponInput } from "./CouponInput";
 export { default as ContactCards } from "./ContactCards";
 export { default as PopUpConfirmContact } from "./PopUpConfirmContact";
 export { default as PopUpConfirmDelete } from "./PopUpConfirmDelete";
+export { default as ImageZoom } from "./ImageZoom";

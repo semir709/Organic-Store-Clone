@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ButtonGreen from "../components/ButtonGreen";
 import Card from "../components/Card";
 import sanityClient from "../client";
@@ -6,7 +6,13 @@ import { getProduct, getRelatedProducts, urlFor } from "../utils";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { InfoMessage, InfoReview, PreviusPrice } from "../components/index";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+import {
+  ImageZoom,
+  InfoMessage,
+  InfoReview,
+  PreviusPrice,
+} from "../components/index";
 import { useCart } from "../utils/context/CartContextCustom";
 import { localSave } from "../utils/localSave";
 
@@ -87,23 +93,25 @@ const Product = () => {
             <InfoMessage text={message.title} mode={message.mode} />
           </div>
         )}
-        <main className="md:mx-0 mx-4">
-          <div className="flex lg:flex-row flex-col gap-10 ">
+        <main className=" mx-4">
+          <div className="flex md:flex-row flex-col gap-10">
             {/* Image */}
-            <div className="lg:w-1/2">
+            <div className="md:w-1/3 sm:w-2/3 mx-auto">
               {!product?.image ? (
                 <Skeleton className="h-full w-full" />
               ) : (
-                <div className="relative">
+                <div className="relative w-full h-full">
                   {product.sale && (
-                    <div className="absolute top-[-10px] right-[-10px] bg-global-color-0 px-2 py-3 rounded-full">
+                    <div className="absolute top-[-10px] left-[-10px] bg-global-color-0 px-2 py-3 rounded-full z-50">
                       <span>Sale!</span>
                     </div>
                   )}
-                  <img
-                    src={urlFor(product?.image)}
+                  <div className="absolute z-50 top-[10px] right-[10px]">
+                    <HiMagnifyingGlass size={30} />
+                  </div>
+                  <ImageZoom
+                    src={product?.image}
                     alt={product?.image.caption}
-                    className="object-cover w-full h-full"
                   />
                 </div>
               )}
