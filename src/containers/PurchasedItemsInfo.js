@@ -18,17 +18,17 @@ const PurchasedItemsInfo = () => {
 
   return (
     <div className="bg-global-color-4 h-screen">
-      <h1 className="text-3xl m-auto block w-fit mb-4 text-global-color-3">
+      <h1 className="text-3xl  mx-auto block w-fit mb-4 text-global-color-3 text-center">
         Items that are sent to your location
       </h1>
-      <div className="w-[80%] m-auto pt-5">
+      <div className="sm:w-[80%] sm:mx-auto mx-1 pt-5">
         <table className=" w-full">
           <thead className="bg-white text-left border-2">
-            <th className="py-3 px-2"></th>
-            <th className="py-3 px-2">Product</th>
-            <th className="py-3 px-2">Price</th>
-            <th className="py-3 px-2">Quantity</th>
-            <th className="py-3 px-2">Subtotal</th>
+            <th className="py-3 px-1"></th>
+            <th className="">Product</th>
+            <th className="py-3 px-1">Price</th>
+            <th className="py-3 px-1">Quantity</th>
+            <th className="py-3 px-1">Subtotal</th>
           </thead>
           <tbody>
             {items.map(({ id, title, price, image, amount, slug }) => (
