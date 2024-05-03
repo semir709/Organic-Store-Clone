@@ -8,7 +8,7 @@ const CartPage = () => {
 
   const total = caculateFinalPrice();
   return (
-    <div className="bg-global-color-4 py-5">
+    <div className="bg-global-color-4 py-5 min-h-[400px] ">
       <div className="mx-auto w-[80%]">
         <h1 className="font-bold text-3xl">Cart</h1>
 

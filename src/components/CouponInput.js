@@ -18,12 +18,12 @@ const CouponInput = ({ text, setMessage }) => {
     setMessage({ flag: true, message });
   };
   return (
-    <div className="flex items-center">
+    <div className="flex sm:flex-row flex-col items-center">
       <input
         ref={couponInput}
         type="text"
         placeholder="Coupon code"
-        className="border-2 px-2 py-1 me-2"
+        className="border-2 px-2 py-1 me-2 sm:mb-0 mb-3 sm:w-[300px] w-full"
       />
       <button
         className="uppercase bg-global-color-1 hover:bg-global-color-0 px-5 py-1 rounded-md text-white transition-all"
