@@ -84,7 +84,7 @@ const CreateContactInfoPage = () => {
     }
 
     if (save) {
-      const { local, error } = localStorageContact(form);
+      const { hasContact, error } = localStorageContact(form);
 
       if (error.length)
         setMessage({
@@ -93,7 +93,7 @@ const CreateContactInfoPage = () => {
           error: true,
         });
       else {
-        setHasContactInfo(!!local);
+        setHasContactInfo(hasContact);
         navigate("/checkout/purchasedItemsInfo");
       }
     }

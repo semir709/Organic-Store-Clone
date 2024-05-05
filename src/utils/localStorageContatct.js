@@ -1,56 +1,51 @@
 export const localStorageContact = (form) => {
   const storage = localStorage.getItem("contactInfo");
   const local = storage ? JSON.parse(storage) : [];
-  let newEntry = true;
 
   form.id = crypto.randomUUID();
 
-  console.log(form, "form");
+  let error = "";
+  let isSaved = true;
 
-  let checkedData = local.map((el) => {
+  // in case if contact exist
+  local.map((localInfo) => {
     if (
-      el.firstName === form.firstName &&
-      el.lastName === form.lastName &&
-      el.phone === form.phone &&
-      el.email === form.email
+      localInfo.firstName === form.firstName &&
+      localInfo.lastName === form.lastName &&
+      localInfo.postCode === form.postCode &&
+      localInfo.street === form.street &&
+      localInfo.apartment === form.apartment
     ) {
-      newEntry = false;
-      return {
-        ...el,
-        additional: form.additional,
-        apartment: form.apartment,
-        canton: form.canton,
-        company: form.company,
-        country: form.country,
-        postCode: form.postCode,
-        street: form.street,
-        townCity: form.townCity,
-      };
+      isSaved = false;
+      try {
+        localStorage.setItem("selectedContact", JSON.stringify(localInfo));
+      } catch (err) {
+        error = err.message;
+      }
     }
-    return el;
   });
 
-  let error = "";
+  // if we have new contact
+  if (isSaved) {
+    try {
+      localStorage.setItem("contactInfo", JSON.stringify([form, ...local]));
+      localStorage.setItem("selectedContact", JSON.stringify(form));
+    } catch (err) {
+      error = err.message;
+    }
+  }
 
-  console.log(newEntry, "new Entry");
-  console.log(checkedData, "checkData");
-
+  // check if there is existing contacts
+  let hasContact = false;
   try {
-    localStorage.setItem(
-      "contactInfo",
-      JSON.stringify(newEntry ? [form, ...local] : [...checkedData])
-    );
-    const selectedData = JSON.parse(localStorage.getItem("selectedContact"));
-    localStorage.setItem(
-      "selectedContact",
-      JSON.stringify(newEntry ? form : selectedData)
-    );
+    hasContact = !!JSON.parse(localStorage.getItem("contactInfo"));
   } catch (err) {
     error = err.message;
   }
 
+  // return necessary data
   const data = {
-    local: newEntry ? [form, ...local] : [...checkedData],
+    hasContact: hasContact,
     error,
   };
 
