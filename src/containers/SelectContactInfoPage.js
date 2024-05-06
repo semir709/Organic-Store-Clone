@@ -50,11 +50,11 @@ const SelectContactInfoPage = () => {
   };
 
   return (
-    <div className="p-[100px] bg-global-color-4">
+    <div className="py-[100px] px-2 bg-global-color-4">
       <div className="w-full flex justify-center mb-[70px]">
-        <h1 className="text-3xl">Select Contact Info</h1>
+        <h1 className="text-3xl text-center">Select Contact Info</h1>
       </div>
-      <div className="mx-[50px] flex flex-wrap gap-7 justify-center mb-[70px]">
+      <div className="sm:mx-[50px] mx-2 flex flex-wrap gap-7 justify-center mb-[70px]">
         {contact.map((data, index) => (
           <ContactCards
             select={selectedData.id === data.id}

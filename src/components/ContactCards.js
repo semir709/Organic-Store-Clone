@@ -7,18 +7,12 @@ const ContactCards = ({
   selectedData,
   notInteractive = true,
 }) => {
-  // useEffect(() => {
-  //   if (select) {
-  //     selectedData(data);
-  //     localStorage.setItem("selectedContact", JSON.stringify(data));
-  //   }
-  // }, [select]);
   return (
     <div
       onClick={handleClick}
       className={`${
         select ? "border-global-color-0" : ""
-      } bg-white py-2 px-3 text-global-color-2 rounded-lg border-2 min-w-[350px] shadow-md ${
+      } bg-white py-2 px-3 text-global-color-2 rounded-lg border-2 sm:min-w-[350px]  shadow-md ${
         notInteractive &&
         "hover:cursor-pointer hover:translate-y-[-10px] transition"
       }`}

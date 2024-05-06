@@ -12,7 +12,7 @@ const PopUpConfirmContact = ({ data, setPopUpConfirm }) => {
   return (
     <>
       <div className="bg-black min-w-full min-h-full fixed top-0 left-0 opacity-50 z-10"></div>
-      <div className="bg-white p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg">
+      <div className="bg-white p-5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg sm:min-w-[50%] min-w-[90%]">
         <div className="w-full flex flex-col items-center mb-5">
           <h2 className="text-2xl font-bold">Please confirm</h2>
           <div>

@@ -102,7 +102,7 @@ const Product = () => {
               ) : (
                 <div className="relative w-full h-full">
                   {product.sale && (
-                    <div className="absolute top-[-10px] left-[-10px] bg-global-color-0 px-2 py-3 rounded-full z-50">
+                    <div className="absolute top-[-10px] left-[-10px] bg-global-color-0 px-2 py-3 rounded-full z-10">
                       <span>Sale!</span>
                     </div>
                   )}
